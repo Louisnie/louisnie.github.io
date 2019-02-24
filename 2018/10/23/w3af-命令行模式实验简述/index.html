@@ -1,0 +1,1340 @@
+<link href="https://louisnie.github.io/harlem-shake-style.css" rel="stylesheet" type="text/css">
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+
+
+  <meta name="keywords" content="tools,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Louisnie" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="实验环境:Kali:192.168.128.128Metasploitable:192.168.128.129 安装W3af:简介及安装w3af文档w3af用户接口: ​    console命令行接口 ​    Gui图形界面化接口 ​    API接口  开始操作123456789101112131415161718192021222324root@kali:~/w3af-master#">
+<meta name="keywords" content="tools">
+<meta property="og:type" content="article">
+<meta property="og:title" content="w3af--命令行模式实验简述">
+<meta property="og:url" content="https://louisnie.github.io/2018/10/23/w3af-命令行模式实验简述/index.html">
+<meta property="og:site_name" content="Louisnie">
+<meta property="og:description" content="实验环境:Kali:192.168.128.128Metasploitable:192.168.128.129 安装W3af:简介及安装w3af文档w3af用户接口: ​    console命令行接口 ​    Gui图形界面化接口 ​    API接口  开始操作123456789101112131415161718192021222324root@kali:~/w3af-master#">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://louisnie.github.io/2018/10/23/w3af-命令行模式实验简述/1.png">
+<meta property="og:updated_time" content="2018-10-23T16:14:09.844Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="w3af--命令行模式实验简述">
+<meta name="twitter:description" content="实验环境:Kali:192.168.128.128Metasploitable:192.168.128.129 安装W3af:简介及安装w3af文档w3af用户接口: ​    console命令行接口 ​    Gui图形界面化接口 ​    API接口  开始操作123456789101112131415161718192021222324root@kali:~/w3af-master#">
+<meta name="twitter:image" content="https://louisnie.github.io/2018/10/23/w3af-命令行模式实验简述/1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://louisnie.github.io/2018/10/23/w3af-命令行模式实验简述/">
+
+
+
+
+
+  <title>w3af--命令行模式实验简述 | Louisnie</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<head><meta name="generator" content="Hexo 3.8.0">
+  <style>
+  /*.tags0{font-size: 12px !important;color: #ccc !important;}灰*/
+
+  .tags00{font-size: 12px !important;color: #666 !important;}/*黑*/
+  /*.tags01{font-size: 12px !important;color: rgb(255,128,128) !important;}红
+  .tags02{font-size: 12px !important;color: rgb(128,255,128) !important;}绿
+  .tags03{font-size: 12px !important;color: rgb(128,128,255) !important;}蓝
+  .tags04{font-size: 12px !important;color: rgb(255,216,128) !important;}黄*/
+
+  /*.tags10{font-size: 20px !important;color: #666 !important;}*/
+  .tags11{font-size: 20px !important;color: rgb(255,128,128) !important;}
+  .tags12{font-size: 20px !important;color: rgb(128,255,128) !important;}
+  .tags13{font-size: 20px !important;color: rgb(128,128,255) !important;}
+  .tags14{font-size: 20px !important;color: rgb(255,216,128) !important;}
+
+  /*.tags20{font-size: 40px !important;color: #666 !important;}*/
+  .tags21{font-size: 40px !important;color: rgb(255,128,128) !important;}
+  .tags22{font-size: 40px !important;color: rgb(128,255,128) !important;}
+  .tags23{font-size: 40px !important;color: rgb(128,128,255) !important;}
+  .tags24{font-size: 40px !important;color: rgb(255,216,128) !important;}
+  </style>
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+	
+	<a href="https://github.com/Louisnie/louisnie.github.io" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewbox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Louisnie</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Attitude determines Altitude!</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>
+            
+            日程表
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>
+            
+            站点地图
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://louisnie.github.io/2018/10/23/w3af-命令行模式实验简述/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Louisnie">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://i.loli.net/2018/10/22/5bcd762c46c2c.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Louisnie">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">w3af--命令行模式实验简述</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-23T23:31:30+08:00">
+                2018-10-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/kali/" itemprop="url" rel="index">
+                    <span itemprop="name">kali</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1,506 字
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <div align="middle"><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=5181411&auto=0&height=66"></iframe></div>
+
+<h2 id="实验环境"><a href="#实验环境" class="headerlink" title="﻿实验环境:"></a>﻿实验环境:</h2><p>Kali:192.168.128.128<br>Metasploitable:192.168.128.129</p>
+<h2 id="安装W3af-简介及安装w3af文档"><a href="#安装W3af-简介及安装w3af文档" class="headerlink" title="安装W3af:简介及安装w3af文档"></a>安装W3af:<a href="https://blog.csdn.net/qq_39353923/article/details/82557316" target="_blank" rel="noopener">简介及安装w3af文档</a></h2><h2 id="w3af用户接口"><a href="#w3af用户接口" class="headerlink" title="w3af用户接口:"></a>w3af用户接口:</h2><ol>
+<li>​    console命令行接口</li>
+<li>​    Gui图形界面化接口</li>
+<li>​    API接口</li>
+</ol>
+<h2 id="开始操作"><a href="#开始操作" class="headerlink" title="开始操作"></a>开始操作</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">root@kali:~/w3af-master# ./w3af_console </span><br><span class="line">w3af&gt;&gt;&gt; </span><br><span class="line">w3af&gt;&gt;&gt; help   #help命令列出当前命令提示符下的可用指令</span><br><span class="line">|-----------------------------------------------------------------------------------|</span><br><span class="line">| start         | Start the scan.  开始扫描                                                 |</span><br><span class="line">| plugins       | Enable and configure plugins.   选择和配置插件                                 |</span><br><span class="line">| exploit       | Exploit the vulnerability. 使用该模块进行攻击漏洞                                       |</span><br><span class="line">| profiles      | List and use scan profiles. 列出可以用来扫描的文件                                      |</span><br><span class="line">| cleanup       | Cleanup before starting a new scan.  在开始新扫描之前进行清理                             |</span><br><span class="line">|-----------------------------------------------------------------------------------|</span><br><span class="line">| help          | Display help. Issuing: help [command] , prints more specific help |</span><br><span class="line">|               | about &quot;command&quot;                                                   |</span><br><span class="line">| version       | Show w3af version information.    显示w3af版本信息                                |</span><br><span class="line">| keys          | Display key shortcuts.  显示关键快捷方式。                                          |</span><br><span class="line">|-----------------------------------------------------------------------------------|</span><br><span class="line">| http-settings | Configure the HTTP settings of the framework.      配置框架的HTTP设置。               |</span><br><span class="line">| misc-settings | Configure w3af misc settings.  配置w3af misc设置                                   |</span><br><span class="line">| target        | Configure the target URL.  配置目标URL                                       |</span><br><span class="line">|-----------------------------------------------------------------------------------|</span><br><span class="line">| back          | Go to the previous menu.    返回前一目录                                      |</span><br><span class="line">| exit          | Exit w3af.           退出                                             |</span><br><span class="line">|-----------------------------------------------------------------------------------|</span><br><span class="line">| kb            | Browse the vulnerabilities stored in the Knowledge Base     浏览存储在知识库中的漏洞      |</span><br><span class="line">|-----------------------------------------------------------------------------------</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">w3af&gt;&gt;&gt; plugins  #输入plugins,进入插件目录的内,</span><br><span class="line">w3af/plugins&gt;&gt;&gt; help #输入help显示当前可使用的命令</span><br><span class="line">|-----------------------------------------------------------------------------------|</span><br><span class="line">| list              | List available plugins.                                       |</span><br><span class="line">|-----------------------------------------------------------------------------------|</span><br><span class="line">| back              | Go to the previous menu.                                      |</span><br><span class="line">| exit              | Exit w3af.                                                    |</span><br><span class="line">|-----------------------------------------------------------------------------------|</span><br><span class="line">| output            | View, configure and enable output plugins                     |</span><br><span class="line">| grep              | View, configure and enable grep plugins                       |</span><br><span class="line">| evasion           | View, configure and enable evasion plugins                    |</span><br><span class="line">| audit             | View, configure and enable audit plugins                      |</span><br><span class="line">| infrastructure    | View, configure and enable infrastructure plugins             |</span><br><span class="line">| crawl             | View, configure and enable crawl plugins                      |</span><br><span class="line">| auth              | View, configure and enable auth plugins                       |</span><br><span class="line">| mangle            | View, configure and enable mangle plugins                     |</span><br><span class="line">| bruteforce        | View, configure and enable bruteforce plugins                 |</span><br><span class="line">|-----------------------------------------------------------------------------------|</span><br><span class="line">w3af/plugins&gt;&gt;&gt; list audit 或者audit #列出audit插件类中的小插件</span><br></pre></td></tr></table></figure>
+<p>也可以在图形界面化直观的看清其结构</p>
+<p><img src="1.png" alt=""><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">#使用audit模块中的xss脚本攻击,sql注入,本地文件调用这三个插件,可以选用一个,也可以选用多个</span><br><span class="line">#那么再次列出时这些插件的Status将会变成Enabled,如果进行扫描,那么就会针对这些漏洞去扫描</span><br><span class="line">w3af/plugins&gt;&gt;&gt; audit xss sqli lfi </span><br><span class="line"></span><br><span class="line">#使用audit模块中的所有插件进行扫描</span><br><span class="line">w3af/plugins&gt;&gt;&gt; audit all</span><br><span class="line"></span><br><span class="line">#输入crawl模块,按两次tab键,可以显示该模块下的插件</span><br><span class="line">w3af/plugins&gt;&gt;&gt; crawl </span><br><span class="line">genexus_xml wordpress_fingerprint dot_listing content_negotiation robots_txt archive_dot_org ria_enumerator wordnet user_dir sitemap_xml bing_spider dir_file_bruter phpinfo find_dvcs import_results urllist_txt google_spider url_fuzzer find_backdoors web_spider spider_man find_captchas oracle_discovery wsdl_finder wordpress_enumerate_users web_diff dwsync_xml pykto wordpress_fullpathdisclosure phishtank digit_sum open_api dot_ds_store ghdb all config desc </span><br><span class="line">w3af/plugins&gt;&gt;&gt; crawl web_spider  #选择该模块下的web爬虫模块</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br></pre></td><td class="code"><pre><span class="line">w3af&gt;&gt;&gt; profiles  #进入profiles模块,这个模块用于自定义组合插件,当然w3af自定义了一些组合插件</span><br><span class="line">w3af/profiles&gt;&gt;&gt; help</span><br><span class="line">|-----------------------------------------------------------------------------------|</span><br><span class="line">| use        | Use a profile.                                                       |</span><br><span class="line">| list       | List available profiles.                                             |</span><br><span class="line">| save_as    | Save the current configuration to a profile.                         |</span><br><span class="line">|-----------------------------------------------------------------------------------|</span><br><span class="line">| back       | Go to the previous menu.                                             |</span><br><span class="line">| exit       | Exit w3af.                                                           |</span><br><span class="line">|------------------------------------------------------------------------------</span><br><span class="line">w3af/profiles&gt;&gt;&gt; list  #列出在profiles模块下的插件</span><br><span class="line"></span><br><span class="line">w3af/profiles&gt;&gt;&gt; help</span><br><span class="line">|-----------------------------------------------------------------------------------|</span><br><span class="line">| use        | Use a profile.                                                       |</span><br><span class="line">| list       | List available profiles.                                             |</span><br><span class="line">| save_as    | Save the current configuration to a profile. #保存当前配置到一个文件内                        |</span><br><span class="line">|-----------------------------------------------------------------------------------|</span><br><span class="line">| back       | Go to the previous menu.                                             |</span><br><span class="line">| exit       | Exit w3af.                                                           |</span><br><span class="line">|-----------------------------------------------------------------------------------|</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">w3af/profiles&gt;&gt;&gt; save_as test   #使用save_as后面自定义一个文件名,表示将刚刚的配置存放在test文件内</span><br><span class="line">Profile saved.</span><br><span class="line"></span><br><span class="line">#使用下列命令将test文件独立出来,以便供其他人使用</span><br><span class="line">w3af/profiles&gt;&gt;&gt; save_as test self-contained</span><br><span class="line"></span><br><span class="line">w3af/profiles&gt;&gt;&gt; use test      #使用自定义的test文件中的配置进行扫描</span><br><span class="line">The plugins configured by the scan profile have been enabled, and their options configured.</span><br><span class="line">Please set the target URL(s) and start the scan.</span><br><span class="line"></span><br><span class="line">w3af/profiles&gt;&gt;&gt; back #返回上一级</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">w3af&gt;&gt;&gt; http-settings  #进入http-settings,设置全局参数</span><br><span class="line">w3af/config:http-settings&gt;&gt;&gt; help</span><br><span class="line">|-----------------------------------------------------------------------------------|</span><br><span class="line">| view   | List the available options and their values.                             |</span><br><span class="line">| set    | Set a parameter value.          #设置参数值                                         |</span><br><span class="line">| save   | Save the configured settings.          #保存配置                                  |</span><br><span class="line">|-----------------------------------------------------------------------------------|</span><br><span class="line">| back   | Go to the previous menu.       #返回上一目录                                          |</span><br><span class="line">| exit   | Exit w3af.                                                               |</span><br><span class="line">|-----------------------------------------------------------------------------------|</span><br><span class="line">w3af/config:http-settings&gt;&gt;&gt; view  #列出可用的操作和其值</span><br><span class="line">|---------------------------------------------------------------------------------</span><br><span class="line"></span><br><span class="line">#设置随机用户代理浏览器,默认位w3af的代理,容易被管理员查看日志发现</span><br><span class="line">w3af/config:http-settings&gt;&gt;&gt; set rand_user_agent True </span><br><span class="line"></span><br><span class="line">w3af/config:http-settings&gt;&gt;&gt; back</span><br><span class="line">The configuration has been saved.</span><br><span class="line">w3af&gt;&gt;&gt; misc-settings  #进入misc-setting全局设置选项中</span><br><span class="line">w3af/config:misc-settings&gt;&gt;&gt; view  #查看需要配置的参数</span><br><span class="line">w3af/config:misc-settings&gt;&gt;&gt; set fuzz_url_filenames True  #设置对URL中的文件名进行模糊测试(Fuzz)</span><br><span class="line"></span><br><span class="line">w3af/config:misc-settings&gt;&gt;&gt; back</span><br><span class="line">The configuration has been saved.</span><br><span class="line">w3af&gt;&gt;&gt; target  #进入target模块,设置目标信息</span><br><span class="line">w3af/config:target&gt;&gt;&gt; help  #查看在此模块下可以使用的命令</span><br><span class="line">|-----------------------------------------------------------------------------------|</span><br><span class="line">| view   | List the available options and their values.                             |</span><br><span class="line">| set    | Set a parameter value.                                                   |</span><br><span class="line">| save   | Save the configured settings.                                            |</span><br><span class="line">|-----------------------------------------------------------------------------------|</span><br><span class="line">| back   | Go to the previous menu.                                                 |</span><br><span class="line">| exit   | Exit w3af.                                                               |</span><br><span class="line">|-----------------------------------------------------------------------------</span><br><span class="line">w3af/config:target&gt;&gt;&gt; view  #列出可用的操作</span><br><span class="line">|----------------------------------------------------------------------------------|</span><br><span class="line">| Setting        | Value | Modified | Description                                      |</span><br><span class="line">|----------------------------------------------------------------------------------|</span><br><span class="line">| target_framework | unknown |       | Target programming framework                     |</span><br><span class="line">|                |      |       | (unknown/php/asp/asp.net/java/jsp/cfm/ruby/perl) |</span><br><span class="line">| target         |      |       | A comma separated list of URLs                   |</span><br><span class="line">| target_os      | unknown |       | Target operating system (unknown/unix/windows)   |</span><br><span class="line">|-----------------------------------------------------------------------------</span><br><span class="line"></span><br><span class="line">#设置目标URL</span><br><span class="line">w3af/config:target&gt;&gt;&gt; set target http://192.168.128.129</span><br><span class="line">w3af/config:target&gt;&gt;&gt; set target_os unix #设置目标系统为unix</span><br><span class="line">w3af/config:target&gt;&gt;&gt; back  #返回上一级目录</span><br><span class="line">w3af&gt;&gt;&gt;start      #开始扫描</span><br></pre></td></tr></table></figure>
+<p>也可以使用w3af中集成的脚本去进行扫描<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">root@kali:~/w3af-master# cd scripts/</span><br><span class="line">root@kali:~/w3af-master/scripts# ls</span><br><span class="line">allowed_methods.w3af             login_brute_form_GET.w3af</span><br><span class="line">all.w3af                         login_brute_password_only.w3af</span><br><span class="line">auth_detailed.w3af               mangle_request.w3af</span><br><span class="line">bing_spider.w3af                 mangle_response.w3af</span><br><span class="line">blind_sqli_detection.w3af        os_commanding-lnx-vdaemon.w3af</span><br><span class="line">cookie_fuzzing.w3af              os_commanding-lnx-w3afAgent.w3af</span><br><span class="line">cross_domain.w3af                os_commanding_shell.w3af</span><br><span class="line">csrf.w3af                        os_commanding.w3af</span><br><span class="line">dav_shell.w3af                   php_sca-payload.w3af</span><br><span class="line">detect_transparent_proxy.w3af    profile-fast_scan.w3af</span><br><span class="line">digit_sum.w3af                   remote_file_include_local_ws.w3af</span><br><span class="line">dvwa.w3af                        remote_file_include_proxy.w3af</span><br><span class="line">eval_shell.w3af                  remote_file_include_shell.w3af</span><br><span class="line">eval.w3af                        remote_file_include_shell-xss.w3af</span><br><span class="line">exploit_all.w3af                 remote_file_include_w3af_site.w3af</span><br><span class="line">exploit_fast.w3af                spider_man.w3af</span><br><span class="line">filename_xss.w3af                sqli.w3af</span><br><span class="line">file_upload_shell.w3af           sqlmap_exploit_int.w3af</span><br><span class="line">frontpage_version.w3af           targets_from_file.w3af</span><br><span class="line">header_fuzzing.w3af              web_spider-ignore_regex.w3af</span><br><span class="line">html_output.w3af                 web_spider-only_forward.w3af</span><br><span class="line">list_all_plugins.w3af            web_spider.w3af</span><br><span class="line">local_file_include-payload.w3af  xss_simple.w3af</span><br><span class="line">local_file_include.w3af          xss_stored.w3af</span><br><span class="line"></span><br><span class="line">#参数-s表示指定具体的脚本去进行扫描,但需要首先去进入该脚本进行配置目标信息,然后调用w3af的console接口去扫描是否存在sql注入</span><br><span class="line">root@kali:~/w3af-master# ./w3af_console -s scripts/sqli.w3af</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+	
+	    <div>
+     
+     <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+        </div>
+	
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/tools/" rel="tag"><i class="fa fa-tag"></i> tools</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/10/23/WEB扫描工具之Nikto实践-1/" rel="next" title="WEB扫描工具之Nikto实践">
+                <i class="fa fa-chevron-left"></i> WEB扫描工具之Nikto实践
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/10/23/墨者学院-手工注入mysql数据库实例/" rel="prev" title="墨者学院--手工注入mysql数据库实例">
+                墨者学院--手工注入mysql数据库实例 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="https://i.loli.net/2018/10/22/5bcd762c46c2c.jpg" alt="Louisnie">
+            
+              <p class="site-author-name" itemprop="name">Louisnie</p>
+              <p class="site-description motion-element" itemprop="description">Attitude determines Altitude!</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+			  
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Louisnie/louisnie.github.io" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://mail.google.com/mail/u/0/?zx=gg4mjbu7kr29#inbox" target="_blank" title="Gmail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>Gmail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/qq_39353923" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-books"></i>CSDN</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://music.163.com/" target="_blank" title="网易云音乐">
+                      
+                        <i class="fa fa-fw fa-music"></i>网易云音乐</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+                <div class="links-of-blogroll-title">
+                   <i class="fa  fa-fw fa-link"></i>
+                   友情链接&nbsp;
+                   <i class="fa  fa-fw fa-link"></i>
+            </div>
+            <ul class="links-of-blogroll-list">
+               
+                  <li class="links-of-blogroll-item">
+                     <a href="https://www.google.com.hk   || google" title="Google" target="_blank">Google</a>
+                   </li>
+               
+                  <li class="links-of-blogroll-item">
+                     <a href="https://github.com/   || github" title="Github" target="_blank">Github</a>
+                   </li>
+               
+                  <li class="links-of-blogroll-item">
+                     <a href="https://thief.one/" title="nMask" target="_blank">nMask</a>
+                   </li>
+               
+                  <li class="links-of-blogroll-item">
+                     <a href="http://www.lmxspace.com/" title="l1nk3r" target="_blank">l1nk3r</a>
+                   </li>
+               
+            </ul>
+             <div id="days"></div>
+
+<script language="javascript">
+function show_date_time(){
+window.setTimeout("show_date_time()", 1000);
+BirthDay=new Date("10/20/2018 12:00:00");
+today=new Date();
+timeold=(today.getTime()-BirthDay.getTime());
+sectimeold=timeold/1000
+secondsold=Math.floor(sectimeold);
+msPerDay=24*60*60*1000
+e_daysold=timeold/msPerDay
+daysold=Math.floor(e_daysold);
+e_hrsold=(e_daysold-daysold)*24;
+hrsold=setzero(Math.floor(e_hrsold));
+e_minsold=(e_hrsold-hrsold)*60;
+minsold=setzero(Math.floor((e_hrsold-hrsold)*60));
+seconds=setzero(Math.floor((e_minsold-minsold)*60));
+document.getElementById('days').innerHTML="已运行"+daysold+"天"+hrsold+"时"+minsold+"分"+seconds+"秒";
+}
+function setzero(i){
+if (i<10)
+{i="0" + i};
+return i;
+}
+show_date_time();
+</script>
+
+      </div>
+     
+		<div id="music163player">
+           <<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=5181411&auto=0&height=66">
+           </iframe>
+        </div>">
+           
+
+        
+
+          <div id="days"></div>
+
+<script language="javascript">
+function show_date_time(){
+window.setTimeout("show_date_time()", 1000);
+BirthDay=new Date("10/20/2018 12:00:00");
+today=new Date();
+timeold=(today.getTime()-BirthDay.getTime());
+sectimeold=timeold/1000
+secondsold=Math.floor(sectimeold);
+msPerDay=24*60*60*1000
+e_daysold=timeold/msPerDay
+daysold=Math.floor(e_daysold);
+e_hrsold=(e_daysold-daysold)*24;
+hrsold=setzero(Math.floor(e_hrsold));
+e_minsold=(e_hrsold-hrsold)*60;
+minsold=setzero(Math.floor((e_hrsold-hrsold)*60));
+seconds=setzero(Math.floor((e_minsold-minsold)*60));
+document.getElementById('days').innerHTML="已运行"+daysold+"天"+hrsold+"时"+minsold+"分"+seconds+"秒";
+}
+function setzero(i){
+if (i<10)
+{i="0" + i};
+return i;
+}
+show_date_time();
+</script>
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#实验环境"><span class="nav-number">1.</span> <span class="nav-text">﻿实验环境:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装W3af-简介及安装w3af文档"><span class="nav-number">2.</span> <span class="nav-text">安装W3af:简介及安装w3af文档</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#w3af用户接口"><span class="nav-number">3.</span> <span class="nav-text">w3af用户接口:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开始操作"><span class="nav-number">4.</span> <span class="nav-text">开始操作</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Louisnie</span>
+
+  
+</div>
+
+
+<!--  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+-->
+  <span class="post-count">博客全站共19.2k字</span>
+</div>
+
+        
+
+
+
+
+
+
+
+        
+      </footer></div>
+    
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"scale":1,"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"superSample":2,"width":150,"height":150,"position":"left"},"mobile":{"show":true},"react":{"opacityDefault":0.9,"opacityOnHover":0.5},"log":false});</script></body>
+</html>
+
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>
+
+#next主题标签也随机颜色
+<script type="text/javascript">
+var languages = new Array("C","C++","Java","C#","Python","HTML","CSS","JavaScript","SQL");
+var randoms = new Array(4,3,2,1,3,2,1,4,2,1,3,4,1,2,3,4);
+$(document).ready(function(){
+var tags_all = $(".tag-cloud-tags a");
+tags_all.each(function(){
+  var x = parseInt(Math.random()*3);
+  if(x > 0){
+    x = 1;
+  }
+  for(var i = 0;i<languages.length;i++){
+    if($(this).text() == languages[i]){
+        x = 2;
+      break;
+    }
+  }
+  var y =0;
+  if(x != 0){
+    y = parseInt(Math.random()*16);
+    y = randoms[y];
+  }
+  $(this).addClass("tags"+x+y);
+});
+});
+</script>

