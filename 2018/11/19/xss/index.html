@@ -83,18 +83,18 @@
 
 
 
-<meta name="description" content="疲惫生活中的英雄梦想!   XSS攻击xss攻击(跨站脚本攻击的简称)是指攻击者利用网站程序对用户输入过滤不足的缺陷,输入可以显示在界面上对其他用户造成影响的HTML代码,从而盗取用户资料,利用用户身份进行某种动作或者访问者进行病毒侵害的一种攻击方式.其英文全称为Cross site Scripting,原本缩写应当是CSS,但为了和层叠样式表(CSS)有所区分,通常将其缩写为XSS. XSS攻击">
+<meta name="description" content="疲惫生活中的英雄梦想!    作者：不二链接：https://www.zhihu.com/question/47828293/answer/138946648来源：知乎著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。 XSS攻击xss攻击(跨站脚本攻击的简称)是指攻击者利用网站程序对用户输入过滤不足的缺陷,输入可以显示在界面上对其他用户造成影响的HTML代码,从而盗取用户资料,">
 <meta name="keywords" content="web漏洞,手工挖掘漏洞">
 <meta property="og:type" content="article">
 <meta property="og:title" content="XSS攻击学习笔记">
 <meta property="og:url" content="https://louisnie.github.io/2018/11/19/xss/index.html">
 <meta property="og:site_name" content="Louisnie">
-<meta property="og:description" content="疲惫生活中的英雄梦想!   XSS攻击xss攻击(跨站脚本攻击的简称)是指攻击者利用网站程序对用户输入过滤不足的缺陷,输入可以显示在界面上对其他用户造成影响的HTML代码,从而盗取用户资料,利用用户身份进行某种动作或者访问者进行病毒侵害的一种攻击方式.其英文全称为Cross site Scripting,原本缩写应当是CSS,但为了和层叠样式表(CSS)有所区分,通常将其缩写为XSS. XSS攻击">
+<meta property="og:description" content="疲惫生活中的英雄梦想!    作者：不二链接：https://www.zhihu.com/question/47828293/answer/138946648来源：知乎著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。 XSS攻击xss攻击(跨站脚本攻击的简称)是指攻击者利用网站程序对用户输入过滤不足的缺陷,输入可以显示在界面上对其他用户造成影响的HTML代码,从而盗取用户资料,">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-01-07T17:15:16.717Z">
+<meta property="og:updated_time" content="2019-02-25T14:12:01.360Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="XSS攻击学习笔记">
-<meta name="twitter:description" content="疲惫生活中的英雄梦想!   XSS攻击xss攻击(跨站脚本攻击的简称)是指攻击者利用网站程序对用户输入过滤不足的缺陷,输入可以显示在界面上对其他用户造成影响的HTML代码,从而盗取用户资料,利用用户身份进行某种动作或者访问者进行病毒侵害的一种攻击方式.其英文全称为Cross site Scripting,原本缩写应当是CSS,但为了和层叠样式表(CSS)有所区分,通常将其缩写为XSS. XSS攻击">
+<meta name="twitter:description" content="疲惫生活中的英雄梦想!    作者：不二链接：https://www.zhihu.com/question/47828293/answer/138946648来源：知乎著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。 XSS攻击xss攻击(跨站脚本攻击的简称)是指攻击者利用网站程序对用户输入过滤不足的缺陷,输入可以显示在界面上对其他用户造成影响的HTML代码,从而盗取用户资料,">
 
 
 
@@ -418,7 +418,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  2,818 字
+                  2,867 字
                 </span>
               
 
@@ -446,6 +446,8 @@
         <p><blockquote class="blockquote-center">疲惫生活中的英雄梦想!</blockquote></p>
 <div align="middle"><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=526668900&auto=1&height=66"></iframe></div>
 
+
+<p>作者：不二<br>链接：<a href="https://www.zhihu.com/question/47828293/answer/138946648" target="_blank" rel="noopener">https://www.zhihu.com/question/47828293/answer/138946648</a><br>来源：知乎<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
 <h2 id="XSS攻击"><a href="#XSS攻击" class="headerlink" title="XSS攻击"></a>XSS攻击</h2><p>xss攻击(跨站脚本攻击的简称)是指攻击者利用网站程序对用户输入过滤不足的缺陷,输入可以显示在界面上对其他用户造成影响的HTML代码,从而盗取用户资料,利用用户身份进行某种动作或者访问者进行病毒侵害的一种攻击方式.其英文全称为Cross site Scripting,原本缩写应当是CSS,但为了和层叠样式表(CSS)有所区分,通常将其缩写为XSS.</p>
 <h3 id="XSS攻击的原理"><a href="#XSS攻击的原理" class="headerlink" title="XSS攻击的原理:"></a>XSS攻击的原理:</h3><p>跨站脚本攻击本质上是将一种恶意代码嵌入到当前网页中并执行的攻击方式.通常情况下,黑客通过”HTML注入”行为篡改网页,并插入恶意JavaScript脚本,从而在用户浏览网页的时候控制浏览器的行为.这种漏洞产生的主要原因是网站对于用户提交的数据过滤不严格,导致用户提交的数据可以修改当前页面或者插入一段脚本.</p>
 <h3 id="XSS攻击风险的功能点"><a href="#XSS攻击风险的功能点" class="headerlink" title="XSS攻击风险的功能点:"></a>XSS攻击风险的功能点:</h3><h4 id="评价功能"><a href="#评价功能" class="headerlink" title="评价功能:"></a>评价功能:</h4><p>用户输入评价(评价处为攻击代码)–服务器接收到评论并存储(存储到数据库中)–前台自动调用评论–任何人触发评论(即看到攻击代码便表示已触发漏洞)–攻击成功</p>
@@ -619,7 +621,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -844,7 +846,7 @@ show_date_time();
 <div class="theme-info">
   <div class="powered-by"></div>
 -->
-  <span class="post-count">博客全站共22.6k字</span>
+  <span class="post-count">博客全站共26.4k字</span>
 </div>
 
         
