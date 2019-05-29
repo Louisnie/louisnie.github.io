@@ -94,7 +94,8 @@
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/0078beR7ly1g313juc6o9j30j10dg41f.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/0078beR7ly1g2zo3zq2o5j30i701da9w.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/0078beR7ly1g2zo3l5gfpj31800jqdgj.jpg">
-<meta property="og:updated_time" content="2019-05-14T13:53:24.918Z">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/0078beR7ly1g36zg8qh9yj30h605qmxa.jpg">
+<meta property="og:updated_time" content="2019-05-19T14:55:39.599Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="docker学习笔记(一)">
 <meta name="twitter:description" content="穷则思变,变则通,通则达!    Docker简介:Docker是一个开源的应用容器引擎,让开发者可以打包他们的应用以及依赖包到一个可移植的容器中,然后发布到任何流行的Linux机器上,也可以实现虚拟化.容器是完全使用沙盒机制,互相之间不会有任何接口(类似iPhone的APP)几乎没有性能开销,很容易的在机器和数据中心中运行.最重要的是,他们不依赖任何语言,框架或包装系统 沙盒沙盒也叫沙箱,英文s">
@@ -422,7 +423,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  3,298 字
+                  3,444 字
                 </span>
               
 
@@ -631,6 +632,15 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker image 镜像名:标签</span><br></pre></td></tr></table></figure>
 <p>4.下载镜像</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull 用户名/镜像名</span><br></pre></td></tr></table></figure>
+<h3 id="docker端口映射"><a href="#docker端口映射" class="headerlink" title="docker端口映射"></a>docker端口映射</h3><h4 id="端口映射"><a href="#端口映射" class="headerlink" title="端口映射"></a>端口映射</h4><p>-d:设置容器在在后台一直运行</p>
+<p>-p:设置端口映射,格式为本地端口:docker容器端口</p>
+<p>-c:执行系统命令,这个文件是我本地写好的自动化脚本用来打开HTTP服务</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# docker run -d -p 80:80 centos:httpd /bin/bash -c /usr/local/bin/start.sh</span><br></pre></td></tr></table></figure>
+<p><img src="http://ww1.sinaimg.cn/large/0078beR7ly1g36zg8qh9yj30h605qmxa.jpg" alt=""></p>
+<p>注:当前使用的docker实例运行的网络模式相当于VMware中的NAT模式</p>
+<h4 id="查看正在运行的容器"><a href="#查看正在运行的容器" class="headerlink" title="查看正在运行的容器"></a>查看正在运行的容器</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# docker ps</span><br></pre></td></tr></table></figure>
+<h4 id="访问容器实例"><a href="#访问容器实例" class="headerlink" title="访问容器实例"></a>访问容器实例</h4><p>docker exec -it  <docker id|name=""> /bin/bash</docker></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker exec -it  centos:httpd /bin/bash</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -679,6 +689,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/05/30/ELK安装/" rel="prev" title="ELK安装部署">
+                ELK安装部署 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -757,7 +771,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -779,7 +793,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -936,7 +950,7 @@ show_date_time();
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Docker简介"><span class="nav-number">1.</span> <span class="nav-text">Docker简介:</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#沙盒"><span class="nav-number">1.1.</span> <span class="nav-text">沙盒</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#LCX"><span class="nav-number">1.2.</span> <span class="nav-text">LCX</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#docker容器技术和虚拟机对比"><span class="nav-number">1.3.</span> <span class="nav-text">docker容器技术和虚拟机对比</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#docker架构"><span class="nav-number">2.</span> <span class="nav-text">docker架构</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#工作流程"><span class="nav-number">2.1.</span> <span class="nav-text">工作流程:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#image和container的区别"><span class="nav-number">2.2.</span> <span class="nav-text">image和container的区别:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#docker-hub"><span class="nav-number">2.3.</span> <span class="nav-text">docker hub</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#docker核心技术"><span class="nav-number">2.4.</span> <span class="nav-text">docker核心技术:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#docker的特性"><span class="nav-number">2.5.</span> <span class="nav-text">docker的特性</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Docker的优缺点"><span class="nav-number">3.</span> <span class="nav-text">Docker的优缺点:</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#优点："><span class="nav-number">3.1.</span> <span class="nav-text">优点：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#缺点："><span class="nav-number">3.2.</span> <span class="nav-text">缺点：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装docker"><span class="nav-number">4.</span> <span class="nav-text">安装docker</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pull镜像出错解决方法"><span class="nav-number">5.</span> <span class="nav-text">pull镜像出错解决方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#错误一"><span class="nav-number">5.1.</span> <span class="nav-text">错误一</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#法一-换国内源"><span class="nav-number">5.1.1.</span> <span class="nav-text">法一:换国内源</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#法二：把之前下载好的-image-镜像导入-image："><span class="nav-number">5.1.2.</span> <span class="nav-text">法二：把之前下载好的 image 镜像导入 image：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#法三：直接下载其他站点的镜像"><span class="nav-number">5.1.3.</span> <span class="nav-text">法三：直接下载其他站点的镜像</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#错误二"><span class="nav-number">5.2.</span> <span class="nav-text">错误二:</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#docker实践"><span class="nav-number">6.</span> <span class="nav-text">docker实践:</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#实例1-在实例中执行bash命令"><span class="nav-number">6.1.</span> <span class="nav-text">实例1:在实例中执行bash命令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#实例2-模拟后台运行服务"><span class="nav-number">6.2.</span> <span class="nav-text">实例2:模拟后台运行服务</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#实例3-kill掉一个容器"><span class="nav-number">6.3.</span> <span class="nav-text">实例3:kill掉一个容器</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#docker镜像制作方法"><span class="nav-number">7.</span> <span class="nav-text">docker镜像制作方法:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Docker-Image的发布"><span class="nav-number">8.</span> <span class="nav-text">Docker Image的发布</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Docker简介"><span class="nav-number">1.</span> <span class="nav-text">Docker简介:</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#沙盒"><span class="nav-number">1.1.</span> <span class="nav-text">沙盒</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#LCX"><span class="nav-number">1.2.</span> <span class="nav-text">LCX</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#docker容器技术和虚拟机对比"><span class="nav-number">1.3.</span> <span class="nav-text">docker容器技术和虚拟机对比</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#docker架构"><span class="nav-number">2.</span> <span class="nav-text">docker架构</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#工作流程"><span class="nav-number">2.1.</span> <span class="nav-text">工作流程:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#image和container的区别"><span class="nav-number">2.2.</span> <span class="nav-text">image和container的区别:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#docker-hub"><span class="nav-number">2.3.</span> <span class="nav-text">docker hub</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#docker核心技术"><span class="nav-number">2.4.</span> <span class="nav-text">docker核心技术:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#docker的特性"><span class="nav-number">2.5.</span> <span class="nav-text">docker的特性</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Docker的优缺点"><span class="nav-number">3.</span> <span class="nav-text">Docker的优缺点:</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#优点："><span class="nav-number">3.1.</span> <span class="nav-text">优点：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#缺点："><span class="nav-number">3.2.</span> <span class="nav-text">缺点：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装docker"><span class="nav-number">4.</span> <span class="nav-text">安装docker</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pull镜像出错解决方法"><span class="nav-number">5.</span> <span class="nav-text">pull镜像出错解决方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#错误一"><span class="nav-number">5.1.</span> <span class="nav-text">错误一</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#法一-换国内源"><span class="nav-number">5.1.1.</span> <span class="nav-text">法一:换国内源</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#法二：把之前下载好的-image-镜像导入-image："><span class="nav-number">5.1.2.</span> <span class="nav-text">法二：把之前下载好的 image 镜像导入 image：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#法三：直接下载其他站点的镜像"><span class="nav-number">5.1.3.</span> <span class="nav-text">法三：直接下载其他站点的镜像</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#错误二"><span class="nav-number">5.2.</span> <span class="nav-text">错误二:</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#docker实践"><span class="nav-number">6.</span> <span class="nav-text">docker实践:</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#实例1-在实例中执行bash命令"><span class="nav-number">6.1.</span> <span class="nav-text">实例1:在实例中执行bash命令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#实例2-模拟后台运行服务"><span class="nav-number">6.2.</span> <span class="nav-text">实例2:模拟后台运行服务</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#实例3-kill掉一个容器"><span class="nav-number">6.3.</span> <span class="nav-text">实例3:kill掉一个容器</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#docker镜像制作方法"><span class="nav-number">7.</span> <span class="nav-text">docker镜像制作方法:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Docker-Image的发布"><span class="nav-number">8.</span> <span class="nav-text">Docker Image的发布</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#docker端口映射"><span class="nav-number">9.</span> <span class="nav-text">docker端口映射</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#端口映射"><span class="nav-number">9.1.</span> <span class="nav-text">端口映射</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查看正在运行的容器"><span class="nav-number">9.2.</span> <span class="nav-text">查看正在运行的容器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#访问容器实例"><span class="nav-number">9.3.</span> <span class="nav-text">访问容器实例</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -982,7 +996,7 @@ show_date_time();
 <div class="theme-info">
   <div class="powered-by"></div>
 -->
-  <span class="post-count">博客全站共32.0k字</span>
+  <span class="post-count">博客全站共34.6k字</span>
 </div>
 
         
