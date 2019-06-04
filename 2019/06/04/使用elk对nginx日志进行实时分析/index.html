@@ -70,7 +70,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="ELK,">
 
 
 
@@ -83,16 +83,26 @@
 
 
 
-<meta name="description" content="Attitude determines Altitude!">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Louisnie">
-<meta property="og:url" content="https://louisnie.github.io/tags/漏洞复现/index.html">
+<meta name="description" content="路漫漫其修道远，吾将上下而求索。         安装nginx12345[root@localhost ~]# yum install nginx -y [root@localhost ~]# /usr/sbin/nginx -v nginx version: nginx/1.12.2 检查elk是否均已启动: elasticsearch 123[root@localhost ~]# ps -e">
+<meta name="keywords" content="ELK">
+<meta property="og:type" content="article">
+<meta property="og:title" content="部署ELK实时分析nginx日志">
+<meta property="og:url" content="https://louisnie.github.io/2019/06/04/使用elk对nginx日志进行实时分析/index.html">
 <meta property="og:site_name" content="Louisnie">
-<meta property="og:description" content="Attitude determines Altitude!">
+<meta property="og:description" content="路漫漫其修道远，吾将上下而求索。         安装nginx12345[root@localhost ~]# yum install nginx -y [root@localhost ~]# /usr/sbin/nginx -v nginx version: nginx/1.12.2 检查elk是否均已启动: elasticsearch 123[root@localhost ~]# ps -e">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://ae01.alicdn.com/kf/HTB1trPZbrus3KVjSZKb760qkFXaL.png">
+<meta property="og:image" content="https://ae01.alicdn.com/kf/HTB1CO6Obv1H3KVjSZFH762KppXaL.png">
+<meta property="og:image" content="https://ae01.alicdn.com/kf/HTB1PLDSbCWD3KVjSZSg763CxVXak.png">
+<meta property="og:image" content="https://ae01.alicdn.com/kf/HTB1i2TQbv1G3KVjSZFk761K4XXap.png">
+<meta property="og:image" content="https://ae01.alicdn.com/kf/HTB1i8jPbEKF3KVjSZFE760ExFXat.png">
+<meta property="og:image" content="https://ae01.alicdn.com/kf/HTB1NwfRbBGE3KVjSZFh763kaFXaT.png">
+<meta property="og:image" content="https://ae01.alicdn.com/kf/HTB1tELPbEWF3KVjSZPh760clXXaG.png">
+<meta property="og:updated_time" content="2019-06-04T14:09:33.172Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Louisnie">
-<meta name="twitter:description" content="Attitude determines Altitude!">
+<meta name="twitter:title" content="部署ELK实时分析nginx日志">
+<meta name="twitter:description" content="路漫漫其修道远，吾将上下而求索。         安装nginx12345[root@localhost ~]# yum install nginx -y [root@localhost ~]# /usr/sbin/nginx -v nginx version: nginx/1.12.2 检查elk是否均已启动: elasticsearch 123[root@localhost ~]# ps -e">
+<meta name="twitter:image" content="https://ae01.alicdn.com/kf/HTB1trPZbrus3KVjSZKb760qkFXaL.png">
 
 
 
@@ -122,13 +132,13 @@
 
 
 
-  <link rel="canonical" href="https://louisnie.github.io/tags/漏洞复现/">
+  <link rel="canonical" href="https://louisnie.github.io/2019/06/04/使用elk对nginx日志进行实时分析/">
 
 
 
 
 
-  <title>标签: 漏洞复现 | Louisnie</title>
+  <title>部署ELK实时分析nginx日志 | Louisnie</title>
   
 
 
@@ -171,7 +181,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 	
 	<a href="https://github.com/Louisnie/louisnie.github.io" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewbox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
@@ -319,104 +329,232 @@
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block tag">
-
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>漏洞复现<small>标签</small>
-        </h1>
-      </div>
-
-      
-        
 
   <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://louisnie.github.io/2019/06/04/使用elk对nginx日志进行实时分析/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Louisnie">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://i.loli.net/2018/10/22/5bcd762c46c2c.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Louisnie">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2019/03/13/thinkphp5版本漏洞/" itemprop="url">
-              
-                <span itemprop="name">Thinkphp5漏洞总结</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">部署ELK实时分析nginx日志</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-03-13T16:45:28+08:00" content="2019-03-13">
-          03-13
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-04T21:59:28+08:00">
+                2019-06-04
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/运维技术/" itemprop="url" rel="index">
+                    <span itemprop="name">运维技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  947 字
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-        
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/03/05/wordpress插件漏洞/" itemprop="url">
-              
-                <span itemprop="name">WordPress插件注入漏洞</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-03-05T02:40:28+08:00" content="2019-03-05">
-          03-05
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+      
 
       
-        
+        <p><blockquote class="blockquote-center">路漫漫其修道远，吾将上下而求索。      </blockquote></p>
+<div align="middle"><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=36897723&auto=1&height=66"></iframe></div>
 
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/03/03/Ubuntu本地提权/" itemprop="url">
-              
-                <span itemprop="name">Ubuntu本地提权漏洞复现</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-03-03T23:56:28+08:00" content="2019-03-03">
-          03-03
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+<h2 id="安装nginx"><a href="#安装nginx" class="headerlink" title="安装nginx"></a>安装nginx</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# yum install nginx -y </span><br><span class="line"></span><br><span class="line">[root@localhost ~]# /usr/sbin/nginx -v </span><br><span class="line"></span><br><span class="line">nginx version: nginx/1.12.2</span><br></pre></td></tr></table></figure>
+<p>检查elk是否均已启动:</p>
+<p>elasticsearch</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# ps -ef | grep elasticsearch </span><br><span class="line">elk        2728      1  1 5月31 pts/0   01:07:32 /bin/java -Xms1g -Xmx1g -XX:+UseConcMarkSweepGC -XX:CMSInitiatingOccupancyFraction=75 -XX:+UseCMSInitiatingOccupancyOnly -Des.networkaddress.cache.ttl=60 -Des.networkaddress.cache.negative.ttl=10 -XX:+AlwaysPreTouch -Xss1m -Des.distribution.flavor=default -Des.distribution.type=tar -cp /usr/local/elasticsearch-6.6.2/lib/* org.elasticsearch.bootstrap.Elasticsearch elk        2824   2728  0 5月31 pts/0   00:00:00 /usr/local/elasticsearch-6.6.2/modules/x-pack-ml/platform/linux-x86_64/bin/controller </span><br><span class="line">root      19874  13681  0 21:16 pts/1    00:00:00 grep --color=auto elasticsearch</span><br></pre></td></tr></table></figure>
+<p>kibana</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# ps -ef | grep kibana </span><br><span class="line">root       2651      1  0 5月31 pts/0   00:55:12 /usr/local/kibana-6.6.2-linux-x86_64/bin/../node/bin/node --no-warnings --max-http-header-size=65536 /usr/local/kibana-6.6.2-linux-x86_64/bin/../src/cli root      19970  13681  0 21:17 pts/1    00:00:00 grep --color=auto kibana </span><br><span class="line">root      35609   2651  0 6月01 pts/0   00:00:06 /usr/local/kibana-6.6.2-linux-x86_64/node/bin/node --no-warnings --max-http-header-size=65536 /usr/local/kibana-6.6.2-linux-x86_64/src/legacy/core_plugins/interpreter/server/lib/route_expression/thread/babeled.js</span><br></pre></td></tr></table></figure>
+<p>kibana</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# ps -ef | grep logstash </span><br><span class="line">root      17996      1  8 20:53 pts/3    00:02:04 /bin/java -Xms1g -Xmx1g -XX:+UseParNewGC -XX:+UseConcMarkSweepGC -XX:CMSInitiatingOccupancyFraction=75 -XX:+UseCMSInitiatingOccupancyOnly -Djava.awt.headless=true -Dfile.encoding=UTF-8 -Djruby.compile.invokedynamic=true -Djruby.jit.threshold=0 -XX:+HeapDumpOnOutOfMemoryError -Djava.security.egd=file:/dev/urandom -cp /usr/local/logstash-6.6.2/logstash-core/lib/jars/animal-sniffer-annotations-1.14.jar:/usr/local/logstas-6.6.2/logstash-core/lib/jars/commons-codec-1.11.jar:/usr/local/logstash-6.6.2/logstash-3.10.0.jar:/usr/local/logstash-6.6.2/logstash-core/lib/jars/org.eclipse.osgi-3.7.1.jar:/usr/local/logstash-6.6.2/logstash-core/lib/jars/org.eclipse.text-3.5.101.jar:/usr/local/logstash-6.6.2/logstash-core/lib/jars/slf4j-api-1.7.25.jar org.logstash.Logstash -f /usr/local/logstash-6.6.2/config/logstash.conf </span><br><span class="line">root      20014  13681  0 21:18 pts/1    00:00:00 grep --color=auto logstash</span><br></pre></td></tr></table></figure>
+<p>然后去修改logstash的配置文件,设置为nginx日志文件</p>
+<h2 id="GROK插件"><a href="#GROK插件" class="headerlink" title="GROK插件"></a>GROK插件</h2><p>修改配置文件之前需要了解一些logstash的插件grok,我们这里使用logstash-filter-grok插件去匹配日志信息</p>
+<p>grok插件:grok插件是logstash中非常强大的插件，其中内置了许多的正则表达式,用来正则匹配各种数据，但其性能和对资源的损耗也是让人为之诟病。</p>
+<p>首先看一下nginx输入日志格式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# cat /etc/nginx/nginx.conf </span><br><span class="line">http &#123;</span><br><span class="line">    log_format  main  &apos;$remote_addr - $remote_user [$time_local] &quot;$request&quot; &apos;</span><br><span class="line">                      &apos;$status $body_bytes_sent &quot;$http_referer&quot; &apos;</span><br><span class="line">                      &apos;&quot;$http_user_agent&quot; &quot;$http_x_forwarded_for&quot;&apos;;</span><br></pre></td></tr></table></figure>
+<p>在以下路径下存在一个httpd的正则匹配文件,与之nginx输入日志格式相符</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost patterns]# pwd </span><br><span class="line">/usr/local/logstash-6.6.2/vendor/bundle/jruby/2.3.0/gems/logstash-patterns-core-4.1.2/patterns </span><br><span class="line"></span><br><span class="line">[root@localhost patterns]# cat httpd </span><br><span class="line">HTTPDUSER %&#123;EMAILADDRESS&#125;|%&#123;USER&#125;</span><br><span class="line">HTTPDERROR_DATE %&#123;DAY&#125; %&#123;MONTH&#125; %&#123;MONTHDAY&#125; %&#123;TIME&#125; %&#123;YEAR&#125;</span><br><span class="line"></span><br><span class="line"># Log formats</span><br><span class="line"></span><br><span class="line">HTTPD_COMMONLOG %&#123;IPORHOST:clientip&#125; %&#123;HTTPDUSER:ident&#125; %&#123;HTTPDUSER:auth&#125; \[%&#123;HTTPDATE:timestamp&#125;\] &quot;(?:%&#123;WORD:verb&#125; %&#123;NOTSPACE:request&#125;(?: HTTP/%&#123;NUMBER:httpversion&#125;)?|%&#123;DATA:rawrequest&#125;)&quot; %&#123;NUMBER:response&#125; (?:%&#123;NUMBER:bytes&#125;|-)</span><br><span class="line">HTTPD_COMBINEDLOG %&#123;HTTPD_COMMONLOG&#125; %&#123;QS:referrer&#125; %&#123;QS:agent&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h2><p>修改logstash的配置文件,使用来匹配HTTPD_COMMONLOG格式去匹配日志数据</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# vim /usr/local/logstash-6.6.2/config/logstash.conf </span><br><span class="line"></span><br><span class="line">#填写以下信息</span><br><span class="line">input &#123;</span><br><span class="line">    file &#123;</span><br><span class="line">        path =&gt; &quot;/var/log/nginx/access.log&quot;   #填写nginx日志文件路径</span><br><span class="line">        type =&gt; &quot;nginxaccess&quot;                  #设置类型,名字容易辨识就好</span><br><span class="line">        start_position =&gt; &quot;beginning&quot;          #设置开始位置</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">filter &#123;</span><br><span class="line">    grok &#123;  </span><br><span class="line">      match =&gt; &#123; &quot;message&quot; =&gt; &quot;%&#123;HTTPD_COMBINEDLOG&#125;&quot; &#125; #匹配HTTPD_COMBINEDLOG信息</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">output &#123;                                     #输出到elasticsearch中</span><br><span class="line">    elasticsearch &#123;</span><br><span class="line">        hosts =&gt; [&quot;127.0.0.1:9200&quot;]</span><br><span class="line">        index =&gt; &quot;nginx-%&#123;+YYYY.MM.dd&#125;&quot;         #设置索引格式</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后运行logstash</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost logstash-6.6.2]# ./startup.sh</span><br></pre></td></tr></table></figure>
+<h2 id="访问kibana"><a href="#访问kibana" class="headerlink" title="访问kibana"></a>访问kibana</h2><p>在浏览器访问kibana界面,可以看到刚刚所添加的nginx日志索引</p>
+<p><img src="https://ae01.alicdn.com/kf/HTB1trPZbrus3KVjSZKb760qkFXaL.png" alt=""></p>
+<p>然后去建一个pattern,成功匹配到刚刚创建的索引</p>
+<p><img src="https://ae01.alicdn.com/kf/HTB1CO6Obv1H3KVjSZFH762KppXaL.png" alt=""></p>
+<p>选时间戳,创建pattern</p>
+<p><img src="https://ae01.alicdn.com/kf/HTB1PLDSbCWD3KVjSZSg763CxVXak.png" alt=""></p>
+<p>然后在Discover模块选nginx-*</p>
+<p><img src="https://ae01.alicdn.com/kf/HTB1i2TQbv1G3KVjSZFk761K4XXap.png" alt=""></p>
+<p>便可以查看到nginx的日志啦</p>
+<p><img src="https://ae01.alicdn.com/kf/HTB1i8jPbEKF3KVjSZFE760ExFXat.png" alt=""></p>
+<p>查看客户端ip</p>
+<p><img src="https://ae01.alicdn.com/kf/HTB1NwfRbBGE3KVjSZFh763kaFXaT.png" alt=""></p>
+<p>查看请求信息</p>
+<p><img src="https://ae01.alicdn.com/kf/HTB1tELPbEWF3KVjSZPh760clXXaG.png" alt=""></p>
 
       
     </div>
+    
+    
+    
 
+    
+
+    
+
+    
+	
+	    <div>
+     
+     <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+        </div>
+	
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ELK/" rel="tag"><i class="fa fa-tag"></i> ELK</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/05/30/ELK安装/" rel="next" title="ELK安装部署">
+                <i class="fa fa-chevron-left"></i> ELK安装部署
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -424,6 +562,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -444,8 +586,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -632,6 +783,22 @@ show_date_time();
       </section>
 
       
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装nginx"><span class="nav-number">1.</span> <span class="nav-text">安装nginx</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GROK插件"><span class="nav-number">2.</span> <span class="nav-text">GROK插件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改配置文件"><span class="nav-number">3.</span> <span class="nav-text">修改配置文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#访问kibana"><span class="nav-number">4.</span> <span class="nav-text">访问kibana</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
 
       
 
@@ -779,6 +946,10 @@ show_date_time();
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
