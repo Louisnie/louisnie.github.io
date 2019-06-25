@@ -98,7 +98,7 @@
 <meta property="og:image" content="https://ae01.alicdn.com/kf/HTB1i8jPbEKF3KVjSZFE760ExFXat.png">
 <meta property="og:image" content="https://ae01.alicdn.com/kf/HTB1NwfRbBGE3KVjSZFh763kaFXaT.png">
 <meta property="og:image" content="https://ae01.alicdn.com/kf/HTB1tELPbEWF3KVjSZPh760clXXaG.png">
-<meta property="og:updated_time" content="2019-06-04T14:09:33.172Z">
+<meta property="og:updated_time" content="2019-06-04T15:31:51.974Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="部署ELK实时分析nginx日志">
 <meta name="twitter:description" content="路漫漫其修道远，吾将上下而求索。         安装nginx12345[root@localhost ~]# yum install nginx -y [root@localhost ~]# /usr/sbin/nginx -v nginx version: nginx/1.12.2 检查elk是否均已启动: elasticsearch 123[root@localhost ~]# ps -e">
@@ -137,6 +137,9 @@
 
 
 
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.7.0/dist/APlayer.min.css">
+<script src="https://cdn.jsdelivr.net/npm/aplayer@1.7.0/dist/APlayer.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/meting@1.1.0/dist/Meting.min.js"></script>
 
   <title>部署ELK实时分析nginx日志 | Louisnie</title>
   
@@ -426,7 +429,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  947 字
+                  1,006 字
                 </span>
               
 
@@ -470,7 +473,8 @@
 <p>在以下路径下存在一个httpd的正则匹配文件,与之nginx输入日志格式相符</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost patterns]# pwd </span><br><span class="line">/usr/local/logstash-6.6.2/vendor/bundle/jruby/2.3.0/gems/logstash-patterns-core-4.1.2/patterns </span><br><span class="line"></span><br><span class="line">[root@localhost patterns]# cat httpd </span><br><span class="line">HTTPDUSER %&#123;EMAILADDRESS&#125;|%&#123;USER&#125;</span><br><span class="line">HTTPDERROR_DATE %&#123;DAY&#125; %&#123;MONTH&#125; %&#123;MONTHDAY&#125; %&#123;TIME&#125; %&#123;YEAR&#125;</span><br><span class="line"></span><br><span class="line"># Log formats</span><br><span class="line"></span><br><span class="line">HTTPD_COMMONLOG %&#123;IPORHOST:clientip&#125; %&#123;HTTPDUSER:ident&#125; %&#123;HTTPDUSER:auth&#125; \[%&#123;HTTPDATE:timestamp&#125;\] &quot;(?:%&#123;WORD:verb&#125; %&#123;NOTSPACE:request&#125;(?: HTTP/%&#123;NUMBER:httpversion&#125;)?|%&#123;DATA:rawrequest&#125;)&quot; %&#123;NUMBER:response&#125; (?:%&#123;NUMBER:bytes&#125;|-)</span><br><span class="line">HTTPD_COMBINEDLOG %&#123;HTTPD_COMMONLOG&#125; %&#123;QS:referrer&#125; %&#123;QS:agent&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h2><p>修改logstash的配置文件,使用来匹配HTTPD_COMMONLOG格式去匹配日志数据</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# vim /usr/local/logstash-6.6.2/config/logstash.conf </span><br><span class="line"></span><br><span class="line">#填写以下信息</span><br><span class="line">input &#123;</span><br><span class="line">    file &#123;</span><br><span class="line">        path =&gt; &quot;/var/log/nginx/access.log&quot;   #填写nginx日志文件路径</span><br><span class="line">        type =&gt; &quot;nginxaccess&quot;                  #设置类型,名字容易辨识就好</span><br><span class="line">        start_position =&gt; &quot;beginning&quot;          #设置开始位置</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">filter &#123;</span><br><span class="line">    grok &#123;  </span><br><span class="line">      match =&gt; &#123; &quot;message&quot; =&gt; &quot;%&#123;HTTPD_COMBINEDLOG&#125;&quot; &#125; #匹配HTTPD_COMBINEDLOG信息</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">output &#123;                                     #输出到elasticsearch中</span><br><span class="line">    elasticsearch &#123;</span><br><span class="line">        hosts =&gt; [&quot;127.0.0.1:9200&quot;]</span><br><span class="line">        index =&gt; &quot;nginx-%&#123;+YYYY.MM.dd&#125;&quot;         #设置索引格式</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>另外也需要date插件来从字段中解析日期，然后用这个日期作为logstash中事件的时间戳（timestamp）。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# vim /usr/local/logstash-6.6.2/config/logstash.conf </span><br><span class="line"></span><br><span class="line">#填写以下信息</span><br><span class="line">input &#123;</span><br><span class="line">    file &#123;</span><br><span class="line">        path =&gt; &quot;/var/log/nginx/access.log&quot;   #填写nginx日志文件路径</span><br><span class="line">        type =&gt; &quot;nginxaccess&quot;                  #设置类型,名字容易辨识就好</span><br><span class="line">        start_position =&gt; &quot;beginning&quot;          #设置开始位置</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">filter &#123;</span><br><span class="line">    grok &#123;  </span><br><span class="line">      match =&gt; &#123; &quot;message&quot; =&gt; &quot;%&#123;HTTPD_COMBINEDLOG&#125;&quot; &#125; #匹配HTTPD_COMBINEDLOG信息</span><br><span class="line">    &#125;</span><br><span class="line">     date &#123;</span><br><span class="line">      match =&gt; [&quot;timestamp&quot;, &quot;dd/MMM/yyyy:HH:mm:ss Z&quot;] #匹配tomestamp</span><br><span class="line">      target =&gt; &quot;@timestamp&quot;     #覆盖@timestamp字段</span><br><span class="line">      &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">output &#123;                                     #输出到elasticsearch中</span><br><span class="line">    elasticsearch &#123;</span><br><span class="line">        hosts =&gt; [&quot;127.0.0.1:9200&quot;]</span><br><span class="line">        index =&gt; &quot;nginx-%&#123;+YYYY.MM.dd&#125;&quot;         #设置索引格式</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>然后运行logstash</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost logstash-6.6.2]# ./startup.sh</span><br></pre></td></tr></table></figure>
 <h2 id="访问kibana"><a href="#访问kibana" class="headerlink" title="访问kibana"></a>访问kibana</h2><p>在浏览器访问kibana界面,可以看到刚刚所添加的nginx日志索引</p>
@@ -535,6 +539,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/06/26/Hexo 使用 APlayer 插入音乐/" rel="prev" title="Hexo使用APlayer插入音乐">
+                Hexo使用APlayer插入音乐 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -613,7 +621,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -624,7 +632,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -635,7 +643,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -838,7 +846,7 @@ show_date_time();
 <div class="theme-info">
   <div class="powered-by"></div>
 -->
-  <span class="post-count">博客全站共35.6k字</span>
+  <span class="post-count">博客全站共36.1k字</span>
 </div>
 
         
