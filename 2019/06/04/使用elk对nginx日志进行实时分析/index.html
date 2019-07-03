@@ -83,13 +83,13 @@
 
 
 
-<meta name="description" content="路漫漫其修道远，吾将上下而求索。         安装nginx12345[root@localhost ~]# yum install nginx -y [root@localhost ~]# /usr/sbin/nginx -v nginx version: nginx/1.12.2 检查elk是否均已启动: elasticsearch 123[root@localhost ~]# ps -e">
+<meta name="description" content="路漫漫其修道远，吾将上下而求索。        安装nginx12345[root@localhost ~]# yum install nginx -y [root@localhost ~]# /usr/sbin/nginx -v nginx version: nginx/1.12.2 检查elk是否均已启动: elasticsearch 123[root@localhost ~]# ps -ef">
 <meta name="keywords" content="ELK">
 <meta property="og:type" content="article">
-<meta property="og:title" content="部署ELK实时分析nginx日志">
+<meta property="og:title" content="搭建ELK实时分析nginx日志">
 <meta property="og:url" content="https://louisnie.github.io/2019/06/04/使用elk对nginx日志进行实时分析/index.html">
 <meta property="og:site_name" content="Louisnie">
-<meta property="og:description" content="路漫漫其修道远，吾将上下而求索。         安装nginx12345[root@localhost ~]# yum install nginx -y [root@localhost ~]# /usr/sbin/nginx -v nginx version: nginx/1.12.2 检查elk是否均已启动: elasticsearch 123[root@localhost ~]# ps -e">
+<meta property="og:description" content="路漫漫其修道远，吾将上下而求索。        安装nginx12345[root@localhost ~]# yum install nginx -y [root@localhost ~]# /usr/sbin/nginx -v nginx version: nginx/1.12.2 检查elk是否均已启动: elasticsearch 123[root@localhost ~]# ps -ef">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://ae01.alicdn.com/kf/HTB1trPZbrus3KVjSZKb760qkFXaL.png">
 <meta property="og:image" content="https://ae01.alicdn.com/kf/HTB1CO6Obv1H3KVjSZFH762KppXaL.png">
@@ -98,10 +98,10 @@
 <meta property="og:image" content="https://ae01.alicdn.com/kf/HTB1i8jPbEKF3KVjSZFE760ExFXat.png">
 <meta property="og:image" content="https://ae01.alicdn.com/kf/HTB1NwfRbBGE3KVjSZFh763kaFXaT.png">
 <meta property="og:image" content="https://ae01.alicdn.com/kf/HTB1tELPbEWF3KVjSZPh760clXXaG.png">
-<meta property="og:updated_time" content="2019-06-04T15:31:51.974Z">
+<meta property="og:updated_time" content="2019-07-03T16:30:20.344Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="部署ELK实时分析nginx日志">
-<meta name="twitter:description" content="路漫漫其修道远，吾将上下而求索。         安装nginx12345[root@localhost ~]# yum install nginx -y [root@localhost ~]# /usr/sbin/nginx -v nginx version: nginx/1.12.2 检查elk是否均已启动: elasticsearch 123[root@localhost ~]# ps -e">
+<meta name="twitter:title" content="搭建ELK实时分析nginx日志">
+<meta name="twitter:description" content="路漫漫其修道远，吾将上下而求索。        安装nginx12345[root@localhost ~]# yum install nginx -y [root@localhost ~]# /usr/sbin/nginx -v nginx version: nginx/1.12.2 检查elk是否均已启动: elasticsearch 123[root@localhost ~]# ps -ef">
 <meta name="twitter:image" content="https://ae01.alicdn.com/kf/HTB1trPZbrus3KVjSZKb760qkFXaL.png">
 
 
@@ -141,7 +141,7 @@
 <script src="https://cdn.jsdelivr.net/npm/aplayer@1.7.0/dist/APlayer.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/meting@1.1.0/dist/Meting.min.js"></script>
 
-  <title>部署ELK实时分析nginx日志 | Louisnie</title>
+  <title>搭建ELK实时分析nginx日志 | Louisnie</title>
   
 
 
@@ -363,7 +363,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">部署ELK实时分析nginx日志</h1>
+          <h1 class="post-title" itemprop="name headline">搭建ELK实时分析nginx日志</h1>
         
 
         <div class="post-meta">
@@ -455,8 +455,7 @@
 
       
         <p><blockquote class="blockquote-center">路漫漫其修道远，吾将上下而求索。      </blockquote></p>
-<div align="middle"><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=36897723&auto=1&height=66"></iframe></div>
-
+<p><div align="middle"><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=36897723&auto=1&height=66"></iframe></div></p>
 <h2 id="安装nginx"><a href="#安装nginx" class="headerlink" title="安装nginx"></a>安装nginx</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# yum install nginx -y </span><br><span class="line"></span><br><span class="line">[root@localhost ~]# /usr/sbin/nginx -v </span><br><span class="line"></span><br><span class="line">nginx version: nginx/1.12.2</span><br></pre></td></tr></table></figure>
 <p>检查elk是否均已启动:</p>
 <p>elasticsearch</p>
@@ -540,8 +539,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/06/26/Hexo 使用 APlayer 插入音乐/" rel="prev" title="Hexo使用APlayer插入音乐">
-                Hexo使用APlayer插入音乐 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/06/05/部署ELK实时日志监控系统/" rel="prev" title="部署ELK实时日志监控系统">
+                部署ELK实时日志监控系统 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -621,7 +620,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-count">24</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -632,7 +631,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -643,7 +642,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -846,7 +845,7 @@ show_date_time();
 <div class="theme-info">
   <div class="powered-by"></div>
 -->
-  <span class="post-count">博客全站共43.6k字</span>
+  <span class="post-count">博客全站共48.4k字</span>
 </div>
 
         

