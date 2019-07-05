@@ -1,0 +1,1455 @@
+<link href="https://louisnie.github.io/harlem-shake-style.css" rel="stylesheet" type="text/css">
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+
+
+  <meta name="keywords" content="开源waf,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Louisnie" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="生活的理想，就是为了理想的生活。  ModSecurity简介ModSecurity是一个入侵侦测与防护引擎，它主要是用于Web应用程序，所以也被称为Web应用程序防火墙(WAF)。它可以作为Web服务器的模块或是单独的应用程序来运作。ModSecurity的功能是增强Web Application 的安全性和保护Web application以避免遭受来自已知与未知的攻击。 ModSecurit">
+<meta name="keywords" content="开源waf">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Nginx+ModSecurity实现WAF防护(转载)">
+<meta property="og:url" content="https://louisnie.github.io/2019/07/05/modsearcity/index.html">
+<meta property="og:site_name" content="Louisnie">
+<meta property="og:description" content="生活的理想，就是为了理想的生活。  ModSecurity简介ModSecurity是一个入侵侦测与防护引擎，它主要是用于Web应用程序，所以也被称为Web应用程序防火墙(WAF)。它可以作为Web服务器的模块或是单独的应用程序来运作。ModSecurity的功能是增强Web Application 的安全性和保护Web application以避免遭受来自已知与未知的攻击。 ModSecurit">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://ae01.alicdn.com/kf/HTB1CZqkXoT1gK0jSZFr763NCXXaF.png">
+<meta property="og:image" content="https://ae01.alicdn.com/kf/HTB1IZSkXoY1gK0jSZFM761WcVXa6.png">
+<meta property="og:image" content="https://ae01.alicdn.com/kf/HTB1x9CjXfb2gK0jSZK9761EgFXa4.png">
+<meta property="og:updated_time" content="2019-07-05T14:52:18.957Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Nginx+ModSecurity实现WAF防护(转载)">
+<meta name="twitter:description" content="生活的理想，就是为了理想的生活。  ModSecurity简介ModSecurity是一个入侵侦测与防护引擎，它主要是用于Web应用程序，所以也被称为Web应用程序防火墙(WAF)。它可以作为Web服务器的模块或是单独的应用程序来运作。ModSecurity的功能是增强Web Application 的安全性和保护Web application以避免遭受来自已知与未知的攻击。 ModSecurit">
+<meta name="twitter:image" content="https://ae01.alicdn.com/kf/HTB1CZqkXoT1gK0jSZFr763NCXXaF.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://louisnie.github.io/2019/07/05/modsearcity/">
+
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.7.0/dist/APlayer.min.css">
+<script src="https://cdn.jsdelivr.net/npm/aplayer@1.7.0/dist/APlayer.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/meting@1.1.0/dist/Meting.min.js"></script>
+
+  <title>Nginx+ModSecurity实现WAF防护(转载) | Louisnie</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<head><meta name="generator" content="Hexo 3.8.0">
+  <style>
+  /*.tags0{font-size: 12px !important;color: #ccc !important;}灰*/
+
+  .tags00{font-size: 12px !important;color: #666 !important;}/*黑*/
+  /*.tags01{font-size: 12px !important;color: rgb(255,128,128) !important;}红
+  .tags02{font-size: 12px !important;color: rgb(128,255,128) !important;}绿
+  .tags03{font-size: 12px !important;color: rgb(128,128,255) !important;}蓝
+  .tags04{font-size: 12px !important;color: rgb(255,216,128) !important;}黄*/
+
+  /*.tags10{font-size: 20px !important;color: #666 !important;}*/
+  .tags11{font-size: 20px !important;color: rgb(255,128,128) !important;}
+  .tags12{font-size: 20px !important;color: rgb(128,255,128) !important;}
+  .tags13{font-size: 20px !important;color: rgb(128,128,255) !important;}
+  .tags14{font-size: 20px !important;color: rgb(255,216,128) !important;}
+
+  /*.tags20{font-size: 40px !important;color: #666 !important;}*/
+  .tags21{font-size: 40px !important;color: rgb(255,128,128) !important;}
+  .tags22{font-size: 40px !important;color: rgb(128,255,128) !important;}
+  .tags23{font-size: 40px !important;color: rgb(128,128,255) !important;}
+  .tags24{font-size: 40px !important;color: rgb(255,216,128) !important;}
+  </style>
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+	
+	<a href="https://github.com/Louisnie/louisnie.github.io" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewbox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Louisnie</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Attitude determines Altitude!</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>
+            
+            日程表
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>
+            
+            站点地图
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://louisnie.github.io/2019/07/05/modsearcity/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Louisnie">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://i.loli.net/2018/10/22/5bcd762c46c2c.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Louisnie">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Nginx+ModSecurity实现WAF防护(转载)</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-05T22:36:28+08:00">
+                2019-07-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/运维技术/" itemprop="url" rel="index">
+                    <span itemprop="name">运维技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  3,512 字
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><blockquote class="blockquote-center">生活的理想，就是为了理想的生活。</blockquote></p>
+<p><div class="aplayer" data-id="25706282" data-server="netease" data-type="song" data-mode="single"></div></p>
+<h2 id="ModSecurity简介"><a href="#ModSecurity简介" class="headerlink" title="ModSecurity简介"></a>ModSecurity简介</h2><p>ModSecurity是一个入侵侦测与防护引擎，它主要是用于Web应用程序，所以也被称为Web应用程序防火墙(WAF)。它可以作为Web服务器的模块或是单独的应用程序来运作。ModSecurity的功能是增强Web Application 的安全性和保护Web application以避免遭受来自已知与未知的攻击。</p>
+<p>ModSecurity计划是从2002年开始，后来由Breach Security Inc.收购，但Breach Security Inc.允诺ModSecurity仍旧为Open Source，并开放源代码给大家使用。最新版的ModSecurity开始支持核心规则集(Core Rule Set)，CRS可用于定义旨在保护Web应用免受0day及其它安全攻击的规则。</p>
+<p>ModSecurity还包含了其他一些特性，如并行文本匹配、Geo IP解析和信用卡号检测等，同时还支持内容注入、自动化的规则更新和脚本等内容。此外，它还提供了一个面向Lua语言的新的API，为开发者提供一个脚本平台以实现用于保护Web应用的复杂逻辑。</p>
+<h2 id="安装ModSecurity"><a href="#安装ModSecurity" class="headerlink" title="安装ModSecurity"></a>安装ModSecurity</h2><p>安装依赖包:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install httpd-devel apr apr-util-devel apr-devel  pcre pcre-devel  libxml2 libxml2-devel zlib zlib-devel openssl openssl-devel</span><br></pre></td></tr></table></figure>
+<p>下载nginx和modsearity</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# cd /opt/</span><br><span class="line">#下载modsecurity</span><br><span class="line">[root@localhost opt]# wget -O modsecurity-2.9.1.tar.gz https://github.com/SpiderLabs/ModSecurity/releases/download/v2.9.1/modsecurity-2.9.1.tar.gz</span><br><span class="line">#下载nginx</span><br><span class="line">[root@localhost opt]# wget &apos;http://nginx.org/download/nginx-1.9.2.tar.gz&apos;</span><br></pre></td></tr></table></figure>
+<h2 id="编译安装ModSecurity"><a href="#编译安装ModSecurity" class="headerlink" title="编译安装ModSecurity"></a>编译安装ModSecurity</h2><p>ginx加载ModSecurity模块有两种方式:一种是编译为Nginx静态模块，一种是通过ModSecurity-Nginx Connector加载动态模块。</p>
+<h3 id="方法一：编译为Nginx静态模块"><a href="#方法一：编译为Nginx静态模块" class="headerlink" title="方法一：编译为Nginx静态模块"></a>方法一：编译为Nginx静态模块</h3><ul>
+<li>编译为独立模块(modsecurity-2.9.1)</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost opt]# tar zxvf  modsecurity-2.9.1.tar.gz</span><br><span class="line">[root@localhost opt]# cd modsecurity-2.9.1/</span><br><span class="line">[root@localhost modsecurity-2.9.1]# ./autogen.sh</span><br><span class="line">$ [root@localhost modsecurity-2.9.1]# ./configure --enable-standalone-module --disable-mlogc</span><br><span class="line">[root@localhost modsecurity-2.9.1]# make</span><br></pre></td></tr></table></figure>
+<p>注:如果在运行./autogen.sh的时候系统报错,提示</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost modsecurity-2.9.1]# ./autogen.sh</span><br><span class="line">#如果出现以下情况</span><br><span class="line">./autogen.sh:行11: libtoolize: 未找到命令</span><br><span class="line">./autogen.sh:行12: autoreconf: 未找到命令</span><br><span class="line">./autogen.sh:行13: autoheader: 未找到命令</span><br><span class="line">./autogen.sh:行14: automake: 未找到命令</span><br><span class="line">./autogen.sh:行15: autoconf: 未找到命令</span><br><span class="line">#表示系统未安装这些软件包,我们用yum安装即可</span><br><span class="line">[root@localhost modsecurity-2.9.1]# yum install automake autoconf libtool</span><br></pre></td></tr></table></figure>
+<ul>
+<li>编译安装Nginx并添加ModSecurity模块</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost opt]# tar xzvf nginx-1.9.2.tar.gz</span><br><span class="line"></span><br><span class="line">[root@localhost opt]# cd nginx-1.9.2</span><br><span class="line">[root@localhost nginx-1.9.2]# ./configure --add-module=/opt/modsecurity-2.9.1/nginx/modsecurity</span><br><span class="line">[root@localhost nginx-1.9.2]# make &amp;&amp; make install</span><br></pre></td></tr></table></figure>
+<h3 id="方法二：编译通过ModSecurity-Nginx-Connector加载的动态模块"><a href="#方法二：编译通过ModSecurity-Nginx-Connector加载的动态模块" class="headerlink" title="方法二：编译通过ModSecurity-Nginx Connector加载的动态模块"></a>方法二：编译通过ModSecurity-Nginx Connector加载的动态模块</h3><ul>
+<li>编译LibModSecurity(modsecurity-3.0)</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ cd /root$ git clone https://github.com/SpiderLabs/ModSecurity</span><br><span class="line">$ cd ModSecurity</span><br><span class="line">$ git checkout -b v3/master origin/v3/master</span><br><span class="line">$ sh build.sh$ git submodule init</span><br><span class="line">$ git submodule update</span><br><span class="line">$ ./configure</span><br><span class="line">$ make</span><br><span class="line">$ make install</span><br></pre></td></tr></table></figure>
+<p>LibModSecurity会安装在<code>/usr/local/modsecurity/lib</code>目录下。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ ls /usr/local/modsecurity/lib</span><br><span class="line">libmodsecurity.a  libmodsecurity.la  libmodsecurity.so  libmodsecurity.so.3  libmodsecurity.so.3.0.0</span><br></pre></td></tr></table></figure>
+<ul>
+<li>编译安装Nginx并添加ModSecurity-Nginx Connector模块</li>
+</ul>
+<p>使用ModSecurity-Nginx模块来连接LibModSecurity</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ cd /opt</span><br><span class="line">$ git clone https://github.com/SpiderLabs/ModSecurity-nginx.git modsecurity-nginx</span><br><span class="line">$ tar xzvf nginx-1.9.2.tar.gz</span><br><span class="line">$ cd nginx-1.9.2$ ./configure --add-module=/root/modsecurity-nginx</span><br><span class="line">$ make$ make &amp;&amp; make install</span><br></pre></td></tr></table></figure>
+<h2 id="添加OWASP规则"><a href="#添加OWASP规则" class="headerlink" title="添加OWASP规则"></a>添加OWASP规则</h2><h3 id="OWASP-CRS"><a href="#OWASP-CRS" class="headerlink" title="OWASP CRS"></a>OWASP CRS</h3><p>OWASP ModSecurity核心规则集（CRS）是一组用于ModSecurity或兼容的Web应用程序防火墙的通用攻击检测规则。CRS旨在保护Web应用程序免受各种攻击，包括OWASP十大攻击，并且只需最少的虚假警报。ModSecurity之所以强大就在于OWASP提供的规则，我们可以根据自己的需求选择不同的规则，也可以通过ModSecurity手工创建安全过滤器、定义攻击并实现主动的安全输入验证。</p>
+<p>ModSecurity核心规则集(CRS)提供以下类别的保护来防止攻击。</p>
+<ul>
+<li>HTTP Protection(HTTP防御)</li>
+</ul>
+<p>HTTP协议和本地定义使用的detects violations策略。</p>
+<ul>
+<li>Real-time Blacklist Lookups(实时黑名单查询)</li>
+</ul>
+<p>利用第三方IP名单。</p>
+<ul>
+<li>HTTP Denial of Service Protections(HTTP的拒绝服务保护)</li>
+</ul>
+<p>防御HTTP的洪水攻击和HTTP Dos攻击。</p>
+<ul>
+<li>Common Web Attacks Protection(常见的Web攻击防护)</li>
+</ul>
+<p>检测常见的Web应用程序的安全攻击。</p>
+<ul>
+<li>Automation Detection(自动化检测)</li>
+</ul>
+<p>检测机器人，爬虫，扫描仪和其他表面恶意活动。</p>
+<ul>
+<li>Integration with AV Scanning for File Uploads(文件上传防病毒扫描)</li>
+</ul>
+<p>检测通过Web应用程序上传的恶意文件。</p>
+<ul>
+<li>Tracking Sensitive Data(跟踪敏感数据)</li>
+</ul>
+<p>信用卡通道的使用，并阻止泄漏。</p>
+<ul>
+<li>Trojan Protection(木马防护)</li>
+</ul>
+<p>检测访问木马。</p>
+<ul>
+<li>Identification of Application Defects(应用程序缺陷的鉴定)</li>
+</ul>
+<p>检测应用程序的错误配置警报。</p>
+<ul>
+<li>Error Detection and Hiding(错误检测和隐藏)</li>
+</ul>
+<p>检测伪装服务器发送错误消息。</p>
+<h3 id="下载OWASP规则并生成配置文件"><a href="#下载OWASP规则并生成配置文件" class="headerlink" title="下载OWASP规则并生成配置文件"></a>下载OWASP规则并生成配置文件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost opt]# git clone https://github.com/SpiderLabs/owasp-modsecurity-crs.git</span><br><span class="line">[root@localhost opt]# cp -rf owasp-modsecurity-crs /usr/local/nginx/conf/</span><br><span class="line">[root@localhost opt]# cd /usr/local/nginx/conf/owasp-modsecurity-crs/</span><br><span class="line">[root@localhost owasp-modsecurity-crs]# cp crs-setup.conf.example crs-setup.conf</span><br></pre></td></tr></table></figure>
+<h3 id="配置OWASP规则"><a href="#配置OWASP规则" class="headerlink" title="配置OWASP规则"></a>配置OWASP规则</h3><p>编辑crs-setup.conf文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ sed -ie &apos;s/SecDefaultAction &quot;phase:1,log,auditlog,pass&quot;/#SecDefaultAction &quot;phase:1,log,auditlog,pass&quot;/g&apos; crs-setup.conf</span><br><span class="line">$ sed -ie &apos;s/SecDefaultAction &quot;phase:2,log,auditlog,pass&quot;/#SecDefaultAction &quot;phase:2,log,auditlog,pass&quot;/g&apos; crs-setup.conf</span><br><span class="line">$ sed -ie &apos;s/#.*SecDefaultAction &quot;phase:1,log,auditlog,deny,status:403&quot;/SecDefaultAction &quot;phase:1,log,auditlog,deny,status:403&quot;/g&apos; crs-setup.conf</span><br><span class="line">$ sed -ie &apos;s/# SecDefaultAction &quot;phase:2,log,auditlog,deny,status:403&quot;/SecDefaultAction &quot;phase:2,log,auditlog,deny,status:403&quot;/g&apos; crs-setup.conf</span><br></pre></td></tr></table></figure>
+<p>默认ModSecurity不会阻挡恶意连接，只会记录在Log里。修改SecDefaultAction选项，默认开启阻挡。</p>
+<h3 id="启用ModSecurity模块和CRS规则"><a href="#启用ModSecurity模块和CRS规则" class="headerlink" title="启用ModSecurity模块和CRS规则"></a>启用ModSecurity模块和CRS规则</h3><p>复制ModSecurity源码目录下的modsecurity.conf-recommended和unicode.mapping到Nginx的conf目录下，并将modsecurity.conf-recommended重新命名为modsecurity.conf。</p>
+<p>modsecurity.conf-recommended是ModSecurity工作的主配置文件。默认情况下，它带有.recommended扩展名。要初始化ModSecurity，我们就要重命名此文件。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost owasp-modsecurity-crs]# cd /opt/modsecurity-2.9.1/</span><br><span class="line">[root@localhost modsecurity-2.9.1]# cp modsecurity.conf-recommended /usr/local/nginx/conf/modsecurity.conf</span><br><span class="line">[root@localhost modsecurity-2.9.1]# cp unicode.mapping /usr/local/nginx/conf/</span><br></pre></td></tr></table></figure>
+<p>将SecRuleEngine设置为On，默认值为DetectOnly即为观察模式，建议大家在安装时先默认使用这个模式，规则测试完成后在设置为On，避免出现对网站、服务器某些不可知的影响。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost modsecurity-2.9.1]# vim /usr/local/nginx/conf/modsecurity.conf</span><br><span class="line">									SecRuleEngine On</span><br></pre></td></tr></table></figure>
+<p>ModSecurity中几个常用配置说明：</p>
+<blockquote>
+<p>1.SecRuleEngine：是否接受来自ModSecurity-CRS目录下的所有规则的安全规则引擎。因此，我们可以根据需求设置不同的规则。要设置不同的规则有以下几种。SecRuleEngine On：将在服务器上激活ModSecurity防火墙，它会检测并阻止该服务器上的任何恶意攻击。SecRuleEngine Detection Only：如果设置这个规则它只会检测到所有的攻击，并根据攻击产生错误，但它不会在服务器上阻止任何东西。SecRuleEngine Off:这将在服务器上上停用ModSecurity的防火墙。</p>
+<p>2.SecRequestBodyAccess：它会告诉ModSecurity是否会检查请求，它起着非常重要的作用。它只有两个参数ON或OFF。</p>
+<p>3.SecResponseBodyAccess：如果此参数设置为ON，然后ModeSecurity可以分析服务器响应，并做适当处理。它也有只有两个参数ON和Off，我们可以根据求要进行设置。</p>
+<p>4.SecDataDir：定义ModSecurity的工作目录，该目录将作为ModSecurity的临时目录使用。</p>
+</blockquote>
+<p>在<code>owasp-modsecurity-crs/rules</code>下有很多定义好的规则，将需要启用的规则用Include指令添加进来就可以了。</p>
+<ul>
+<li><p>3.x版本CRS</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ cd /usr/local/nginx/conf/owasp-modsecurity-crs</span><br><span class="line"># 生成例外排除请求的配置文件</span><br><span class="line">$ cp rules/REQUEST-900-EXCLUSION-RULES-BEFORE-CRS.conf.example rules/REQUEST-900-EXCLUSION-RULES-BEFORE-CRS.conf</span><br><span class="line">$ cp rules/RESPONSE-999-EXCLUSION-RULES-AFTER-CRS.conf.example rules/RESPONSE-999-EXCLUSION-RULES-AFTER-CRS.conf</span><br><span class="line">$ cp rules/*.data /usr/local/nginx/conf</span><br></pre></td></tr></table></figure>
+<p>为了保持modsecurity.conf简洁，这里新建一个modsec_includes.conf文件,内容为需要启用的规则。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">vim /usr/local/nginx/conf/modsec_includes.conf</span><br><span class="line"></span><br><span class="line">include modsecurity.conf</span><br><span class="line">include owasp-modsecurity-crs/crs-setup.conf</span><br><span class="line">include owasp-modsecurity-crs/rules/REQUEST-900-EXCLUSION-RULES-BEFORE-CRS.conf</span><br><span class="line">include owasp-modsecurity-crs/rules/REQUEST-901-INITIALIZATION.conf</span><br><span class="line">Include owasp-modsecurity-crs/rules/REQUEST-903.9002-WORDPRESS-EXCLUSION-RULES.conf</span><br><span class="line">include owasp-modsecurity-crs/rules/REQUEST-905-COMMON-EXCEPTIONS.conf</span><br><span class="line">include owasp-modsecurity-crs/rules/REQUEST-910-IP-REPUTATION.conf</span><br><span class="line">include owasp-modsecurity-crs/rules/REQUEST-911-METHOD-ENFORCEMENT.conf</span><br><span class="line">include owasp-modsecurity-crs/rules/REQUEST-912-DOS-PROTECTION.conf</span><br><span class="line">include owasp-modsecurity-crs/rules/REQUEST-913-SCANNER-DETECTION.conf</span><br><span class="line">include owasp-modsecurity-crs/rules/REQUEST-920-PROTOCOL-ENFORCEMENT.conf</span><br><span class="line">include owasp-modsecurity-crs/rules/REQUEST-921-PROTOCOL-ATTACK.conf</span><br><span class="line">include owasp-modsecurity-crs/rules/REQUEST-930-APPLICATION-ATTACK-LFI.conf</span><br><span class="line">include owasp-modsecurity-crs/rules/REQUEST-931-APPLICATION-ATTACK-RFI.conf</span><br><span class="line">include owasp-modsecurity-crs/rules/REQUEST-932-APPLICATION-ATTACK-RCE.conf</span><br><span class="line">include owasp-modsecurity-crs/rules/REQUEST-933-APPLICATION-ATTACK-PHP.conf</span><br><span class="line">include owasp-modsecurity-crs/rules/REQUEST-941-APPLICATION-ATTACK-XSS.conf</span><br><span class="line">include owasp-modsecurity-crs/rules/REQUEST-942-APPLICATION-ATTACK-SQLI.conf</span><br><span class="line">include owasp-modsecurity-crs/rules/REQUEST-943-APPLICATION-ATTACK-SESSION-FIXATION.conf</span><br><span class="line">include owasp-modsecurity-crs/rules/REQUEST-949-BLOCKING-EVALUATION.conf</span><br><span class="line">include owasp-modsecurity-crs/rules/RESPONSE-950-DATA-LEAKAGES.conf</span><br><span class="line">include owasp-modsecurity-crs/rules/RESPONSE-951-DATA-LEAKAGES-SQL.conf</span><br><span class="line">include owasp-modsecurity-crs/rules/RESPONSE-952-DATA-LEAKAGES-JAVA.conf</span><br><span class="line">include owasp-modsecurity-crs/rules/RESPONSE-953-DATA-LEAKAGES-PHP.conf</span><br><span class="line">include owasp-modsecurity-crs/rules/RESPONSE-954-DATA-LEAKAGES-IIS.conf</span><br><span class="line">include owasp-modsecurity-crs/rules/RESPONSE-959-BLOCKING-EVALUATION.conf</span><br><span class="line">include owasp-modsecurity-crs/rules/RESPONSE-980-CORRELATION.conf</span><br><span class="line">include owasp-modsecurity-crs/rules/RESPONSE-999-EXCLUSION-RULES-AFTER-CRS.conf</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>注：考虑到可能对主机性能上的损耗，可以根据实际需求加入对应的漏洞的防护规则即可。</p>
+<h2 id="配置Nginx支持Modsecurity"><a href="#配置Nginx支持Modsecurity" class="headerlink" title="配置Nginx支持Modsecurity"></a>配置Nginx支持Modsecurity</h2><h3 id="启用Modsecurity"><a href="#启用Modsecurity" class="headerlink" title="启用Modsecurity"></a>启用Modsecurity</h3><ul>
+<li>使用静态模块加载的配置方法</li>
+</ul>
+<p>在需要启用Modsecurity的主机的location下面加入下面两行即可：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost modsecurity-2.9.1]# vim /usr/local/nginx/conf/nginx.conf</span><br><span class="line"> server &#123;</span><br><span class="line">        listen       80;</span><br><span class="line">        server_name  localhost;</span><br><span class="line"></span><br><span class="line">        location / &#123;</span><br><span class="line">        	#加入下面两行内容</span><br><span class="line">            ModSecurityEnabled on;    </span><br><span class="line">            ModSecurityConfig modsec_includes.conf;</span><br><span class="line">            root   html;</span><br><span class="line">            index  index.html index.htm;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>使用动态模块加载的配置方法</p>
+<p>在需要启用Modsecurity的主机的location下面加入下面两行即可：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost modsecurity-2.9.1]# vim /usr/local/nginx/conf/nginx.conf</span><br><span class="line">server &#123;</span><br><span class="line">        listen       80;</span><br><span class="line">        server_name  localhost;</span><br><span class="line"></span><br><span class="line">        location / &#123;</span><br><span class="line">        	#加入下面两行内容</span><br><span class="line">            modsecurity on;</span><br><span class="line">			modsecurity_rules_file modsec_includes.conf;</span><br><span class="line">            root   html;</span><br><span class="line">            index  index.html index.htm;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="验证Nginx配置文件"><a href="#验证Nginx配置文件" class="headerlink" title="验证Nginx配置文件"></a>验证Nginx配置文件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost modsecurity-2.9.1]# /usr/local/nginx/sbin/nginx -t</span><br><span class="line">nginx: [emerg] ModSecurityConfig in /usr/local/nginx/conf/nginx.conf:45: Cannot open config file: /usr/local/nginx/conf/owasp-modsecurity-crs/rules/REQUEST-900-EXCLUSION-RULES-BEFORE-CRS.conf</span><br><span class="line">nginx: configuration file /usr/local/nginx/conf/nginx.conf test failed</span><br></pre></td></tr></table></figure>
+<p>发现没有REQUEST-900-EXCLUSION-RULES-BEFORE-CRS.conf文件,然后去其目录发现存在着REQUEST-900-EXCLUSION-RULES-BEFORE-CRS.conf,所以将其修改名称即可,再次测试,发现RESPONSE-999-EXCLUSION-RULES-AFTER-CRS.conf也是没有的,使用相同的方法修改</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost modsecurity-2.9.1]# cd /usr/local/nginx/conf/owasp-modsecurity-crs/rules/</span><br><span class="line"></span><br><span class="line">[root@localhost rules]# cp REQUEST-900-EXCLUSION-RULES-BEFORE-CRS.conf.example REQUEST-900-EXCLUSION-RULES-BEFORE-CRS.conf</span><br><span class="line"></span><br><span class="line">[root@localhost rules]# cp RESPONSE-999-EXCLUSION-RULES-AFTER-CRS.conf.example RESPONSE-999-EXCLUSION-RULES-AFTER-CRS.conf</span><br></pre></td></tr></table></figure>
+<p>最后测试成功</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost rules]# /usr/local/nginx/sbin/nginx -t</span><br><span class="line">nginx: the configuration file /usr/local/nginx/conf/nginx.conf syntax is ok</span><br><span class="line">nginx: configuration file /usr/local/nginx/conf/nginx.conf test is successful</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>启动Nginx</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost rules]# /usr/local/nginx/sbin/nginx -c /usr/local/nginx/conf/nginx.conf</span><br></pre></td></tr></table></figure>
+<h3 id="测试Modsecurity"><a href="#测试Modsecurity" class="headerlink" title="测试Modsecurity"></a>测试Modsecurity</h3><p>正常访问时ok的</p>
+<p><img src="https://ae01.alicdn.com/kf/HTB1CZqkXoT1gK0jSZFr763NCXXaF.png" alt=""></p>
+</li>
+</ul>
+</li>
+</ul>
+<p>那么我们尝试构造一些注入参数进去试试</p>
+<p><img src="https://ae01.alicdn.com/kf/HTB1IZSkXoY1gK0jSZFM761WcVXa6.png" alt=""></p>
+<p><img src="https://ae01.alicdn.com/kf/HTB1x9CjXfb2gK0jSZK9761EgFXa4.png" alt=""></p>
+<p>其日志保存在<code>/var/log/modsec_audit.log</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost log]# tail -n 20  modsec_audit.log </span><br><span class="line">Connection: keep-alive</span><br><span class="line"></span><br><span class="line">--9621e831-H--</span><br><span class="line">Message: Warning. Pattern match &quot;^[\\d.:]+$&quot; at REQUEST_HEADERS:Host. [file &quot;/usr/local/nginx/conf/owasp-modsecurity-crs/rules/REQUEST-920-PROTOCOL-ENFORCEMENT.conf&quot;] [line &quot;682&quot;] [id &quot;920350&quot;] [msg &quot;Host header is a numeric IP address&quot;] [data &quot;192.168.204.129&quot;] [severity &quot;WARNING&quot;] [ver &quot;OWASP_CRS/3.1.0&quot;] [tag &quot;application-multi&quot;] [tag &quot;language-multi&quot;] [tag &quot;platform-multi&quot;] [tag &quot;attack-protocol&quot;] [tag &quot;OWASP_CRS/PROTOCOL_VIOLATION/IP_HOST&quot;] [tag &quot;WASCTC/WASC-21&quot;] [tag &quot;OWASP_TOP_10/A7&quot;] [tag &quot;PCI/6.5.10&quot;]</span><br><span class="line">Message: Warning. detected XSS using libinjection. [file &quot;/usr/local/nginx/conf/owasp-modsecurity-crs/rules/REQUEST-941-APPLICATION-ATTACK-XSS.conf&quot;] [line &quot;58&quot;] [id &quot;941100&quot;] [msg &quot;XSS Attack Detected via libinjection&quot;] [data &quot;Matched Data: XSS data found within ARGS:search: &lt;script&gt;alert(/xss/)&lt;/scrity&gt;&quot;] [severity &quot;CRITICAL&quot;] [ver &quot;OWASP_CRS/3.1.0&quot;] [tag &quot;application-multi&quot;] [tag &quot;language-multi&quot;] [tag &quot;platform-multi&quot;] [tag &quot;attack-xss&quot;] [tag &quot;OWASP_CRS/WEB_ATTACK/XSS&quot;] [tag &quot;WASCTC/WASC-8&quot;] [tag &quot;WASCTC/WASC-22&quot;] [tag &quot;OWASP_TOP_10/A3&quot;] [tag &quot;OWASP_AppSensor/IE1&quot;] [tag &quot;CAPEC-242&quot;]</span><br><span class="line">Message: Warning. Pattern match &quot;(?i)[&lt;\xef\xbc\x9c]script[^&gt;\xef\xbc\x9e]*[&gt;\xef\xbc\x9e][\\s\\S]*?&quot; at ARGS:search. [file &quot;/usr/local/nginx/conf/owasp-modsecurity-crs/rules/REQUEST-941-APPLICATION-ATTACK-XSS.conf&quot;] [line &quot;88&quot;] [id &quot;941110&quot;] [msg &quot;XSS Filter - Category 1: Script Tag Vector&quot;] [data &quot;Matched Data: &lt;script&gt; found within ARGS:search: &lt;script&gt;alert(/xss/)&lt;/scrity&gt;&quot;] [severity &quot;CRITICAL&quot;] [ver &quot;OWASP_CRS/3.1.0&quot;] [tag &quot;application-multi&quot;] [tag &quot;language-multi&quot;] [tag &quot;platform-multi&quot;] [tag &quot;attack-xss&quot;] [tag &quot;OWASP_CRS/WEB_ATTACK/XSS&quot;] [tag &quot;WASCTC/WASC-8&quot;] [tag &quot;WASCTC/WASC-22&quot;] [tag &quot;OWASP_TOP_10/A3&quot;] [tag &quot;OWASP_AppSensor/IE1&quot;] [tag &quot;CAPEC-242&quot;]</span><br><span class="line">Message: Warning. Pattern match &quot;(?i)&lt;[^\\w&lt;&gt;]*(?:[^&lt;&gt;\&quot;&apos;\\s]*:)?[^\\w&lt;&gt;]*(?:\\W*?s\\W*?c\\W*?r\\W*?i\\W*?p\\W*?t|\\W*?f\\W*?o\\W*?r\\W*?m|\\W*?s\\W*?t\\W*?y\\W*?l\\W*?e|\\W*?s\\W*?v\\W*?g|\\W*?m\\W*?a\\W*?r\\W*?q\\W*?u\\W*?e\\W*?e|(?:\\W*?l\\W*?i\\W*?n\\W*?k|\\W*?o\\W*?b\\W*?j\\W*?e\ ...&quot; at ARGS:search. [file &quot;/usr/local/nginx/conf/owasp-modsecurity-crs/rules/REQUEST-941-APPLICATION-ATTACK-XSS.conf&quot;] [line &quot;207&quot;] [id &quot;941160&quot;] [msg &quot;NoScript XSS InjectionChecker: HTML Injection&quot;] [data &quot;Matched Data: &lt;script found within ARGS:search: &lt;script&gt;alert(/xss/)&lt;/scrity&gt;&quot;] [severity &quot;CRITICAL&quot;] [ver &quot;OWASP_CRS/3.1.0&quot;] [tag &quot;application-multi&quot;] [tag &quot;language-multi&quot;] [tag &quot;platform-multi&quot;] [tag &quot;attack-xss&quot;] [tag &quot;OWASP_CRS/WEB_ATTACK/XSS&quot;] [tag &quot;WASCTC/WASC-8&quot;] [tag &quot;WASCTC/WASC-22&quot;] [tag &quot;OWASP_TOP_10/A3&quot;] [tag &quot;OWASP_AppSensor/IE1&quot;] [tag &quot;CAPEC-242&quot;]</span><br><span class="line">Message: Access denied with code 403 (phase 2). Operator GE matched 5 at TX:anomaly_score. [file &quot;/usr/local/nginx/conf/owasp-modsecurity-crs/rules/REQUEST-949-BLOCKING-EVALUATION.conf&quot;] [line &quot;91&quot;] [id &quot;949110&quot;] [msg &quot;Inbound Anomaly Score Exceeded (Total Score: 18)&quot;] [severity &quot;CRITICAL&quot;] [tag &quot;application-multi&quot;] [tag &quot;language-multi&quot;] [tag &quot;platform-multi&quot;] [tag &quot;attack-generic&quot;]</span><br><span class="line">Message: Warning. Operator GE matched 5 at TX:inbound_anomaly_score. [file &quot;/usr/local/nginx/conf/owasp-modsecurity-crs/rules/RESPONSE-980-CORRELATION.conf&quot;] [line &quot;86&quot;] [id &quot;980130&quot;] [msg &quot;Inbound Anomaly Score Exceeded (Total Inbound Score: 18 - SQLI=0,XSS=15,RFI=0,LFI=0,RCE=0,PHPI=0,HTTP=0,SESS=0): individual paranoia level scores: 18, 0, 0, 0&quot;] [tag &quot;event-correlation&quot;]</span><br><span class="line">Message: Audit log: Failed to lock global mutex: Permission denied</span><br><span class="line">Action: Intercepted (phase 2)</span><br><span class="line">Apache-Handler: IIS</span><br><span class="line">Stopwatch: 1562335360000217 222381 (- - -)</span><br><span class="line">Stopwatch2: 1562335360000217 222381; combined=3851, p1=333, p2=3340, p3=0, p4=0, p5=178, sr=8, sw=0, l=0, gc=0</span><br><span class="line">Producer: ModSecurity for nginx (STABLE)/2.9.1 (http://www.modsecurity.org/); OWASP_CRS/3.1.0.</span><br><span class="line">Server: ModSecurity Standalone</span><br><span class="line">Engine-Mode: &quot;ENABLED&quot;</span><br><span class="line"></span><br><span class="line">--9621e831-Z--</span><br></pre></td></tr></table></figure>
+<p>可以查看到其匹配了REQUEST-920-PROTOCOL-ENFORCEMENT.conf和REQUEST-941-APPLICATION-ATTACK-XSS.conf文件中的规则.</p>
+<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档:"></a>参考文档:</h2><p><a href="https://www.hi-linux.com/posts/45920.html" target="_blank" rel="noopener">https://www.hi-linux.com/posts/45920.html</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+	
+	    <div>
+     
+     <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+        </div>
+	
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/开源waf/" rel="tag"><i class="fa fa-tag"></i> 开源waf</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/04/绕安全狗/" rel="next" title="绕waf系列之绕安全狗">
+                <i class="fa fa-chevron-left"></i> 绕waf系列之绕安全狗
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="https://i.loli.net/2018/10/22/5bcd762c46c2c.jpg" alt="Louisnie">
+            
+              <p class="site-author-name" itemprop="name">Louisnie</p>
+              <p class="site-description motion-element" itemprop="description">Attitude determines Altitude!</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">25</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+			  
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Louisnie/louisnie.github.io" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://mail.google.com/mail/u/0/?zx=gg4mjbu7kr29#inbox" target="_blank" title="Gmail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>Gmail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/qq_39353923" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-books"></i>CSDN</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://music.163.com/" target="_blank" title="网易云音乐">
+                      
+                        <i class="fa fa-fw fa-music"></i>网易云音乐</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+                <div class="links-of-blogroll-title">
+                   <i class="fa  fa-fw fa-link"></i>
+                   友情链接&nbsp;
+                   <i class="fa  fa-fw fa-link"></i>
+            </div>
+            <ul class="links-of-blogroll-list">
+               
+                  <li class="links-of-blogroll-item">
+                     <a href="https://www.google.com.hk   || google" title="Google" target="_blank">Google</a>
+                   </li>
+               
+                  <li class="links-of-blogroll-item">
+                     <a href="https://github.com/   || github" title="Github" target="_blank">Github</a>
+                   </li>
+               
+                  <li class="links-of-blogroll-item">
+                     <a href="https://thief.one/" title="nMask" target="_blank">nMask</a>
+                   </li>
+               
+                  <li class="links-of-blogroll-item">
+                     <a href="http://www.lmxspace.com/" title="l1nk3r" target="_blank">l1nk3r</a>
+                   </li>
+               
+            </ul>
+             <div id="days"></div>
+
+<script language="javascript">
+function show_date_time(){
+window.setTimeout("show_date_time()", 1000);
+BirthDay=new Date("10/20/2018 12:00:00");
+today=new Date();
+timeold=(today.getTime()-BirthDay.getTime());
+sectimeold=timeold/1000
+secondsold=Math.floor(sectimeold);
+msPerDay=24*60*60*1000
+e_daysold=timeold/msPerDay
+daysold=Math.floor(e_daysold);
+e_hrsold=(e_daysold-daysold)*24;
+hrsold=setzero(Math.floor(e_hrsold));
+e_minsold=(e_hrsold-hrsold)*60;
+minsold=setzero(Math.floor((e_hrsold-hrsold)*60));
+seconds=setzero(Math.floor((e_minsold-minsold)*60));
+document.getElementById('days').innerHTML="已运行"+daysold+"天"+hrsold+"时"+minsold+"分"+seconds+"秒";
+}
+function setzero(i){
+if (i<10)
+{i="0" + i};
+return i;
+}
+show_date_time();
+</script>
+
+      </div>
+     
+		<div id="music163player">
+           <<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=5181411&auto=0&height=66">
+           </iframe>
+        </div>">
+           
+
+        
+
+          <div id="days"></div>
+
+<script language="javascript">
+function show_date_time(){
+window.setTimeout("show_date_time()", 1000);
+BirthDay=new Date("10/20/2018 12:00:00");
+today=new Date();
+timeold=(today.getTime()-BirthDay.getTime());
+sectimeold=timeold/1000
+secondsold=Math.floor(sectimeold);
+msPerDay=24*60*60*1000
+e_daysold=timeold/msPerDay
+daysold=Math.floor(e_daysold);
+e_hrsold=(e_daysold-daysold)*24;
+hrsold=setzero(Math.floor(e_hrsold));
+e_minsold=(e_hrsold-hrsold)*60;
+minsold=setzero(Math.floor((e_hrsold-hrsold)*60));
+seconds=setzero(Math.floor((e_minsold-minsold)*60));
+document.getElementById('days').innerHTML="已运行"+daysold+"天"+hrsold+"时"+minsold+"分"+seconds+"秒";
+}
+function setzero(i){
+if (i<10)
+{i="0" + i};
+return i;
+}
+show_date_time();
+</script>
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#ModSecurity简介"><span class="nav-number">1.</span> <span class="nav-text">ModSecurity简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装ModSecurity"><span class="nav-number">2.</span> <span class="nav-text">安装ModSecurity</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编译安装ModSecurity"><span class="nav-number">3.</span> <span class="nav-text">编译安装ModSecurity</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#方法一：编译为Nginx静态模块"><span class="nav-number">3.1.</span> <span class="nav-text">方法一：编译为Nginx静态模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方法二：编译通过ModSecurity-Nginx-Connector加载的动态模块"><span class="nav-number">3.2.</span> <span class="nav-text">方法二：编译通过ModSecurity-Nginx Connector加载的动态模块</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#添加OWASP规则"><span class="nav-number">4.</span> <span class="nav-text">添加OWASP规则</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#OWASP-CRS"><span class="nav-number">4.1.</span> <span class="nav-text">OWASP CRS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#下载OWASP规则并生成配置文件"><span class="nav-number">4.2.</span> <span class="nav-text">下载OWASP规则并生成配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置OWASP规则"><span class="nav-number">4.3.</span> <span class="nav-text">配置OWASP规则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#启用ModSecurity模块和CRS规则"><span class="nav-number">4.4.</span> <span class="nav-text">启用ModSecurity模块和CRS规则</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置Nginx支持Modsecurity"><span class="nav-number">5.</span> <span class="nav-text">配置Nginx支持Modsecurity</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#启用Modsecurity"><span class="nav-number">5.1.</span> <span class="nav-text">启用Modsecurity</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#验证Nginx配置文件"><span class="nav-number">5.2.</span> <span class="nav-text">验证Nginx配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#测试Modsecurity"><span class="nav-number">5.3.</span> <span class="nav-text">测试Modsecurity</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文档"><span class="nav-number">6.</span> <span class="nav-text">参考文档:</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Louisnie</span>
+
+  
+</div>
+
+
+<!--  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+-->
+  <span class="post-count">博客全站共51.9k字</span>
+</div>
+
+        
+
+
+
+
+
+
+
+        
+      </footer></div>
+    
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"scale":1,"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"superSample":2,"width":150,"height":150,"position":"left"},"mobile":{"show":true},"react":{"opacityDefault":0.9,"opacityOnHover":0.5},"log":false});</script></body>
+</html>
+
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>
+
+
+<script type="text/javascript">
+var languages = new Array("C","C++","Java","C#","Python","HTML","CSS","JavaScript","SQL");
+var randoms = new Array(4,3,2,1,3,2,1,4,2,1,3,4,1,2,3,4);
+$(document).ready(function(){
+var tags_all = $(".tag-cloud-tags a");
+tags_all.each(function(){
+  var x = parseInt(Math.random()*3);
+  if(x > 0){
+    x = 1;
+  }
+  for(var i = 0;i<languages.length;i++){
+    if($(this).text() == languages[i]){
+        x = 2;
+      break;
+    }
+  }
+  var y =0;
+  if(x != 0){
+    y = parseInt(Math.random()*16);
+    y = randoms[y];
+  }
+  $(this).addClass("tags"+x+y);
+});
+});
+</script>
